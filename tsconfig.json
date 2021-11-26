@@ -17,8 +17,8 @@
     "baseUrl": ".",
     "paths": {
       "@components/*": ["components/*"],
+      "@entities/*": ["entities/*"],
       "@pages/*": ["pages/*"],
-      "@api/*": ["pages/api/*"],
       "@styles/*": ["styles/*"]
     }
   },
