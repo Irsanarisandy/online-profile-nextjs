@@ -47,7 +47,13 @@ class Navbar extends React.Component<NavbarProp, NavbarState> {
       certainLinks.forEach(name => {
         if (!!links[name]) {
           linkElements.push(
-            <a href={links[name]} target="_blank" rel="noopener noreferrer" key={name}>
+            <a
+              href={links[name]}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${name} link`}
+              key={name}
+            >
               {linkElementPair(name, styles.icon)}
             </a>
           );

@@ -11,7 +11,13 @@ function Footer({links}: IProp): JSX.Element {
   if (links != null) {
     Object.entries(links).map(link =>
       linkElements.push(
-        <a href={link[1]} target="_blank" rel="noopener noreferrer" key={link[0]}>
+        <a
+          href={link[1]}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${link[0]} link`}
+          key={link[0]}
+        >
           {linkElementPair(link[0], styles.icon, 24)}
         </a>
       )
