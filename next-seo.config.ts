@@ -1,34 +1,78 @@
 const SEO = {
-  defaultTitle: "Irsan's Online Profile",
-  // description: "This is my Next.js TypeScript Tailwind Site",
-  favicon: "/favicon.ico",
-  additionalMetaTags: [
+  defaultTitle: 'IA | Fullstack Website Developer | Mentor',
+  // description: 'Hire professional fullstack website developer to build interactive and high-end solutions.',
+  additionalLinkTags: [
     {
-      property: "author",
-      content: "Irsan Arisandy"
+      rel: 'apple-touch-icon',
+      href: '/images/apple-touch-icon.png',
+      sizes: '180x180'
     },
     {
-      property: "keywords",
-      content: "irsan arisandy, online profile, online portfolio, online cv"
+      rel: 'icon',
+      href: '/images/favicon.ico',
+    },
+    {
+      rel: 'icon',
+      href: '/images/favicon-16x16.png',
+      sizes: '16x16',
+      type: 'image/png'
+    },
+    {
+      rel: 'icon',
+      href: '/images/favicon-32x32.png',
+      sizes: '32x32',
+      type: 'image/png'
+    },
+    {
+      rel: 'manifest',
+      href: '/manifest.json'
+    }
+  ],
+  additionalMetaTags: [
+    {
+      property: 'author',
+      content: 'Irsan Arisandy'
+    },
+    {
+      property: 'keywords',
+      content: [
+        'irsan arisandy',
+        'online profile',
+        'online portfolio',
+        'online cv',
+        'website developer',
+        'software developer',
+        'fullstack developer',
+        'full-stack developer',
+        'full stack developer',
+        'frontend developer',
+        'front-end developer',
+        'front end developer',
+        'backend developer',
+        'back-end developer',
+        'back end developer',
+        'mentor'
+      ].join(', ')
     }
   ],
   // twitter: {
-  //   cardType: "summary",
-  //   handle: "jhooks",
-  //   site: "jhooks"
+  //   cardType: 'summary',
+  //   handle: 'jhooks',
+  //   site: 'jhooks'
   // },
   openGraph: {
-    title: "Irsan's Online Profile",
-    type: "website",
+    title: 'IA | Fullstack Website Developer | Mentor',
+    description: 'Hire professional fullstack website developer to build interactive and high-end solutions.',
+    type: 'website',
     site_name: "Irsan's Online Profile",
     profile: {
-      firstName: "Irsan",
-      lastName: "Arisandy",
-      gender: "male"
+      firstName: 'Irsan',
+      lastName: 'Arisandy',
+      gender: 'male'
     },
     // images: [
     //   {
-    //     url: "/images/og.jpg",
+    //     url: '/images/og.jpg',
     //     width: 1280,
     //     height: 720
     //   }
