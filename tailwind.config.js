@@ -11,5 +11,8 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [],
+  corePlugins: {
+    fontFamily: false
+  },
+  plugins: []
 }
