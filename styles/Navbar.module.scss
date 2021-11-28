@@ -1,0 +1,55 @@
+@import './variables';
+
+.customfont_name {
+  font-family: 'Merienda', sans-serif;
+  font-weight: $font-weight-bold;
+}
+
+.customfont_role {
+  font: $font-weight-regular 0.75rem 'Merienda', sans-serif;
+}
+
+.icon {
+  width: 20px;
+
+  svg {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.toggle_button {
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+
+  span {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 640px), (orientation: portrait) {
+  .navbar {
+    display: none;
+
+    &_display {
+      position: fixed;
+      height: 100vh;
+      width: 100vw;
+    }
+  }
+
+  .icon {
+    width: 28px;
+  }
+}
+
+@media screen and (min-width: 640px) and (orientation: landscape) {
+  .toggle_button {
+    display: none;
+  }
+}
+
+.navbar_display {
+  display: flex;
+}

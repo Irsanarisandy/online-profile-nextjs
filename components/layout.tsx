@@ -1,5 +1,6 @@
 import axios from 'axios';
 import useSWR from 'swr';
+import Navbar from './navbar';
 import Footer from './footer';
 import useToggleTheme from './toggle-theme';
 import styles from '@styles/Layout.module.scss';
@@ -14,9 +15,10 @@ function Layout({children}: IProp): JSX.Element {
   const [colorTheme, setTheme] = useToggleTheme();
 
   return (
-    <div className="min-h-screen flex flex-row">
-      <div className="flex flex-col flex-auto p-4">
-        <main>{children}</main>
+    <div className="h-screen flex flex-row">
+      <Navbar links={data} />
+      <div className="flex flex-col flex-auto p-4 overflow-y-auto">
+        <main className="flex-grow">{children}</main>
         <Footer links={data} />
       </div>
       <button
