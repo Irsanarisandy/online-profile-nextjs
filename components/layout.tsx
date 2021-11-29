@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import useSWR from 'swr';
 import Navbar from './navbar';
@@ -12,13 +13,36 @@ interface IProp {
 function Layout({children}: IProp): JSX.Element {
   const fetcher = (url: string) => axios.get(url).then(res => res.data);
   const { data, error } = useSWR('/api/links', fetcher);
+
   const [colorTheme, setTheme] = useToggleTheme();
+
+  const [displayMainContainer, setDisplayMainContainer] = useState(false);
+  const [displayChildren, setDisplayChildren] = useState(children);
+  useEffect(() => {
+    setDisplayMainContainer(true);
+  }, []);
+  useEffect(() => {
+    if (children !== displayChildren) setDisplayMainContainer(false);
+  }, [children, displayChildren, setDisplayChildren]);
 
   return (
     <div className="h-screen flex flex-row">
       <Navbar links={data} />
       <div className="flex flex-col flex-auto p-4 overflow-y-auto">
-        <main className="flex-grow">{children}</main>
+        <main
+          onTransitionEnd={() => {
+            if (!displayMainContainer) {
+              setDisplayMainContainer(true);
+              setDisplayChildren(children);
+            }
+          }}
+          className="flex-grow transition-opacity duration-1000"
+          style={{
+            opacity: Number(displayMainContainer)
+          }}
+        >
+          {displayChildren}
+        </main>
         <Footer links={data} />
       </div>
       <button

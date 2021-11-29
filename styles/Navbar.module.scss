@@ -28,6 +28,11 @@
   }
 }
 
+.navbar {  // moved from using TailwindCSS to here to avoid glitch
+  display: flex;
+  flex-direction: column;
+}
+
 @media screen and (max-width: 640px), (orientation: portrait) {
   .navbar {
     display: none;

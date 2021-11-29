@@ -8,6 +8,7 @@ import styles from '@styles/Navbar.module.scss';
 interface NavlinkProp {
   href: string;
   name: string;
+  handleClick?: React.MouseEventHandler<HTMLElement>;
 }
 
 interface NavbarProp {
@@ -18,8 +19,11 @@ interface NavbarState {
   isOpen: boolean;
 }
 
-const Navlink = ({href, name}: NavlinkProp) => (
-  <div className="border border-gray-100 dark:border-gray-800 text-center">
+const Navlink = ({href, name, handleClick}: NavlinkProp) => (
+  <div
+    className="border border-gray-100 dark:border-gray-800 text-center"
+    onClick={handleClick}
+  >
     <Link href={href} passHref>
       <a>
         <span className="py-4 font-bold transition-opacity duration-500 hover:opacity-50">
@@ -65,11 +69,11 @@ class Navbar extends React.Component<NavbarProp, NavbarState> {
         <nav
           role="navigation"
           aria-label="main navigation"
-          className={`flex flex-col ${styles.navbar} ${isOpen ? styles.navbar_display : ''}`}
+          className={`${styles.navbar} ${isOpen ? styles.navbar_display : ''}`}
         >
           <div className="flex flex-col items-center p-4">
             <Link href="/" passHref>
-              <a>
+              <a onClick={this.handleClick}>
                 <Image
                   src="/images/logo.png"
                   alt="logo"
@@ -84,10 +88,10 @@ class Navbar extends React.Component<NavbarProp, NavbarState> {
           </div>
           <div className='flex flex-col items-center flex-auto bg-gray-50 dark:bg-gray-900'>
             <div className="w-full my-12">
-              {/* <Navlink href="/games" name="Games" /> */}
-              <Navlink href="/coming-soon" name="About" />
-              <Navlink href="/coming-soon" name="My Skills" />
-              <Navlink href="/coming-soon" name="Blog" />
+              {/* <Navlink href="/games" name="Games" handleClick={this.handleClick} /> */}
+              <Navlink href="/coming-soon" name="About" handleClick={this.handleClick} />
+              <Navlink href="/coming-soon" name="My Skills" handleClick={this.handleClick} />
+              <Navlink href="/coming-soon" name="Blog" handleClick={this.handleClick} />
             </div>
             <div
               className='mb-2 transition-opacity duration-1500 grid gap-3 items-center'
