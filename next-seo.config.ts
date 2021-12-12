@@ -25,7 +25,7 @@ const SEO = {
     },
     {
       rel: 'manifest',
-      href: '/manifest.json'
+      href: '/site.webmanifest'
     }
   ],
   additionalMetaTags: [
@@ -70,6 +70,7 @@ const SEO = {
       lastName: 'Arisandy',
       gender: 'male'
     },
+    locale: 'en_US',
     // images: [
     //   {
     //     url: '/images/og.jpg',
