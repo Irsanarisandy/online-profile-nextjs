@@ -18,7 +18,7 @@
   }
 }
 
-.toggle_button {
+.toggle_nav_button {
   border-radius: 50%;
   height: 50px;
   width: 50px;
@@ -28,33 +28,58 @@
   }
 }
 
-.navbar {  // moved from using TailwindCSS to here to avoid glitch
-  display: flex;
-  flex-direction: column;
+.navbar {
+  height: 100vh;
+  width: 0;
+
+  > div * {
+    opacity: 0;
+  }
 }
 
-@media screen and (max-width: 640px), (orientation: portrait) {
-  .navbar {
-    display: none;
-
-    &_display {
-      position: fixed;
-      height: 100vh;
-      width: 100vw;
-    }
+@media screen and (max-width: 640px), (max-height: 570px), (orientation: portrait) {
+  .navbar_display {
+    position: fixed;
+    width: 100vw;
   }
 
   .icon {
     width: 28px;
   }
+
+  .toggle_nav_button {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+  }
 }
 
-@media screen and (min-width: 640px) and (orientation: landscape) {
-  .toggle_button {
-    display: none;
+@media screen and (min-width: 640px) and (min-height: 570px) and (orientation: landscape) {
+  .navbar {
+    transition: width 0.5s linear;
+
+    > div * {
+      transition: opacity 0.5s ease-out;
+    }
+
+    &_display {
+      width: 130px;
+
+      > div * {
+        transition: opacity 1.5s ease-in;
+      }
+    }
+  }
+
+  .toggle_nav_button {
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
   }
 }
 
 .navbar_display {
-  display: flex;
+  > div * {
+    opacity: 1;
+  }
 }
