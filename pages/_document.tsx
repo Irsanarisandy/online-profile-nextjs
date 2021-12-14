@@ -15,7 +15,7 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Merienda:wght@400;700&family=Quicksand:wght@300;400;500;600;700&display=swap"
           />
         </Head>
-        <body>
+        <body className="transition-colors duration-500">
           <Main />
           <NextScript />
         </body>

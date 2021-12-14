@@ -24,8 +24,45 @@
   width: 50px;
 
   span {
-    font-size: 1.5rem;
+    border-radius: 3px;
+    height: 3px;
+    width: 22px;
+    transition: all 0.2s linear;
+
+    &:not(:first-child) {
+      margin-top: 5px;
+    }
   }
+}
+
+.top_bar {
+  transform: translateX(3px) rotate(45deg);
+  transform-origin: 0 50%;
+}
+
+.middle_bar {
+  opacity: 0;
+}
+
+.bottom_bar {
+  transform: translateX(3px) rotate(-45deg);
+  transform-origin: 0 50%;
+}
+
+.top_left_arrow {
+  transform: translateY(-3px) rotate(-45deg);
+}
+
+.bottom_left_arrow {
+  transform: translateY(3px) rotate(45deg);
+}
+
+.top_right_arrow {
+  transform: translateY(-3px) rotate(45deg);
+}
+
+.bottom_right_arrow {
+  transform: translateY(3px) rotate(-45deg);
 }
 
 .navbar {

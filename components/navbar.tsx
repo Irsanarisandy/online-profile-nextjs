@@ -117,7 +117,7 @@ class Navbar extends React.Component<NavbarProp, NavbarState> {
             <h1 className={styles.customfont_name}>Irsan</h1>
             <span className={styles.customfont_role}>Web Developer</span>
           </div>
-          <div className="flex flex-col items-center flex-auto bg-gray-50 dark:bg-gray-900">
+          <div className="flex flex-col items-center flex-auto bg-gray-50 dark:bg-gray-900 transition-colors duration-500">
             <div className="w-full my-12">
               {/* <Navlink href="/games" name="Games" isOpen={isOpen} handleClick={this.handleClick} /> */}
               <Navlink href="/coming-soon" name="About" isOpen={isOpen} handleClick={this.handleClick} />
@@ -136,12 +136,18 @@ class Navbar extends React.Component<NavbarProp, NavbarState> {
           </div>
         </nav>
         <button
-          className={`text-black bg-gray-200 ${styles.toggle_nav_button}`}
+          className={`text-black bg-gray-200 flex flex-col justify-center items-center ${styles.toggle_nav_button}`}
           onClick={() => this.setState({ isOpen: !isOpen })}
         >
-          <span>
-            {isMobile ? (isOpen ? '\u2613' : '\u2630') : (isOpen ? '\u2B9C' : '\u2B9E')}
-          </span>
+          {isMobile && <div>
+            <span className={`bg-black ${isOpen ? styles.top_bar : ''}`}></span>
+            <span className={`bg-black ${isOpen ? styles.middle_bar : ''}`}></span>
+            <span className={`bg-black ${isOpen ? styles.bottom_bar : ''}`}></span>
+          </div>}
+          {!isMobile && <div>
+            <span className={`bg-black ${isOpen ? styles.top_left_arrow : styles.top_right_arrow}`}></span>
+            <span className={`bg-black ${isOpen ? styles.bottom_left_arrow : styles.bottom_right_arrow}`}></span>
+          </div>}
         </button>
       </>
     );
