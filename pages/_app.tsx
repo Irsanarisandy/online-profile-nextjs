@@ -5,12 +5,12 @@ import Layout from '@components/layout';
 import '@styles/globals.scss';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return (
+  return typeof window !== 'undefined' ? (
     <Layout>
       <DefaultSeo {...SEO} />
       <Component {...pageProps} />
     </Layout>
-  );
+  ) : null;
 }
 
 export default MyApp;

@@ -74,6 +74,14 @@
   }
 }
 
+.navlink {
+  @include btn-border-drawing(#F3F4F6, black);
+}
+
+.navlink_dark {
+  @include btn-border-drawing(#1F2937, white);
+}
+
 @media screen and (max-width: 640px), (max-height: 570px), (orientation: portrait) {
   .navbar_display {
     position: fixed;

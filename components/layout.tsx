@@ -27,7 +27,7 @@ function Layout({children}: IProp): JSX.Element {
 
   return (
     <div className="h-screen flex flex-row">
-      <Navbar links={data} />
+      <Navbar links={data} colorTheme={colorTheme} />
       <div className="flex flex-col flex-auto p-4 overflow-y-auto">
         <main
           onTransitionEnd={() => {

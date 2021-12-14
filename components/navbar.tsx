@@ -9,11 +9,13 @@ interface NavlinkProp {
   href: string;
   name: string;
   isOpen: boolean;
+  colorTheme?: string;
   handleClick?: React.MouseEventHandler<HTMLElement>;
 }
 
 interface NavbarProp {
   links: Links;
+  colorTheme?: string;
 }
 
 interface NavbarState {
@@ -23,9 +25,9 @@ interface NavbarState {
   width?: number;
 }
 
-const Navlink = ({href, name, isOpen, handleClick}: NavlinkProp) => (
+const Navlink = ({href, name, isOpen, colorTheme, handleClick}: NavlinkProp) => (
   <div
-    className="border border-gray-100 dark:border-gray-800 text-center"
+    className={`text-center ${colorTheme !== 'dark' ? styles.navlink : styles.navlink_dark}`}
     onClick={handleClick}
   >
     <Link href={href} passHref>
@@ -66,7 +68,7 @@ class Navbar extends React.Component<NavbarProp, NavbarState> {
   handleClick = () => this.setState(state => ({ isOpen: state.isMobile ? !state.isOpen : true }));
 
   render() {
-    const { links } = this.props;
+    const { links, colorTheme } = this.props;
     const { isMobile, isOpen } = this.state;
     let linkElements: JSX.Element[] = [];
     if (links != null) {
@@ -119,10 +121,10 @@ class Navbar extends React.Component<NavbarProp, NavbarState> {
           </div>
           <div className="flex flex-col items-center flex-auto bg-gray-50 dark:bg-gray-900 transition-colors duration-500">
             <div className="w-full my-12">
-              {/* <Navlink href="/games" name="Games" isOpen={isOpen} handleClick={this.handleClick} /> */}
-              <Navlink href="/coming-soon" name="About" isOpen={isOpen} handleClick={this.handleClick} />
-              <Navlink href="/coming-soon" name="My Skills" isOpen={isOpen} handleClick={this.handleClick} />
-              <Navlink href="/coming-soon" name="Blog" isOpen={isOpen} handleClick={this.handleClick} />
+              {/* <Navlink href="/games" name="Games" isOpen={isOpen} colorTheme={colorTheme} handleClick={this.handleClick} /> */}
+              <Navlink href="/coming-soon" name="About" isOpen={isOpen} colorTheme={colorTheme} handleClick={this.handleClick} />
+              <Navlink href="/coming-soon" name="My Skills" isOpen={isOpen} colorTheme={colorTheme} handleClick={this.handleClick} />
+              <Navlink href="/coming-soon" name="Blog" isOpen={isOpen} colorTheme={colorTheme} handleClick={this.handleClick} />
             </div>
             <div
               className="mb-2 grid gap-3 items-center"

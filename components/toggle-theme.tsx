@@ -5,9 +5,6 @@ type ToggleThemeState = 'dark' | 'light';
 function useToggleTheme() {
   const preferDarkQuery = '(prefers-color-scheme: dark)';
   const [theme, setTheme] = useState<ToggleThemeState>(() => {
-    if (typeof(window) === 'undefined') {
-      return 'light';
-    }
     const localStorageValue = window.localStorage.getItem('theme');
     if (localStorageValue) {
       return localStorageValue === 'dark' ? 'dark' : 'light';
