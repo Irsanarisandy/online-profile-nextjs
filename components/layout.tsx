@@ -36,7 +36,7 @@ function Layout({children}: IProp): JSX.Element {
               setDisplayChildren(children);
             }
           }}
-          className="flex-grow transition-opacity duration-1000"
+          className="grow transition-opacity duration-1000"
           style={{
             opacity: Number(displayMainContainer)
           }}
