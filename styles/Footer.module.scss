@@ -1,5 +1,10 @@
 .icon {
+  transition: transform 250ms linear;
   width: 28px;
+
+  &:hover {
+    transform: scale(1.5);
+  }
 
   svg {
     width: 100%;

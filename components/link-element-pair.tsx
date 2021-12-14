@@ -15,9 +15,9 @@ const linkElementPair = (linkName: string, classes?: string, otherIconSize?: num
         <GitLabLogo fill="#FCA121" />
       </span>;
     case 'cv':
-      return <span style={{fontSize: otherIconSize}}>&#128196;</span>;
+      return <span className={classes} style={{fontSize: otherIconSize}}>&#128196;</span>;
     default:
-      return <span style={{fontSize: otherIconSize}}>&#128279;</span>;
+      return <span className={classes} style={{fontSize: otherIconSize}}>&#128279;</span>;
   }
 }
 
