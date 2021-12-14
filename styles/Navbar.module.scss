@@ -1,4 +1,4 @@
-@import './variables';
+@use './variables' as *;
 
 .customfont_name {
   font-family: 'Merienda', sans-serif;
@@ -82,7 +82,7 @@
   @include btn-border-drawing(#1F2937, white);
 }
 
-@media screen and (max-width: 640px), (max-height: 570px), (orientation: portrait) {
+@media screen and (max-width: $screen-width-sm), (max-height: 570px), (orientation: portrait) {
   .navbar_display {
     position: fixed;
     width: 100vw;
@@ -99,7 +99,7 @@
   }
 }
 
-@media screen and (min-width: 640px) and (min-height: 570px) and (orientation: landscape) {
+@media screen and (min-width: $screen-width-sm) and (min-height: 570px) and (orientation: landscape) {
   .navbar {
     transition: width 0.5s linear;
 
