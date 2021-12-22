@@ -97,9 +97,15 @@ class Navbar extends React.Component<NavbarProp, NavbarState> {
         <nav
           role="navigation"
           aria-label="main navigation"
-          className={`flex flex-col ${styles.navbar} ${isOpen ? styles.navbar_display : ''}`}
+          className={`z-10 flex flex-col ${styles.navbar} ${isOpen ? styles.navbar_display : ''}`}
         >
-          <div className="flex flex-col items-center p-4">
+          <div
+            className="flex flex-col items-center p-4"
+            style={{
+              backgroundColor: (isMobile && isOpen) ?
+                (colorTheme !== 'dark' ? 'white' : 'black') : 'transparent'
+            }}
+          >
             <Link href="/" passHref>
               <a
                 onClick={this.handleClick}
@@ -138,7 +144,7 @@ class Navbar extends React.Component<NavbarProp, NavbarState> {
           </div>
         </nav>
         <button
-          className={`text-black bg-gray-200 flex flex-col justify-center items-center ${styles.toggle_nav_button}`}
+          className={`z-10 text-black bg-gray-200 flex flex-col justify-center items-center ${styles.toggle_nav_button}`}
           onClick={() => this.setState({ isOpen: !isOpen })}
         >
           {isMobile && <div>

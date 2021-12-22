@@ -14,15 +14,18 @@ function useToggleTheme() {
 
   useEffect(() => {
     const mediaQuery = window.matchMedia(preferDarkQuery);
+    const pageContent = document.getElementById('__next') as HTMLElement;
     const handleChange = () => {
       setTheme(() => {
         const result = mediaQuery.matches ? 'dark' : 'light';
         if (result === 'dark') {
 					document.documentElement.classList.add('dark');
 					document.body.classList.add('bg-black', 'text-white');
+          pageContent.className = 'dark-gradient';
         } else {
 					document.documentElement.classList.remove('dark');
 					document.body.classList.remove('bg-black', 'text-white');
+          pageContent.className = 'light-gradient';
         }
         return result;
       });
@@ -32,12 +35,15 @@ function useToggleTheme() {
   }, []);
 
   useEffect(() => {
+    const pageContent = document.getElementById('__next') as HTMLElement;
     if (theme === 'dark') {
       document.documentElement.classList.add('dark');
       document.body.classList.add('bg-black', 'text-white');
+      pageContent.className = 'dark-gradient';
     } else {
       document.documentElement.classList.remove('dark');
       document.body.classList.remove('bg-black', 'text-white');
+      pageContent.className = 'light-gradient';
     }
     window.localStorage.setItem('theme', theme);
   }, [theme]);
