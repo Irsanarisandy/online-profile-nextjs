@@ -1,0 +1,29 @@
+@use './variables' as *;
+
+.intro {
+  span {
+    font-size: 1.5rem;
+    font-weight: $font-weight-bold;
+  }
+}
+
+@media screen and (min-width: $screen-width-sm) {
+  .container {
+    margin: 2rem;
+  }
+
+  .intro {
+    span {
+      font-size: 3rem;
+      font-weight: $font-weight-extra-bold;
+    }
+  }
+}
+
+@media screen and (min-width: $screen-width-md) {
+  .intro {
+    span {
+      font-size: 4rem;
+    }
+  }
+}

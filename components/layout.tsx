@@ -42,7 +42,7 @@ function Layout({children}: IProp): JSX.Element {
             opacity: Number(displayMainContainer)
           }}
         >
-          {displayChildren}
+          {children === displayChildren ? displayChildren : null}
         </main>
         <Footer links={data} />
       </div>
