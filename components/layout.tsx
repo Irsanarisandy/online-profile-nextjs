@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { AnimatePresence } from 'framer-motion';
+import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import { MoonIcon, SunIcon } from '@heroicons/react/solid';
 import Navbar from './navbar';
@@ -16,34 +17,17 @@ function Layout({children}: IProp): JSX.Element {
   const { data, error } = useSWR('/api/links', fetcher);
 
   const [colorTheme, setTheme] = useToggleTheme();
-
-  const [displayMainContainer, setDisplayMainContainer] = useState(false);
-  const [displayChildren, setDisplayChildren] = useState(children);
-  useEffect(() => {
-    setDisplayMainContainer(true);
-  }, []);
-  useEffect(() => {
-    if (children !== displayChildren) setDisplayMainContainer(false);
-  }, [children, displayChildren, setDisplayChildren]);
+  const router = useRouter();
 
   return (
     <div className="h-screen flex flex-row">
       <Navbar links={data} colorTheme={colorTheme} />
       <div className="flex flex-col flex-auto p-4 overflow-y-auto">
-        <main
-          onTransitionEnd={() => {
-            if (!displayMainContainer) {
-              setDisplayMainContainer(true);
-              setDisplayChildren(children);
-            }
-          }}
-          className="grow transition-opacity duration-1000"
-          style={{
-            opacity: Number(displayMainContainer)
-          }}
-        >
-          {children === displayChildren ? displayChildren : null}
-        </main>
+        <AnimatePresence exitBeforeEnter onExitComplete={() => window.scrollTo(0, 0)}>
+          <main key={router.asPath} className="grow">
+            {children}
+          </main>
+        </AnimatePresence>
         <Footer links={data} />
       </div>
       <button

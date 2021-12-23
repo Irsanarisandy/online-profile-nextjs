@@ -36,8 +36,7 @@
 }
 
 .top_bar {
-  transform: translateX(3px) rotate(45deg);
-  transform-origin: 0 50%;
+  transform: translateY(8px) rotate(45deg);
 }
 
 .middle_bar {
@@ -45,8 +44,7 @@
 }
 
 .bottom_bar {
-  transform: translateX(3px) rotate(-45deg);
-  transform-origin: 0 50%;
+  transform: translateY(-8px) rotate(-45deg);
 }
 
 .top_left_arrow {
@@ -68,10 +66,6 @@
 .navbar {
   height: 100vh;
   width: 0;
-
-  > div * {
-    opacity: 0;
-  }
 }
 
 .navlink {
@@ -103,16 +97,8 @@
   .navbar {
     transition: width 0.5s linear;
 
-    > div * {
-      transition: opacity 0.5s ease-out;
-    }
-
     &_display {
       width: 130px;
-
-      > div * {
-        transition: opacity 1.5s ease-in;
-      }
     }
   }
 
@@ -120,11 +106,5 @@
     position: fixed;
     bottom: 1rem;
     left: 1rem;
-  }
-}
-
-.navbar_display {
-  > div * {
-    opacity: 1;
   }
 }

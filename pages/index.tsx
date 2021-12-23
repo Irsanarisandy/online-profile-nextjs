@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { OpacityPageTransitionMotion } from '@components/custom-motion';
 import DisplayTextAnimation from '@components/display-text-animation';
-import styles from '@styles/Home.module.scss';
 
 const Home: NextPage = () => {
   const intro = [
@@ -14,9 +14,12 @@ const Home: NextPage = () => {
       <Head>
         <meta name="description" content="Home Page" />
       </Head>
-      <div className={styles.container}>
-        <DisplayTextAnimation paragraph={intro} classes={styles.intro} />
-      </div>
+      <OpacityPageTransitionMotion classes="sm:m-8">
+        <DisplayTextAnimation
+          paragraph={intro}
+          classes="text-[1.5rem] font-bold sm:text-[3rem] sm:font-extrabold md:text-[4rem]"
+        />
+      </OpacityPageTransitionMotion>
     </>
   );
 };

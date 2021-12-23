@@ -1,9 +1,17 @@
-import React from 'react';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import React from 'react';
 import Links from '@entities/links.interface';
 import linkElementPair from './link-element-pair';
 import styles from '@styles/Navbar.module.scss';
+
+interface CustomMotionProp {
+  isMobile: boolean;
+  isOpen: boolean;
+  children: React.ReactNode;
+  classes?: string;
+}
 
 interface NavlinkProp {
   href: string;
@@ -25,6 +33,27 @@ interface NavbarState {
   width?: number;
 }
 
+const NavOpacityMotionContainer = ({isMobile, isOpen, children, classes}: CustomMotionProp) => {
+  return isMobile ? (
+    <div className={classes} style={{ opacity: Number(isOpen) }}>
+      {children}
+    </div>
+  ) : (
+    <motion.div
+      variants={{
+        // default duration is 0.3
+        hidden: { opacity: 0, transition: { ease: [0, 1, 1, 1] } },
+        display: { opacity: 1, transition: { duration: 2, ease: 'easeIn' } }
+      }}
+      initial="hidden"
+      animate={isOpen ? 'display' : 'hidden'}
+      className={classes}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
 const Navlink = ({href, name, isOpen, colorTheme, handleClick}: NavlinkProp) => (
   <div
     className={`text-center ${colorTheme !== 'dark' ? styles.navlink : styles.navlink_dark}`}
@@ -34,9 +63,20 @@ const Navlink = ({href, name, isOpen, colorTheme, handleClick}: NavlinkProp) => 
       <a style={{
         pointerEvents: isOpen ? 'auto' : 'none'
       }}>
-        <span className="py-4 font-bold hover:duration-500 hover:opacity-50">
+        <motion.span
+          whileHover={{
+            opacity: [1, 0.5],
+            fontSize: ['1.125rem', '1.3rem'],
+            transition: {
+              duration: 0.8,
+              repeat: Infinity,
+              repeatType: 'reverse'
+            }
+          }}
+          className="py-4 font-bold"
+        >
           {name}
-        </span>
+        </motion.span>
       </a>
     </Link>
   </div>
@@ -100,47 +140,58 @@ class Navbar extends React.Component<NavbarProp, NavbarState> {
           className={`z-10 flex flex-col ${styles.navbar} ${isOpen ? styles.navbar_display : ''}`}
         >
           <div
-            className="flex flex-col items-center p-4"
             style={{
               backgroundColor: (isMobile && isOpen) ?
                 (colorTheme !== 'dark' ? 'white' : 'black') : 'transparent'
             }}
           >
-            <Link href="/" passHref>
-              <a
-                onClick={this.handleClick}
+            <NavOpacityMotionContainer
+              isMobile={isMobile}
+              isOpen={isOpen}
+              classes="flex flex-col items-center p-4"
+            >
+              <Link href="/" passHref>
+                <a
+                  onClick={this.handleClick}
+                  style={{
+                    pointerEvents: isOpen ? 'auto' : 'none'
+                  }}
+                >
+                  <Image
+                    src="/images/logo.png"
+                    alt="logo"
+                    height={100}
+                    width={55}
+                    className="cursor-pointer"
+                  />
+                </a>
+              </Link>
+              <h1 className={styles.customfont_name}>Irsan</h1>
+              <span className={styles.customfont_role}>Web Developer</span>
+            </NavOpacityMotionContainer>
+          </div>
+          <div className="flex-auto bg-gray-50 dark:bg-gray-900 transition-colors duration-500">
+            <NavOpacityMotionContainer
+              isMobile={isMobile}
+              isOpen={isOpen}
+              classes="flex flex-col items-center"
+            >
+              <div className="w-full my-12">
+                {/* <Navlink href="/games" name="Games" isOpen={isOpen} colorTheme={colorTheme} handleClick={this.handleClick} /> */}
+                <Navlink href="/coming-soon" name="About" isOpen={isOpen} colorTheme={colorTheme} handleClick={this.handleClick} />
+                <Navlink href="/coming-soon" name="My Skills" isOpen={isOpen} colorTheme={colorTheme} handleClick={this.handleClick} />
+                <Navlink href="/coming-soon" name="Blog" isOpen={isOpen} colorTheme={colorTheme} handleClick={this.handleClick} />
+              </div>
+              <div
+                className="mb-2 grid gap-3 items-center"
                 style={{
-                  pointerEvents: isOpen ? 'auto' : 'none'
+                  opacity: linkElements.length === 0 ? 0 : 1,
+                  gridTemplateColumns: `repeat(${linkElements.length}, minmax(0, 1fr))`
                 }}
               >
-                <Image
-                  src="/images/logo.png"
-                  alt="logo"
-                  height={100}
-                  width={55}
-                  className="cursor-pointer"
-                />
-              </a>
-            </Link>
-            <h1 className={styles.customfont_name}>Irsan</h1>
-            <span className={styles.customfont_role}>Web Developer</span>
-          </div>
-          <div className="flex flex-col items-center flex-auto bg-gray-50 dark:bg-gray-900 transition-colors duration-500">
-            <div className="w-full my-12">
-              {/* <Navlink href="/games" name="Games" isOpen={isOpen} colorTheme={colorTheme} handleClick={this.handleClick} /> */}
-              <Navlink href="/coming-soon" name="About" isOpen={isOpen} colorTheme={colorTheme} handleClick={this.handleClick} />
-              <Navlink href="/coming-soon" name="My Skills" isOpen={isOpen} colorTheme={colorTheme} handleClick={this.handleClick} />
-              <Navlink href="/coming-soon" name="Blog" isOpen={isOpen} colorTheme={colorTheme} handleClick={this.handleClick} />
-            </div>
-            <div
-              className="mb-2 grid gap-3 items-center"
-              style={{
-                opacity: linkElements.length === 0 ? 0 : 1,
-                gridTemplateColumns: `repeat(${linkElements.length}, minmax(0, 1fr))`
-              }}
-            >
-              {linkElements}
-            </div>
+                {linkElements}
+              </div>
+            </NavOpacityMotionContainer>
           </div>
         </nav>
         <button

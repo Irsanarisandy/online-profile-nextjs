@@ -15,6 +15,7 @@ function DisplayTextAnimation({paragraph, classes}: IProp): JSX.Element {
           <span
             aria-hidden="true"
             key={`line${lineIndex}char${charIndex}`}
+            className={classes}
             style={{
               animationDelay: `${curIndex / 10 * 2 + 1}s`
             }}
@@ -27,7 +28,7 @@ function DisplayTextAnimation({paragraph, classes}: IProp): JSX.Element {
   );
 
   return (
-    <div className={`${styles.animated_text_container} ${classes}`}>
+    <div className={`${styles.animated_text_container}`}>
       {result.map((sentence, index) => (
         <div key={`sentence${index}`} className="flex">
           {sentence}
