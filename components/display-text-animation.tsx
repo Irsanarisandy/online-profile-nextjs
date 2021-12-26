@@ -2,10 +2,15 @@ import styles from '@styles/DisplayTextAnimation.module.scss';
 
 interface IProp {
   paragraph: string[];
+  speed?: (n: number) => number;
   classes?: string;
 }
 
-function DisplayTextAnimation({paragraph, classes}: IProp): JSX.Element {
+function DisplayTextAnimation({
+  paragraph,
+  speed = ((n: number) => n / 10 + 1),
+  classes
+}: IProp): JSX.Element {
   let curIndex = 0;
   const result = paragraph.map(
     (line, lineIndex) => line.split('').map(
@@ -17,7 +22,7 @@ function DisplayTextAnimation({paragraph, classes}: IProp): JSX.Element {
             key={`line${lineIndex}char${charIndex}`}
             className={classes}
             style={{
-              animationDelay: `${curIndex / 10 * 2 + 1}s`
+              animationDelay: `${speed(curIndex)}s`
             }}
           >
             {char === ' ' ? '\u00A0' : char}

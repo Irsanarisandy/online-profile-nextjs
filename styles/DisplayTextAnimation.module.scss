@@ -4,5 +4,11 @@
   span {
     opacity: 0;
     animation: display-text 2s forwards, stretch 0.7s linear;
+    transition: all 0.3s linear;
+
+    &:hover {
+      color: #FDB601;
+      transform: scale(1.25);
+    }
   }
 }

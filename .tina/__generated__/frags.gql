@@ -1,0 +1,3 @@
+fragment HomeParts on Home {
+  intro
+}

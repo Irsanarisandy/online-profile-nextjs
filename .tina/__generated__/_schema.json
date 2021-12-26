@@ -1,0 +1,31 @@
+{
+  "version": {
+    "fullVersion": "0.59.2",
+    "major": "0",
+    "minor": "59",
+    "patch": "2"
+  },
+  "meta": {},
+  "collections": [
+    {
+      "label": "Home",
+      "name": "home",
+      "path": "content/home",
+      "fields": [
+        {
+          "type": "string",
+          "label": "Intro",
+          "name": "intro",
+          "list": true,
+          "namespace": [
+            "home",
+            "intro"
+          ]
+        }
+      ],
+      "namespace": [
+        "home"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "DocumentConnection": {
+    "type": "DocumentConnection",
+    "resolveType": "multiCollectionDocumentList",
+    "collections": [
+      "home"
+    ]
+  },
+  "Node": {
+    "type": "Node",
+    "resolveType": "nodeDocument"
+  },
+  "DocumentNode": {
+    "type": "DocumentNode",
+    "resolveType": "multiCollectionDocument",
+    "createDocument": "create",
+    "updateDocument": "update"
+  },
+  "HomeDocument": {
+    "type": "HomeDocument",
+    "resolveType": "collectionDocument",
+    "collection": "home",
+    "createHomeDocument": "create",
+    "updateHomeDocument": "update"
+  },
+  "HomeConnection": {
+    "type": "HomeConnection",
+    "resolveType": "collectionDocumentList",
+    "collection": "home"
+  }
+}
