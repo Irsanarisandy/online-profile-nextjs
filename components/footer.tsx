@@ -24,7 +24,7 @@ function Footer({links}: IProp): JSX.Element {
     );
   }
   return (
-    <footer className="flex flex-col items-center mt-4">
+    <footer className="flex flex-col items-center py-4">
       <div
         className="mb-2 transition-opacity duration-1500 grid gap-5 items-center"
         style={{

@@ -22,7 +22,7 @@ function Layout({children}: IProp): JSX.Element {
   return (
     <div className="h-screen flex flex-row">
       <Navbar links={data} colorTheme={colorTheme} />
-      <div className="flex flex-col flex-auto p-4 overflow-y-auto">
+      <div className="flex flex-col flex-auto overflow-y-auto">
         <AnimatePresence exitBeforeEnter onExitComplete={() => window.scrollTo(0, 0)}>
           <main key={router.asPath} className="grow">
             {children}
@@ -31,6 +31,7 @@ function Layout({children}: IProp): JSX.Element {
         <Footer links={data} />
       </div>
       <button
+        aria-label="theme toggle button"
         className={`fixed bottom-4 right-4 text-black bg-gray-200 ${styles.toggle_button}`}
         onClick={() => setTheme(colorTheme === 'light' ? 'dark' : 'light')}
       >

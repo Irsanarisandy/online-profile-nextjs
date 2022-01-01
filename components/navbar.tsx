@@ -195,6 +195,7 @@ class Navbar extends React.Component<NavbarProp, NavbarState> {
           </div>
         </nav>
         <button
+          aria-label="nav menu toggle button"
           className={`z-10 text-black bg-gray-200 flex flex-col justify-center items-center ${styles.toggle_nav_button}`}
           onClick={() => this.setState({ isOpen: !isOpen })}
         >
