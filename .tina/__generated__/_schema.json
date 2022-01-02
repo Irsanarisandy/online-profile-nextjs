@@ -26,6 +26,120 @@
       "namespace": [
         "home"
       ]
+    },
+    {
+      "label": "About",
+      "name": "about",
+      "path": "content/about",
+      "fields": [
+        {
+          "type": "string",
+          "label": "Title",
+          "name": "title",
+          "namespace": [
+            "about",
+            "title"
+          ]
+        },
+        {
+          "type": "rich-text",
+          "label": "Body",
+          "name": "body",
+          "isBody": true,
+          "namespace": [
+            "about",
+            "body"
+          ]
+        },
+        {
+          "type": "object",
+          "label": "Overall Web Skills",
+          "name": "overallWebSkills",
+          "list": true,
+          "fields": [
+            {
+              "type": "string",
+              "label": "Name",
+              "name": "name",
+              "namespace": [
+                "about",
+                "overallWebSkills",
+                "name"
+              ]
+            },
+            {
+              "type": "number",
+              "label": "Percentage",
+              "name": "percentage",
+              "namespace": [
+                "about",
+                "overallWebSkills",
+                "percentage"
+              ]
+            },
+            {
+              "type": "string",
+              "label": "Color",
+              "name": "color",
+              "ui": {
+                "component": "color"
+              },
+              "namespace": [
+                "about",
+                "overallWebSkills",
+                "color"
+              ]
+            }
+          ],
+          "namespace": [
+            "about",
+            "overallWebSkills"
+          ]
+        },
+        {
+          "type": "string",
+          "label": "Frontend Skills",
+          "name": "frontend",
+          "list": true,
+          "namespace": [
+            "about",
+            "frontend"
+          ]
+        },
+        {
+          "type": "string",
+          "label": "Backend Skills",
+          "name": "backend",
+          "list": true,
+          "namespace": [
+            "about",
+            "backend"
+          ]
+        },
+        {
+          "type": "string",
+          "label": "General Coding Skills",
+          "name": "generalCoding",
+          "list": true,
+          "namespace": [
+            "about",
+            "generalCoding"
+          ]
+        },
+        {
+          "type": "string",
+          "label": "Other Skills",
+          "name": "others",
+          "list": true,
+          "namespace": [
+            "about",
+            "others"
+          ]
+        }
+      ],
+      "namespace": [
+        "about"
+      ]
     }
   ]
 }

@@ -50,6 +50,8 @@ type Query {
   getDocumentFields: JSON!
   getHomeDocument(relativePath: String): HomeDocument!
   getHomeList(before: String, after: String, first: Int, last: Int): HomeConnection!
+  getAboutDocument(relativePath: String): AboutDocument!
+  getAboutList(before: String, after: String, first: Int, last: Int): AboutConnection!
 }
 
 type DocumentConnectionEdges {
@@ -75,7 +77,7 @@ type Collection {
   documents(before: String, after: String, first: Int, last: Int): DocumentConnection!
 }
 
-union DocumentNode = HomeDocument
+union DocumentNode = HomeDocument | AboutDocument
 
 type Home {
   intro: [String]
@@ -101,20 +103,75 @@ type HomeConnection implements Connection {
   edges: [HomeConnectionEdges]
 }
 
+type AboutOverallWebSkills {
+  name: String
+  percentage: Int
+  color: String
+}
+
+type About {
+  title: String
+  body: JSON
+  overallWebSkills: [AboutOverallWebSkills]
+  frontend: [String]
+  backend: [String]
+  generalCoding: [String]
+  others: [String]
+}
+
+type AboutDocument implements Node & Document {
+  id: ID!
+  sys: SystemInfo!
+  data: About!
+  form: JSON!
+  values: JSON!
+  dataJSON: JSON!
+}
+
+type AboutConnectionEdges {
+  cursor: String
+  node: AboutDocument
+}
+
+type AboutConnection implements Connection {
+  pageInfo: PageInfo
+  totalCount: Int!
+  edges: [AboutConnectionEdges]
+}
+
 type Mutation {
   addPendingDocument(collection: String!, relativePath: String!, template: String): DocumentNode!
   updateDocument(collection: String, relativePath: String!, params: DocumentMutation!): DocumentNode!
   createDocument(collection: String, relativePath: String!, params: DocumentMutation!): DocumentNode!
   updateHomeDocument(relativePath: String!, params: HomeMutation!): HomeDocument!
   createHomeDocument(relativePath: String!, params: HomeMutation!): HomeDocument!
+  updateAboutDocument(relativePath: String!, params: AboutMutation!): AboutDocument!
+  createAboutDocument(relativePath: String!, params: AboutMutation!): AboutDocument!
 }
 
 input DocumentMutation {
   home: HomeMutation
+  about: AboutMutation
 }
 
 input HomeMutation {
   intro: [String]
+}
+
+input AboutOverallWebSkillsMutation {
+  name: String
+  percentage: Int
+  color: String
+}
+
+input AboutMutation {
+  title: String
+  body: JSON
+  overallWebSkills: [AboutOverallWebSkillsMutation]
+  frontend: [String]
+  backend: [String]
+  generalCoding: [String]
+  others: [String]
 }
 
 schema {

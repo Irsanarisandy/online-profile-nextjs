@@ -1,3 +1,18 @@
 fragment HomeParts on Home {
   intro
 }
+
+fragment AboutParts on About {
+  title
+  body
+  overallWebSkills {
+    __typename
+    name
+    percentage
+    color
+  }
+  frontend
+  backend
+  generalCoding
+  others
+}

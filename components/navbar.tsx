@@ -140,6 +140,7 @@ class Navbar extends React.Component<NavbarProp, NavbarState> {
           className={`z-10 flex flex-col ${styles.navbar} ${isOpen ? styles.navbar_display : ''}`}
         >
           <div
+            className={isOpen ? styles.logo_section : ''}
             style={{
               backgroundColor: (isMobile && isOpen) ?
                 (colorTheme !== 'dark' ? 'white' : 'black') : 'transparent'
@@ -177,10 +178,9 @@ class Navbar extends React.Component<NavbarProp, NavbarState> {
               classes="flex flex-col items-center"
             >
               <div className="w-full my-12">
-                {/* <Navlink href="/games" name="Games" isOpen={isOpen} colorTheme={colorTheme} handleClick={this.handleClick} /> */}
-                <Navlink href="/coming-soon" name="About" isOpen={isOpen} colorTheme={colorTheme} handleClick={this.handleClick} />
-                <Navlink href="/coming-soon" name="My Skills" isOpen={isOpen} colorTheme={colorTheme} handleClick={this.handleClick} />
+                <Navlink href="/about" name="About" isOpen={isOpen} colorTheme={colorTheme} handleClick={this.handleClick} />
                 <Navlink href="/coming-soon" name="Blog" isOpen={isOpen} colorTheme={colorTheme} handleClick={this.handleClick} />
+                <Navlink href="/coming-soon" name="Games" isOpen={isOpen} colorTheme={colorTheme} handleClick={this.handleClick} />
               </div>
               <div
                 className="mb-2 grid gap-3 items-center"

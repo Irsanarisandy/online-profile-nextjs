@@ -69,6 +69,8 @@ export type Query = {
   getDocumentFields: Scalars['JSON'];
   getHomeDocument: HomeDocument;
   getHomeList: HomeConnection;
+  getAboutDocument: AboutDocument;
+  getAboutList: AboutConnection;
 };
 
 
@@ -102,6 +104,19 @@ export type QueryGetHomeDocumentArgs = {
 
 
 export type QueryGetHomeListArgs = {
+  before?: InputMaybe<Scalars['String']>;
+  after?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type QueryGetAboutDocumentArgs = {
+  relativePath?: InputMaybe<Scalars['String']>;
+};
+
+
+export type QueryGetAboutListArgs = {
   before?: InputMaybe<Scalars['String']>;
   after?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -142,7 +157,7 @@ export type CollectionDocumentsArgs = {
   last?: InputMaybe<Scalars['Int']>;
 };
 
-export type DocumentNode = HomeDocument;
+export type DocumentNode = HomeDocument | AboutDocument;
 
 export type Home = {
   __typename?: 'Home';
@@ -172,6 +187,47 @@ export type HomeConnection = Connection & {
   edges?: Maybe<Array<Maybe<HomeConnectionEdges>>>;
 };
 
+export type AboutOverallWebSkills = {
+  __typename?: 'AboutOverallWebSkills';
+  name?: Maybe<Scalars['String']>;
+  percentage?: Maybe<Scalars['Int']>;
+  color?: Maybe<Scalars['String']>;
+};
+
+export type About = {
+  __typename?: 'About';
+  title?: Maybe<Scalars['String']>;
+  body?: Maybe<Scalars['JSON']>;
+  overallWebSkills?: Maybe<Array<Maybe<AboutOverallWebSkills>>>;
+  frontend?: Maybe<Array<Maybe<Scalars['String']>>>;
+  backend?: Maybe<Array<Maybe<Scalars['String']>>>;
+  generalCoding?: Maybe<Array<Maybe<Scalars['String']>>>;
+  others?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type AboutDocument = Node & Document & {
+  __typename?: 'AboutDocument';
+  id: Scalars['ID'];
+  sys: SystemInfo;
+  data: About;
+  form: Scalars['JSON'];
+  values: Scalars['JSON'];
+  dataJSON: Scalars['JSON'];
+};
+
+export type AboutConnectionEdges = {
+  __typename?: 'AboutConnectionEdges';
+  cursor?: Maybe<Scalars['String']>;
+  node?: Maybe<AboutDocument>;
+};
+
+export type AboutConnection = Connection & {
+  __typename?: 'AboutConnection';
+  pageInfo?: Maybe<PageInfo>;
+  totalCount: Scalars['Int'];
+  edges?: Maybe<Array<Maybe<AboutConnectionEdges>>>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   addPendingDocument: DocumentNode;
@@ -179,6 +235,8 @@ export type Mutation = {
   createDocument: DocumentNode;
   updateHomeDocument: HomeDocument;
   createHomeDocument: HomeDocument;
+  updateAboutDocument: AboutDocument;
+  createAboutDocument: AboutDocument;
 };
 
 
@@ -214,15 +272,46 @@ export type MutationCreateHomeDocumentArgs = {
   params: HomeMutation;
 };
 
+
+export type MutationUpdateAboutDocumentArgs = {
+  relativePath: Scalars['String'];
+  params: AboutMutation;
+};
+
+
+export type MutationCreateAboutDocumentArgs = {
+  relativePath: Scalars['String'];
+  params: AboutMutation;
+};
+
 export type DocumentMutation = {
   home?: InputMaybe<HomeMutation>;
+  about?: InputMaybe<AboutMutation>;
 };
 
 export type HomeMutation = {
   intro?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
+export type AboutOverallWebSkillsMutation = {
+  name?: InputMaybe<Scalars['String']>;
+  percentage?: InputMaybe<Scalars['Int']>;
+  color?: InputMaybe<Scalars['String']>;
+};
+
+export type AboutMutation = {
+  title?: InputMaybe<Scalars['String']>;
+  body?: InputMaybe<Scalars['JSON']>;
+  overallWebSkills?: InputMaybe<Array<InputMaybe<AboutOverallWebSkillsMutation>>>;
+  frontend?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  backend?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  generalCoding?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  others?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
 export type HomePartsFragment = { __typename?: 'Home', intro?: Array<string | null | undefined> | null | undefined };
+
+export type AboutPartsFragment = { __typename?: 'About', title?: string | null | undefined, body?: any | null | undefined, frontend?: Array<string | null | undefined> | null | undefined, backend?: Array<string | null | undefined> | null | undefined, generalCoding?: Array<string | null | undefined> | null | undefined, others?: Array<string | null | undefined> | null | undefined, overallWebSkills?: Array<{ __typename: 'AboutOverallWebSkills', name?: string | null | undefined, percentage?: number | null | undefined, color?: string | null | undefined } | null | undefined> | null | undefined };
 
 export type GetHomeDocumentQueryVariables = Exact<{
   relativePath: Scalars['String'];
@@ -236,9 +325,37 @@ export type GetHomeListQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetHomeListQuery = { __typename?: 'Query', getHomeList: { __typename?: 'HomeConnection', totalCount: number, edges?: Array<{ __typename?: 'HomeConnectionEdges', node?: { __typename?: 'HomeDocument', id: string, sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, data: { __typename?: 'Home', intro?: Array<string | null | undefined> | null | undefined } } | null | undefined } | null | undefined> | null | undefined } };
 
+export type GetAboutDocumentQueryVariables = Exact<{
+  relativePath: Scalars['String'];
+}>;
+
+
+export type GetAboutDocumentQuery = { __typename?: 'Query', getAboutDocument: { __typename?: 'AboutDocument', id: string, sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, data: { __typename?: 'About', title?: string | null | undefined, body?: any | null | undefined, frontend?: Array<string | null | undefined> | null | undefined, backend?: Array<string | null | undefined> | null | undefined, generalCoding?: Array<string | null | undefined> | null | undefined, others?: Array<string | null | undefined> | null | undefined, overallWebSkills?: Array<{ __typename: 'AboutOverallWebSkills', name?: string | null | undefined, percentage?: number | null | undefined, color?: string | null | undefined } | null | undefined> | null | undefined } } };
+
+export type GetAboutListQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAboutListQuery = { __typename?: 'Query', getAboutList: { __typename?: 'AboutConnection', totalCount: number, edges?: Array<{ __typename?: 'AboutConnectionEdges', node?: { __typename?: 'AboutDocument', id: string, sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, data: { __typename?: 'About', title?: string | null | undefined, body?: any | null | undefined, frontend?: Array<string | null | undefined> | null | undefined, backend?: Array<string | null | undefined> | null | undefined, generalCoding?: Array<string | null | undefined> | null | undefined, others?: Array<string | null | undefined> | null | undefined, overallWebSkills?: Array<{ __typename: 'AboutOverallWebSkills', name?: string | null | undefined, percentage?: number | null | undefined, color?: string | null | undefined } | null | undefined> | null | undefined } } | null | undefined } | null | undefined> | null | undefined } };
+
 export const HomePartsFragmentDoc = gql`
     fragment HomeParts on Home {
   intro
+}
+    `;
+export const AboutPartsFragmentDoc = gql`
+    fragment AboutParts on About {
+  title
+  body
+  overallWebSkills {
+    __typename
+    name
+    percentage
+    color
+  }
+  frontend
+  backend
+  generalCoding
+  others
 }
     `;
 export const GetHomeDocumentDocument = gql`
@@ -282,6 +399,47 @@ export const GetHomeListDocument = gql`
   }
 }
     ${HomePartsFragmentDoc}`;
+export const GetAboutDocumentDocument = gql`
+    query getAboutDocument($relativePath: String!) {
+  getAboutDocument(relativePath: $relativePath) {
+    sys {
+      filename
+      basename
+      breadcrumbs
+      path
+      relativePath
+      extension
+    }
+    id
+    data {
+      ...AboutParts
+    }
+  }
+}
+    ${AboutPartsFragmentDoc}`;
+export const GetAboutListDocument = gql`
+    query getAboutList {
+  getAboutList {
+    totalCount
+    edges {
+      node {
+        id
+        sys {
+          filename
+          basename
+          breadcrumbs
+          path
+          relativePath
+          extension
+        }
+        data {
+          ...AboutParts
+        }
+      }
+    }
+  }
+}
+    ${AboutPartsFragmentDoc}`;
 export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<R>
   export function getSdk<C>(requester: Requester<C>) {
     return {
@@ -290,6 +448,12 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
       },
     getHomeList(variables?: GetHomeListQueryVariables, options?: C): Promise<{data: GetHomeListQuery, variables: GetHomeListQueryVariables, query: string}> {
         return requester<{data: GetHomeListQuery, variables: GetHomeListQueryVariables, query: string}, GetHomeListQueryVariables>(GetHomeListDocument, variables, options);
+      },
+    getAboutDocument(variables: GetAboutDocumentQueryVariables, options?: C): Promise<{data: GetAboutDocumentQuery, variables: GetAboutDocumentQueryVariables, query: string}> {
+        return requester<{data: GetAboutDocumentQuery, variables: GetAboutDocumentQueryVariables, query: string}, GetAboutDocumentQueryVariables>(GetAboutDocumentDocument, variables, options);
+      },
+    getAboutList(variables?: GetAboutListQueryVariables, options?: C): Promise<{data: GetAboutListQuery, variables: GetAboutListQueryVariables, query: string}> {
+        return requester<{data: GetAboutListQuery, variables: GetAboutListQueryVariables, query: string}, GetAboutListQueryVariables>(GetAboutListDocument, variables, options);
       }
     };
   }

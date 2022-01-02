@@ -36,3 +36,42 @@ query getHomeList {
     }
   }
 }
+
+query getAboutDocument($relativePath: String!) {
+  getAboutDocument(relativePath: $relativePath) {
+    sys {
+      filename
+      basename
+      breadcrumbs
+      path
+      relativePath
+      extension
+    }
+    id
+    data {
+      ...AboutParts
+    }
+  }
+}
+
+query getAboutList {
+  getAboutList {
+    totalCount
+    edges {
+      node {
+        id
+        sys {
+          filename
+          basename
+          breadcrumbs
+          path
+          relativePath
+          extension
+        }
+        data {
+          ...AboutParts
+        }
+      }
+    }
+  }
+}

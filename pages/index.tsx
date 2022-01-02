@@ -2,7 +2,7 @@ import type { GetStaticPropsResult, NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { staticRequest } from 'tinacms';
-import { DesktopComputerIcon, EmojiHappyIcon } from '@heroicons/react/outline';
+import { EmojiHappyIcon, NewspaperIcon, PlayIcon } from '@heroicons/react/outline';
 import { OpacityPageTransitionMotion } from '@components/custom-motion';
 import DisplayTextAnimation from '@components/display-text-animation';
 
@@ -31,17 +31,24 @@ const Home: NextPage<HomeProp> = ({data}) => {
           <div className="mt-4 flex">
             <button
               aria-label="navigate to about page button"
-              className="mr-8 hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors duration-500 font-bold py-2 px-4 border border-transparent rounded shadow-lg shadow-gray-50 dark:shadow-gray-900"
-              onClick={() => router.push('/coming-soon')}
+              className="mr-8 w-[120px] hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors duration-500 font-bold py-2 px-4 border border-transparent rounded shadow-lg shadow-gray-50 dark:shadow-gray-900"
+              onClick={() => router.push('/about')}
             >
               <span>About Me <EmojiHappyIcon className="hidden md:block" /></span>
             </button>
             <button
               aria-label="navigate to about page button"
-              className="hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors duration-500 font-bold py-2 px-4 border border-transparent rounded shadow-lg shadow-gray-50 dark:shadow-gray-900"
+              className="mr-8 w-[120px] hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors duration-500 font-bold py-2 px-4 border border-transparent rounded shadow-lg shadow-gray-50 dark:shadow-gray-900"
               onClick={() => router.push('/coming-soon')}
             >
-              <span>My Skills <DesktopComputerIcon className="hidden md:block" /></span>
+              <span>My Blog <NewspaperIcon className="hidden md:block" /></span>
+            </button>
+            <button
+              aria-label="navigate to about page button"
+              className="w-[120px] hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors duration-500 font-bold py-2 px-4 border border-transparent rounded shadow-lg shadow-gray-50 dark:shadow-gray-900"
+              onClick={() => router.push('/coming-soon')}
+            >
+              <span>Games <PlayIcon className="hidden md:block" /></span>
             </button>
           </div>
         </div>

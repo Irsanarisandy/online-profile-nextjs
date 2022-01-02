@@ -82,6 +82,10 @@
     width: 100vw;
   }
 
+  .logo_section {
+    width: 100vw;
+  }
+
   .icon {
     width: 28px;
   }
@@ -97,7 +101,7 @@
   .navbar {
     transition: width 0.5s linear;
 
-    &_display {
+    &_display, .logo_section {
       width: 130px;
     }
   }

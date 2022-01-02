@@ -3,7 +3,8 @@
     "type": "DocumentConnection",
     "resolveType": "multiCollectionDocumentList",
     "collections": [
-      "home"
+      "home",
+      "about"
     ]
   },
   "Node": {
@@ -27,5 +28,17 @@
     "type": "HomeConnection",
     "resolveType": "collectionDocumentList",
     "collection": "home"
+  },
+  "AboutDocument": {
+    "type": "AboutDocument",
+    "resolveType": "collectionDocument",
+    "collection": "about",
+    "createAboutDocument": "create",
+    "updateAboutDocument": "update"
+  },
+  "AboutConnection": {
+    "type": "AboutConnection",
+    "resolveType": "collectionDocumentList",
+    "collection": "about"
   }
 }
