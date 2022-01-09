@@ -1,9 +1,9 @@
 {
   "version": {
-    "fullVersion": "0.59.2",
+    "fullVersion": "0.59.3",
     "major": "0",
     "minor": "59",
-    "patch": "2"
+    "patch": "3"
   },
   "meta": {},
   "collections": [
@@ -139,6 +139,70 @@
       ],
       "namespace": [
         "about"
+      ]
+    },
+    {
+      "label": "Blog Posts",
+      "name": "post",
+      "path": "content/posts",
+      "format": "mdx",
+      "fields": [
+        {
+          "type": "string",
+          "label": "Title",
+          "name": "title",
+          "namespace": [
+            "post",
+            "title"
+          ]
+        },
+        {
+          "type": "datetime",
+          "label": "Post Date & Time",
+          "name": "postDateTime",
+          "ui": {
+            "dateFormat": "DD/MM/YYYY h:mm a"
+          },
+          "namespace": [
+            "post",
+            "postDateTime"
+          ]
+        },
+        {
+          "type": "string",
+          "label": "Tags",
+          "name": "tags",
+          "list": true,
+          "namespace": [
+            "post",
+            "tags"
+          ]
+        },
+        {
+          "type": "string",
+          "label": "Excerpt",
+          "name": "excerpt",
+          "ui": {
+            "component": "textarea"
+          },
+          "namespace": [
+            "post",
+            "excerpt"
+          ]
+        },
+        {
+          "type": "rich-text",
+          "label": "Body",
+          "name": "body",
+          "isBody": true,
+          "namespace": [
+            "post",
+            "body"
+          ]
+        }
+      ],
+      "namespace": [
+        "post"
       ]
     }
   ]

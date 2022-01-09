@@ -179,7 +179,7 @@ class Navbar extends React.Component<NavbarProp, NavbarState> {
             >
               <div className="w-full my-12">
                 <Navlink href="/about" name="About" isOpen={isOpen} colorTheme={colorTheme} handleClick={this.handleClick} />
-                <Navlink href="/coming-soon" name="Blog" isOpen={isOpen} colorTheme={colorTheme} handleClick={this.handleClick} />
+                <Navlink href="/posts" name="Blog" isOpen={isOpen} colorTheme={colorTheme} handleClick={this.handleClick} />
                 <Navlink href="/coming-soon" name="Games" isOpen={isOpen} colorTheme={colorTheme} handleClick={this.handleClick} />
               </div>
               <div

@@ -83,5 +83,46 @@ export default defineSchema({
         },
       ]
     },
+    {
+      label: 'Blog Posts',
+      name: 'post',
+      path: 'content/posts',
+      format: 'mdx',
+      fields: [
+        {
+          type: 'string',
+          label: 'Title',
+          name: 'title'
+        },
+        {
+          type: 'datetime',
+          label: 'Post Date & Time',
+          name: 'postDateTime',
+          ui: {
+            dateFormat: 'DD/MM/YYYY h:mm a'
+          }
+        },
+        {
+          type: 'string',
+          label: 'Tags',
+          name: 'tags',
+          list: true
+        },
+        {
+          type: 'string',
+          label: 'Excerpt',
+          name: 'excerpt',
+          ui: {
+            component: 'textarea'
+          }
+        },
+        {
+          type: 'rich-text',
+          label: 'Body',
+          name: 'body',
+          isBody: true
+        },
+      ],
+    },
   ]
 });

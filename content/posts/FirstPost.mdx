@@ -1,0 +1,27 @@
+---
+title: Remake of my online profile
+postDateTime: 2022-01-10T06:26:27.858Z
+tags:
+  - First Post
+  - Web Development
+  - Next.js (React)
+  - Tina CMS
+  - TailwindCSS
+excerpt: This is my first post attempt.
+---
+
+> “Why, hello there” - a delusional magician
+
+As time goes by, I had a curiosity in finding a CMS that is headless, while also simple to use without having to purchase a server to connect to a database. This new website I'm making will be my new online profile, with capabilities of having my own blog posts being able to be created and edited on the fly without needing to touch code, like this one. It also gives me a reason to polish up my frontend skills and learn more about frontend technologies like [Next.js](https://nextjs.org/) which is SSR for [React](https://reactjs.org/). So, as I was browsing the results given by the search engine, I found out in [Jamstack](https://jamstack.org/headless-cms/) that there were technologies that uses Git to store page content in markdown files as an alternative to API-based, which includes [Tina](https://tina.io/) and [Netlify CMS](https://www.netlifycms.org/) as the top two listed for Git-based and open-source. At the time, I chose [Tina](https://tina.io/) just because it has better integration with [Next.js](https://nextjs.org/) from looking at comments on couple of websites. I'll probably try out [Netlify CMS](https://www.netlifycms.org/) as well when testing out other frontend technologies like [Nuxt.js](https://nuxtjs.org/) (SSR for [Vue](https://v3.vuejs.org/)) and [SvelteKit](https://kit.svelte.dev/) (SSR for [Svelte](https://svelte.dev/)).
+
+—————
+
+During the creation of this website, I chose [Next.js](https://nextjs.org/) because it is currently one of the most popular JavaScript frameworks to use that has SSR capability, and that my workplace planned to migrate one of their main websites to use it. As oppose to just using [React](https://reactjs.org/) as it is and rely on third-party libraries to handle things like routing, [Next.js](https://nextjs.org/) have that covered plus more such as performance optimization features like image optimization.
+
+—————
+
+Thanks to [Tina](https://tina.io/), I managed to accomplish my goal in being able to edit my website's content on the fly. Since it was still on beta during the time I created this website, there were couple of things that were not found in the documentations (had to browse their code in [GitHub](https://github.com/tinacms/tinacms)) and some bugs, which was expected. I was lucky to find a person who is part of the [Tina](https://tina.io/) team that was kind enough to help me resolve the issues I have at the time.
+
+—————
+
+For this website I decided to not rely on any UI pre-styled component packages and go for a minimal approach by using a utility-first CSS framework, which is where [Tailwind CSS](https://tailwindcss.com/) comes in. This framework allows me to simply use their classes without needing to write the styling myself, which also allows me to overcome the limitation of using CSS modules (which is a feature supported in [Next.js](https://nextjs.org/)) such as having opacity animation effects when doing page transitions. I wanted to avoid using custom global styling where possible and scope the styling to the component, and [Tailwind CSS](https://tailwindcss.com/) allows me to do that easily in addition to using CSS modules.

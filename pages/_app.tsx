@@ -20,6 +20,17 @@ function MyApp({ Component, pageProps }: AppProps) {
             isLocalClient={Boolean(
               Number(process.env.NEXT_PUBLIC_USE_LOCAL_CLIENT ?? true)
             )}
+            documentCreatorCallback={{
+              onNewDocument: ({ collection: { slug }, breadcrumbs }) => {
+                const relativeUrl = `/${slug}s/${breadcrumbs.join('/')}`;
+                return (window.location.href = relativeUrl);
+              },
+              filterCollections: (options) => {
+                return options.filter(
+                  (option) => option.label === 'Blog Posts'
+                );
+              },
+            }}
             {...pageProps}
           >
             {

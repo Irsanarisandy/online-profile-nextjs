@@ -1,0 +1,104 @@
+import { GetStaticPropsResult, NextPage } from 'next';
+import Head from 'next/head';
+import Link from 'next/link';
+import { staticRequest } from 'tinacms';
+import Cards from '@components/cards';
+import Chips from '@components/chips';
+import { OpacityPageTransitionMotion } from '@components/custom-motion';
+
+interface PostsData {
+  location: string;
+  title: string;
+  tags: string[];
+  excerpt: string;
+}
+
+interface PostsProp {
+  query: string;
+  data: any;
+}
+
+const Posts: NextPage<PostsProp> = ({data}) => {
+  let postsTags: string[] = [];
+  const postsData: PostsData[] = data.getPostList.edges.map((edge: any) => {
+    const curNode = edge.node;
+    if (curNode.data.tags != null && curNode.data.tags.length > 0) {
+      postsTags.push(...curNode.data.tags);
+    }
+
+    return {
+      location: curNode.sys.filename,
+      ...curNode.data
+    };
+  });
+  postsTags = Array.from(new Set(postsTags)).sort();
+
+  return (
+    <>
+      <Head>
+        <meta name="description" content="Posts Page" />
+      </Head>
+      {postsData.length === 0 && <OpacityPageTransitionMotion classes="h-full flex items-center justify-center">
+        <h1>No Posts Available</h1>
+      </OpacityPageTransitionMotion>}
+      {postsData.length > 0 &&
+        <OpacityPageTransitionMotion classes="flex flex-col md:flex-row min-h-full px-4 pt-4 sm:px-8 sm:pt-8">
+          <section className="mb-8 md:mb-0 md:ml-8">
+            <Cards classes="p-4 sm:p-8 flex flex-col md:w-[320px]">
+              <h1 className="mb-4">Tags</h1>
+              {postsTags.length > 0 && <Chips labels={postsTags} clickLocation="tags" />}
+            </Cards>
+          </section>
+          <section className="md:grow md:order-first grid gap-8 grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 md:auto-rows-[300px]">
+            {postsData.map((data, index) => (
+              <Cards
+                classes="p-4 sm:p-8 flex flex-col"
+                key={`post${index+1}`}
+              >
+                <div className="mb-4 flex">
+                  <Link href={`/posts/${data.location}`} passHref>
+                    <a className="hover:text-[#FDB601]">
+                      <h1>{data.title}</h1>
+                    </a>
+                  </Link>
+                </div>
+                <p>{data.excerpt}</p>
+              </Cards>
+            ))}
+          </section>
+        </OpacityPageTransitionMotion>
+      }
+    </>
+  );
+};
+
+export async function getStaticProps(): Promise<GetStaticPropsResult<PostsProp>> {
+  const query = `
+    query {
+      getPostList {
+        edges {
+          node {
+            sys {
+              filename
+            },
+            data {
+              title,
+              tags,
+              excerpt
+            }
+          }
+        }
+      }
+    }
+  `;
+  const data: any = await staticRequest({ query });
+
+  return {
+    props: {
+      query,
+      data
+    }
+  };
+}
+
+export default Posts;

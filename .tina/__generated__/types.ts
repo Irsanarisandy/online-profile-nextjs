@@ -71,6 +71,8 @@ export type Query = {
   getHomeList: HomeConnection;
   getAboutDocument: AboutDocument;
   getAboutList: AboutConnection;
+  getPostDocument: PostDocument;
+  getPostList: PostConnection;
 };
 
 
@@ -123,6 +125,19 @@ export type QueryGetAboutListArgs = {
   last?: InputMaybe<Scalars['Int']>;
 };
 
+
+export type QueryGetPostDocumentArgs = {
+  relativePath?: InputMaybe<Scalars['String']>;
+};
+
+
+export type QueryGetPostListArgs = {
+  before?: InputMaybe<Scalars['String']>;
+  after?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+};
+
 export type DocumentConnectionEdges = {
   __typename?: 'DocumentConnectionEdges';
   cursor?: Maybe<Scalars['String']>;
@@ -157,7 +172,7 @@ export type CollectionDocumentsArgs = {
   last?: InputMaybe<Scalars['Int']>;
 };
 
-export type DocumentNode = HomeDocument | AboutDocument;
+export type DocumentNode = HomeDocument | AboutDocument | PostDocument;
 
 export type Home = {
   __typename?: 'Home';
@@ -228,6 +243,38 @@ export type AboutConnection = Connection & {
   edges?: Maybe<Array<Maybe<AboutConnectionEdges>>>;
 };
 
+export type Post = {
+  __typename?: 'Post';
+  title?: Maybe<Scalars['String']>;
+  postDateTime?: Maybe<Scalars['String']>;
+  tags?: Maybe<Array<Maybe<Scalars['String']>>>;
+  excerpt?: Maybe<Scalars['String']>;
+  body?: Maybe<Scalars['JSON']>;
+};
+
+export type PostDocument = Node & Document & {
+  __typename?: 'PostDocument';
+  id: Scalars['ID'];
+  sys: SystemInfo;
+  data: Post;
+  form: Scalars['JSON'];
+  values: Scalars['JSON'];
+  dataJSON: Scalars['JSON'];
+};
+
+export type PostConnectionEdges = {
+  __typename?: 'PostConnectionEdges';
+  cursor?: Maybe<Scalars['String']>;
+  node?: Maybe<PostDocument>;
+};
+
+export type PostConnection = Connection & {
+  __typename?: 'PostConnection';
+  pageInfo?: Maybe<PageInfo>;
+  totalCount: Scalars['Int'];
+  edges?: Maybe<Array<Maybe<PostConnectionEdges>>>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   addPendingDocument: DocumentNode;
@@ -237,6 +284,8 @@ export type Mutation = {
   createHomeDocument: HomeDocument;
   updateAboutDocument: AboutDocument;
   createAboutDocument: AboutDocument;
+  updatePostDocument: PostDocument;
+  createPostDocument: PostDocument;
 };
 
 
@@ -284,9 +333,22 @@ export type MutationCreateAboutDocumentArgs = {
   params: AboutMutation;
 };
 
+
+export type MutationUpdatePostDocumentArgs = {
+  relativePath: Scalars['String'];
+  params: PostMutation;
+};
+
+
+export type MutationCreatePostDocumentArgs = {
+  relativePath: Scalars['String'];
+  params: PostMutation;
+};
+
 export type DocumentMutation = {
   home?: InputMaybe<HomeMutation>;
   about?: InputMaybe<AboutMutation>;
+  post?: InputMaybe<PostMutation>;
 };
 
 export type HomeMutation = {
@@ -309,9 +371,19 @@ export type AboutMutation = {
   others?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
+export type PostMutation = {
+  title?: InputMaybe<Scalars['String']>;
+  postDateTime?: InputMaybe<Scalars['String']>;
+  tags?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  excerpt?: InputMaybe<Scalars['String']>;
+  body?: InputMaybe<Scalars['JSON']>;
+};
+
 export type HomePartsFragment = { __typename?: 'Home', intro?: Array<string | null | undefined> | null | undefined };
 
 export type AboutPartsFragment = { __typename?: 'About', title?: string | null | undefined, body?: any | null | undefined, frontend?: Array<string | null | undefined> | null | undefined, backend?: Array<string | null | undefined> | null | undefined, generalCoding?: Array<string | null | undefined> | null | undefined, others?: Array<string | null | undefined> | null | undefined, overallWebSkills?: Array<{ __typename: 'AboutOverallWebSkills', name?: string | null | undefined, percentage?: number | null | undefined, color?: string | null | undefined } | null | undefined> | null | undefined };
+
+export type PostPartsFragment = { __typename?: 'Post', title?: string | null | undefined, postDateTime?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined, excerpt?: string | null | undefined, body?: any | null | undefined };
 
 export type GetHomeDocumentQueryVariables = Exact<{
   relativePath: Scalars['String'];
@@ -337,6 +409,18 @@ export type GetAboutListQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetAboutListQuery = { __typename?: 'Query', getAboutList: { __typename?: 'AboutConnection', totalCount: number, edges?: Array<{ __typename?: 'AboutConnectionEdges', node?: { __typename?: 'AboutDocument', id: string, sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, data: { __typename?: 'About', title?: string | null | undefined, body?: any | null | undefined, frontend?: Array<string | null | undefined> | null | undefined, backend?: Array<string | null | undefined> | null | undefined, generalCoding?: Array<string | null | undefined> | null | undefined, others?: Array<string | null | undefined> | null | undefined, overallWebSkills?: Array<{ __typename: 'AboutOverallWebSkills', name?: string | null | undefined, percentage?: number | null | undefined, color?: string | null | undefined } | null | undefined> | null | undefined } } | null | undefined } | null | undefined> | null | undefined } };
 
+export type GetPostDocumentQueryVariables = Exact<{
+  relativePath: Scalars['String'];
+}>;
+
+
+export type GetPostDocumentQuery = { __typename?: 'Query', getPostDocument: { __typename?: 'PostDocument', id: string, sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, data: { __typename?: 'Post', title?: string | null | undefined, postDateTime?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined, excerpt?: string | null | undefined, body?: any | null | undefined } } };
+
+export type GetPostListQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetPostListQuery = { __typename?: 'Query', getPostList: { __typename?: 'PostConnection', totalCount: number, edges?: Array<{ __typename?: 'PostConnectionEdges', node?: { __typename?: 'PostDocument', id: string, sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, data: { __typename?: 'Post', title?: string | null | undefined, postDateTime?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined, excerpt?: string | null | undefined, body?: any | null | undefined } } | null | undefined } | null | undefined> | null | undefined } };
+
 export const HomePartsFragmentDoc = gql`
     fragment HomeParts on Home {
   intro
@@ -356,6 +440,15 @@ export const AboutPartsFragmentDoc = gql`
   backend
   generalCoding
   others
+}
+    `;
+export const PostPartsFragmentDoc = gql`
+    fragment PostParts on Post {
+  title
+  postDateTime
+  tags
+  excerpt
+  body
 }
     `;
 export const GetHomeDocumentDocument = gql`
@@ -440,6 +533,47 @@ export const GetAboutListDocument = gql`
   }
 }
     ${AboutPartsFragmentDoc}`;
+export const GetPostDocumentDocument = gql`
+    query getPostDocument($relativePath: String!) {
+  getPostDocument(relativePath: $relativePath) {
+    sys {
+      filename
+      basename
+      breadcrumbs
+      path
+      relativePath
+      extension
+    }
+    id
+    data {
+      ...PostParts
+    }
+  }
+}
+    ${PostPartsFragmentDoc}`;
+export const GetPostListDocument = gql`
+    query getPostList {
+  getPostList {
+    totalCount
+    edges {
+      node {
+        id
+        sys {
+          filename
+          basename
+          breadcrumbs
+          path
+          relativePath
+          extension
+        }
+        data {
+          ...PostParts
+        }
+      }
+    }
+  }
+}
+    ${PostPartsFragmentDoc}`;
 export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<R>
   export function getSdk<C>(requester: Requester<C>) {
     return {
@@ -454,22 +588,38 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
       },
     getAboutList(variables?: GetAboutListQueryVariables, options?: C): Promise<{data: GetAboutListQuery, variables: GetAboutListQueryVariables, query: string}> {
         return requester<{data: GetAboutListQuery, variables: GetAboutListQueryVariables, query: string}, GetAboutListQueryVariables>(GetAboutListDocument, variables, options);
+      },
+    getPostDocument(variables: GetPostDocumentQueryVariables, options?: C): Promise<{data: GetPostDocumentQuery, variables: GetPostDocumentQueryVariables, query: string}> {
+        return requester<{data: GetPostDocumentQuery, variables: GetPostDocumentQueryVariables, query: string}, GetPostDocumentQueryVariables>(GetPostDocumentDocument, variables, options);
+      },
+    getPostList(variables?: GetPostListQueryVariables, options?: C): Promise<{data: GetPostListQuery, variables: GetPostListQueryVariables, query: string}> {
+        return requester<{data: GetPostListQuery, variables: GetPostListQueryVariables, query: string}, GetPostListQueryVariables>(GetPostListDocument, variables, options);
       }
     };
   }
   export type Sdk = ReturnType<typeof getSdk>;
 
 // TinaSDK generated code
-import { getStaticPropsForTina } from 'tinacms'
+import { staticRequest } from 'tinacms'
 const requester: (doc: any, vars?: any, options?: any) => Promise<any> = async (
   doc,
   vars,
   _options
 ) => {
-  // const data = await tinaClient.request(doc, { variables: vars }); 
-  const res = await await getStaticPropsForTina({query: doc, variables: vars})
-  return res
-};
+  let data = {}
+  try {
+    data = await staticRequest({
+      query: doc,
+      variables: vars,
+    })
+  } catch (e) {
+    // swallow errors related to document creation
+    console.warn('Warning: There was an error when fetching data')
+    console.warn(e)
+  }
+
+  return { data, query: doc, variables: vars || {} }
+}
 
 /**
  * @experimental this class can be used but may change in the future

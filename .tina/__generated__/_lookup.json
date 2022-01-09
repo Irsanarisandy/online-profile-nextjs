@@ -4,7 +4,8 @@
     "resolveType": "multiCollectionDocumentList",
     "collections": [
       "home",
-      "about"
+      "about",
+      "post"
     ]
   },
   "Node": {
@@ -40,5 +41,17 @@
     "type": "AboutConnection",
     "resolveType": "collectionDocumentList",
     "collection": "about"
+  },
+  "PostDocument": {
+    "type": "PostDocument",
+    "resolveType": "collectionDocument",
+    "collection": "post",
+    "createPostDocument": "create",
+    "updatePostDocument": "update"
+  },
+  "PostConnection": {
+    "type": "PostConnection",
+    "resolveType": "collectionDocumentList",
+    "collection": "post"
   }
 }

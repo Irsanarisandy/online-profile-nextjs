@@ -39,7 +39,7 @@ const Home: NextPage<HomeProp> = ({data}) => {
             <button
               aria-label="navigate to about page button"
               className="mr-8 w-[120px] hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors duration-500 font-bold py-2 px-4 border border-transparent rounded shadow-lg shadow-gray-50 dark:shadow-gray-900"
-              onClick={() => router.push('/coming-soon')}
+              onClick={() => router.push('/posts')}
             >
               <span>My Blog <NewspaperIcon className="hidden md:block" /></span>
             </button>

@@ -16,3 +16,11 @@ fragment AboutParts on About {
   generalCoding
   others
 }
+
+fragment PostParts on Post {
+  title
+  postDateTime
+  tags
+  excerpt
+  body
+}
