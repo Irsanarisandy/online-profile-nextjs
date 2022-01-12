@@ -1,3 +1,4 @@
+import { DocumentDownloadIcon, RssIcon } from '@heroicons/react/solid';
 import { GitHubLogo, GitLabLogo, LinkedInLogo } from './svg-icons';
 
 const linkElementPair = (linkName: string, classes?: string, otherIconSize?: number) => {
@@ -15,7 +16,13 @@ const linkElementPair = (linkName: string, classes?: string, otherIconSize?: num
         <GitLabLogo fill="#FCA121" />
       </span>;
     case 'cv':
-      return <span className={classes} style={{fontSize: otherIconSize}}>&#128196;</span>;
+      return <span className={classes}>
+        <DocumentDownloadIcon />
+      </span>;
+    case 'feed':
+      return <span className={classes}>
+        <RssIcon />
+      </span>;
     default:
       return <span className={classes} style={{fontSize: otherIconSize}}>&#128279;</span>;
   }

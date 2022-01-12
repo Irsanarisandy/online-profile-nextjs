@@ -1,4 +1,4 @@
-const SEO = {
+module.exports = {
   defaultTitle: 'IA | Fullstack Website Developer | Mentor',
   // description: 'Hire professional fullstack website developer to build interactive and high-end solutions.',
   additionalLinkTags: [
@@ -80,5 +80,3 @@ const SEO = {
     // ]
   }
 };
-
-export default SEO;

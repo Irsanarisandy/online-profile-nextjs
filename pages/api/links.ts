@@ -9,6 +9,9 @@ export default function handler(
     linkedin: 'https://www.linkedin.com/in/irsan-arisandy',
     github: 'https://github.com/irsanarisandy',
     gitlab: 'https://gitlab.com/irsanarisandy',
-    cv: 'https://www.dropbox.com/s/lfazvco9hgy6qq0/CV.pdf?dl=1'
+    cv: 'https://www.dropbox.com/s/lfazvco9hgy6qq0/CV.pdf?dl=1',
+    feedAtom: '/api/feeddata/atom',
+    feedJson: '/api/feeddata/json',
+    feedRss: '/api/feeddata/rss'
   });
 };
