@@ -30,7 +30,7 @@ others:
   - Responsive Web Design
 ---
 
-I am a Fullstack Website Developer, currently working for an Australian company. I am a passionate and well-organised employee, with high attention to detail and dedication to getting things done. I chose this career because I have a passion for learning and helping people solve real-life problems.
+I am a Fullstack Website Developer, currently working for an Australian company. I am passionate and well-organised, with high attention to detail and dedication to getting things done. I chose this career because I have a passion for learning and helping people solve real-life problems.
 
 ﻿
 

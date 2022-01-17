@@ -12,4 +12,4 @@ module.exports = {
     fontFamily: false
   },
   plugins: []
-}
+};

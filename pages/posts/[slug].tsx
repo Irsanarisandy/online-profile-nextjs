@@ -83,7 +83,7 @@ export async function getStaticProps({ params }: any): Promise<GetStaticPropsRes
   if (!data.getPostDocument.data.postDateTime) {
     const file = `./content/posts/${slug}.mdx`;
     const creationDateTime = fs.statSync(file).mtime.toISOString();
-    fs.writeFileSync(file, `---\ntitle: ${slug}\npostDateTime: ${creationDateTime}\n---`);
+    fs.writeFileSync(file, `---\ntitle: ${slug}\npostDateTime: '${creationDateTime}'\n---`);
     data.getPostDocument.data.postDateTime = creationDateTime;
   }
 
