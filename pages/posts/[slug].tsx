@@ -1,6 +1,7 @@
 import fs from 'fs';
 import type { GetStaticPathsResult, GetStaticPropsResult, NextPage } from 'next';
 import Head from 'next/head';
+import Image from 'next/image';
 import { staticRequest } from 'tinacms';
 import { TinaMarkdown, TinaMarkdownContent } from 'tinacms/dist/rich-text';
 import Cards from '@components/cards';
@@ -11,6 +12,7 @@ interface PostData {
   title: string;
   postDateTime: string;
   tags: string[];
+  heroImage: string;
   body: TinaMarkdownContent | TinaMarkdownContent[];
 }
 
@@ -30,6 +32,7 @@ const Post: NextPage<PostProp> = ({slug, data}) => {
     title,
     postDateTime,
     tags,
+    heroImage,
     body
   } = data.getPostDocument.data as PostData;
 
@@ -52,17 +55,28 @@ const Post: NextPage<PostProp> = ({slug, data}) => {
       </Head>
       <OpacityPageTransitionMotion>
         <Cards classes="m-4 sm:m-8 p-4 sm:p-8">
-          {title && <h1>{title}</h1>}
+          <h1>{title}</h1>
           <span className="my-4">
             <time>{displayedDateTime}</time>
           </span>
           {tagsExist && <Chips labels={tags} clickLocation="tags" classes="mb-4" />}
-          <article className="markdown"><TinaMarkdown content={body} /></article>
+          {heroImage && <div className="w-full">
+            <div className="max-w-md mx-auto">
+              <Image
+                src={heroImage}
+                layout="responsive"
+                alt="hero image"
+                height={540}
+                width={960}
+              />
+            </div>
+          </div>}
+          <article className="mt-4 markdown"><TinaMarkdown content={body} /></article>
         </Cards>
       </OpacityPageTransitionMotion>
     </>
   );
-}
+};
 
 export async function getStaticProps({ params }: any): Promise<GetStaticPropsResult<PostProp>> {
   const { slug } = params;
@@ -73,6 +87,7 @@ export async function getStaticProps({ params }: any): Promise<GetStaticPropsRes
           title,
           postDateTime,
           tags,
+          heroImage,
           body
         }
       }

@@ -56,7 +56,7 @@ export type Document = {
 
 /** A relay-compliant pagination connection */
 export type Connection = {
-  totalCount: Scalars['Int'];
+  totalCount: Scalars['Float'];
 };
 
 export type Query = {
@@ -95,8 +95,8 @@ export type QueryGetDocumentArgs = {
 export type QueryGetDocumentListArgs = {
   before?: InputMaybe<Scalars['String']>;
   after?: InputMaybe<Scalars['String']>;
-  first?: InputMaybe<Scalars['Int']>;
-  last?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Float']>;
+  last?: InputMaybe<Scalars['Float']>;
 };
 
 
@@ -108,8 +108,8 @@ export type QueryGetHomeDocumentArgs = {
 export type QueryGetHomeListArgs = {
   before?: InputMaybe<Scalars['String']>;
   after?: InputMaybe<Scalars['String']>;
-  first?: InputMaybe<Scalars['Int']>;
-  last?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Float']>;
+  last?: InputMaybe<Scalars['Float']>;
 };
 
 
@@ -121,8 +121,8 @@ export type QueryGetAboutDocumentArgs = {
 export type QueryGetAboutListArgs = {
   before?: InputMaybe<Scalars['String']>;
   after?: InputMaybe<Scalars['String']>;
-  first?: InputMaybe<Scalars['Int']>;
-  last?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Float']>;
+  last?: InputMaybe<Scalars['Float']>;
 };
 
 
@@ -134,8 +134,8 @@ export type QueryGetPostDocumentArgs = {
 export type QueryGetPostListArgs = {
   before?: InputMaybe<Scalars['String']>;
   after?: InputMaybe<Scalars['String']>;
-  first?: InputMaybe<Scalars['Int']>;
-  last?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Float']>;
+  last?: InputMaybe<Scalars['Float']>;
 };
 
 export type DocumentConnectionEdges = {
@@ -147,7 +147,7 @@ export type DocumentConnectionEdges = {
 export type DocumentConnection = Connection & {
   __typename?: 'DocumentConnection';
   pageInfo?: Maybe<PageInfo>;
-  totalCount: Scalars['Int'];
+  totalCount: Scalars['Float'];
   edges?: Maybe<Array<Maybe<DocumentConnectionEdges>>>;
 };
 
@@ -155,7 +155,7 @@ export type Collection = {
   __typename?: 'Collection';
   name: Scalars['String'];
   slug: Scalars['String'];
-  label: Scalars['String'];
+  label?: Maybe<Scalars['String']>;
   path: Scalars['String'];
   format?: Maybe<Scalars['String']>;
   matches?: Maybe<Scalars['String']>;
@@ -168,8 +168,8 @@ export type Collection = {
 export type CollectionDocumentsArgs = {
   before?: InputMaybe<Scalars['String']>;
   after?: InputMaybe<Scalars['String']>;
-  first?: InputMaybe<Scalars['Int']>;
-  last?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Float']>;
+  last?: InputMaybe<Scalars['Float']>;
 };
 
 export type DocumentNode = HomeDocument | AboutDocument | PostDocument;
@@ -198,14 +198,14 @@ export type HomeConnectionEdges = {
 export type HomeConnection = Connection & {
   __typename?: 'HomeConnection';
   pageInfo?: Maybe<PageInfo>;
-  totalCount: Scalars['Int'];
+  totalCount: Scalars['Float'];
   edges?: Maybe<Array<Maybe<HomeConnectionEdges>>>;
 };
 
 export type AboutOverallWebSkills = {
   __typename?: 'AboutOverallWebSkills';
   name?: Maybe<Scalars['String']>;
-  percentage?: Maybe<Scalars['Int']>;
+  percentage?: Maybe<Scalars['Float']>;
   color?: Maybe<Scalars['String']>;
 };
 
@@ -239,7 +239,7 @@ export type AboutConnectionEdges = {
 export type AboutConnection = Connection & {
   __typename?: 'AboutConnection';
   pageInfo?: Maybe<PageInfo>;
-  totalCount: Scalars['Int'];
+  totalCount: Scalars['Float'];
   edges?: Maybe<Array<Maybe<AboutConnectionEdges>>>;
 };
 
@@ -249,6 +249,7 @@ export type Post = {
   postDateTime?: Maybe<Scalars['String']>;
   tags?: Maybe<Array<Maybe<Scalars['String']>>>;
   excerpt?: Maybe<Scalars['String']>;
+  heroImage?: Maybe<Scalars['String']>;
   body?: Maybe<Scalars['JSON']>;
 };
 
@@ -271,7 +272,7 @@ export type PostConnectionEdges = {
 export type PostConnection = Connection & {
   __typename?: 'PostConnection';
   pageInfo?: Maybe<PageInfo>;
-  totalCount: Scalars['Int'];
+  totalCount: Scalars['Float'];
   edges?: Maybe<Array<Maybe<PostConnectionEdges>>>;
 };
 
@@ -357,7 +358,7 @@ export type HomeMutation = {
 
 export type AboutOverallWebSkillsMutation = {
   name?: InputMaybe<Scalars['String']>;
-  percentage?: InputMaybe<Scalars['Int']>;
+  percentage?: InputMaybe<Scalars['Float']>;
   color?: InputMaybe<Scalars['String']>;
 };
 
@@ -376,6 +377,7 @@ export type PostMutation = {
   postDateTime?: InputMaybe<Scalars['String']>;
   tags?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   excerpt?: InputMaybe<Scalars['String']>;
+  heroImage?: InputMaybe<Scalars['String']>;
   body?: InputMaybe<Scalars['JSON']>;
 };
 
@@ -383,7 +385,7 @@ export type HomePartsFragment = { __typename?: 'Home', intro?: Array<string | nu
 
 export type AboutPartsFragment = { __typename?: 'About', title?: string | null | undefined, body?: any | null | undefined, frontend?: Array<string | null | undefined> | null | undefined, backend?: Array<string | null | undefined> | null | undefined, generalCoding?: Array<string | null | undefined> | null | undefined, others?: Array<string | null | undefined> | null | undefined, overallWebSkills?: Array<{ __typename: 'AboutOverallWebSkills', name?: string | null | undefined, percentage?: number | null | undefined, color?: string | null | undefined } | null | undefined> | null | undefined };
 
-export type PostPartsFragment = { __typename?: 'Post', title?: string | null | undefined, postDateTime?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined, excerpt?: string | null | undefined, body?: any | null | undefined };
+export type PostPartsFragment = { __typename?: 'Post', title?: string | null | undefined, postDateTime?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined, excerpt?: string | null | undefined, heroImage?: string | null | undefined, body?: any | null | undefined };
 
 export type GetHomeDocumentQueryVariables = Exact<{
   relativePath: Scalars['String'];
@@ -414,12 +416,12 @@ export type GetPostDocumentQueryVariables = Exact<{
 }>;
 
 
-export type GetPostDocumentQuery = { __typename?: 'Query', getPostDocument: { __typename?: 'PostDocument', id: string, sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, data: { __typename?: 'Post', title?: string | null | undefined, postDateTime?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined, excerpt?: string | null | undefined, body?: any | null | undefined } } };
+export type GetPostDocumentQuery = { __typename?: 'Query', getPostDocument: { __typename?: 'PostDocument', id: string, sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, data: { __typename?: 'Post', title?: string | null | undefined, postDateTime?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined, excerpt?: string | null | undefined, heroImage?: string | null | undefined, body?: any | null | undefined } } };
 
 export type GetPostListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPostListQuery = { __typename?: 'Query', getPostList: { __typename?: 'PostConnection', totalCount: number, edges?: Array<{ __typename?: 'PostConnectionEdges', node?: { __typename?: 'PostDocument', id: string, sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, data: { __typename?: 'Post', title?: string | null | undefined, postDateTime?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined, excerpt?: string | null | undefined, body?: any | null | undefined } } | null | undefined } | null | undefined> | null | undefined } };
+export type GetPostListQuery = { __typename?: 'Query', getPostList: { __typename?: 'PostConnection', totalCount: number, edges?: Array<{ __typename?: 'PostConnectionEdges', node?: { __typename?: 'PostDocument', id: string, sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, data: { __typename?: 'Post', title?: string | null | undefined, postDateTime?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined, excerpt?: string | null | undefined, heroImage?: string | null | undefined, body?: any | null | undefined } } | null | undefined } | null | undefined> | null | undefined } };
 
 export const HomePartsFragmentDoc = gql`
     fragment HomeParts on Home {
@@ -448,6 +450,7 @@ export const PostPartsFragmentDoc = gql`
   postDateTime
   tags
   excerpt
+  heroImage
   body
 }
     `;

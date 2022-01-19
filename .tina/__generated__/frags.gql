@@ -22,5 +22,6 @@ fragment PostParts on Post {
   postDateTime
   tags
   excerpt
+  heroImage
   body
 }

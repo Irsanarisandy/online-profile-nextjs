@@ -1,5 +1,6 @@
 import { GetStaticPropsResult, NextPage } from 'next';
 import Head from 'next/head';
+import Image from 'next/image';
 import Link from 'next/link';
 import { staticRequest } from 'tinacms';
 import Cards from '@components/cards';
@@ -11,6 +12,7 @@ interface PostsData {
   title: string;
   tags: string[];
   excerpt: string;
+  heroImage: string;
 }
 
 interface PostsProp {
@@ -49,7 +51,7 @@ const Posts: NextPage<PostsProp> = ({data}) => {
               {postsTags.length > 0 && <Chips labels={postsTags} clickLocation="tags" />}
             </Cards>
           </section>
-          <section className="md:grow md:order-first grid gap-8 grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 md:auto-rows-[300px]">
+          <section className="md:grow md:order-first grid gap-8 grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 md:auto-rows-[360px]">
             {postsData.map((data, index) => (
               <Cards
                 classes="p-4 sm:p-8 flex flex-col"
@@ -62,7 +64,18 @@ const Posts: NextPage<PostsProp> = ({data}) => {
                     </a>
                   </Link>
                 </div>
-                <p>{data.excerpt}</p>
+                {data.heroImage && <div className="block w-full">
+                  <div className="max-w-md mx-auto">
+                    <Image
+                      src={data.heroImage}
+                      layout="responsive"
+                      alt="hero image"
+                      height={540}
+                      width={960}
+                    />
+                  </div>
+                </div>}
+                {data.excerpt && <p className="mt-4">{data.excerpt}</p>}
               </Cards>
             ))}
           </section>
@@ -84,7 +97,8 @@ export async function getStaticProps(): Promise<GetStaticPropsResult<PostsProp>>
             data {
               title,
               tags,
-              excerpt
+              excerpt,
+              heroImage
             }
           }
         }

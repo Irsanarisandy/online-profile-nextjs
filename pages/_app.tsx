@@ -2,6 +2,7 @@ import { DefaultSeo } from 'next-seo';
 import type { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
 import SEO from 'next-seo.config';
+import { TinaCloudCloudinaryMediaStore } from 'next-tinacms-cloudinary';
 import { TinaEditProvider } from 'tinacms/dist/edit-state';
 import Layout from '@components/layout';
 import '@styles/globals.scss';
@@ -31,6 +32,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 );
               },
             }}
+            mediaStore={TinaCloudCloudinaryMediaStore}
             {...pageProps}
           >
             {

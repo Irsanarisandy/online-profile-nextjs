@@ -1,5 +1,6 @@
 import type { GetStaticPathsResult, GetStaticPropsResult, NextPage } from 'next';
 import Head from 'next/head';
+import Image from 'next/image';
 import Link from 'next/link';
 import { staticRequest } from 'tinacms';
 import Cards from '@components/cards';
@@ -10,6 +11,7 @@ interface PostsData {
   title: string;
   tags: string[];
   excerpt: string;
+  heroImage: string;
 }
 
 interface PostsProp {
@@ -28,7 +30,7 @@ const Tags: NextPage<PostsProp> = ({slug, data}) => {
         <Cards classes="p-4 sm:p-8 mb-4 md:mb-8">
           <h1>Tag: {slug}</h1>
         </Cards>
-        <section className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 md:auto-rows-[300px]">
+        <section className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 md:auto-rows-[360px]">
           {data.map((curPost, index) => (
             <Cards
               classes="p-4 sm:p-8 flex flex-col"
@@ -41,14 +43,25 @@ const Tags: NextPage<PostsProp> = ({slug, data}) => {
                   </a>
                 </Link>
               </div>
-              <p>{curPost.excerpt}</p>
+              {curPost.heroImage && <div className="block w-full">
+                <div className="max-w-md mx-auto">
+                  <Image
+                    src={curPost.heroImage}
+                    layout="responsive"
+                    alt="hero image"
+                    height={540}
+                    width={960}
+                  />
+                </div>
+              </div>}
+              {curPost.excerpt && <p className="mt-4">{curPost.excerpt}</p>}
             </Cards>
           ))}
         </section>
       </OpacityPageTransitionMotion>
     </>
   );
-}
+};
 
 export async function getStaticProps({ params }: any): Promise<GetStaticPropsResult<PostsProp>> {
   // Temporary: needs to be changed when Tina finally supports filtering
@@ -64,7 +77,8 @@ export async function getStaticProps({ params }: any): Promise<GetStaticPropsRes
             data {
               title,
               tags,
-              excerpt
+              excerpt,
+              heroImage
             }
           }
         }

@@ -117,6 +117,11 @@ export default defineSchema({
           }
         },
         {
+          type: 'image',
+          label: 'Hero Image',
+          name: 'heroImage'
+        },
+        {
           type: 'rich-text',
           label: 'Body',
           name: 'body',
