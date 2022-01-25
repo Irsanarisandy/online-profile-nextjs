@@ -1,8 +1,9 @@
 import type { GetStaticPropsResult, NextPage } from 'next';
 import Head from 'next/head';
 import { staticRequest } from 'tinacms';
-import { TinaMarkdown, TinaMarkdownContent } from 'tinacms/dist/rich-text';
+import { Components, TinaMarkdown, TinaMarkdownContent } from 'tinacms/dist/rich-text';
 import Cards from '@components/cards';
+import Codeblock from '@components/codeblock';
 import { OpacityPageTransitionMotion } from '@components/custom-motion';
 import Progress, { ProgressData } from '@components/progress';
 
@@ -38,6 +39,13 @@ const About: NextPage<AboutProp> = ({data}) => {
   const generalCodingExist = generalCoding && generalCoding.length > 0;
   const othersExist = others && others.length > 0;
 
+  const components: Components<{}> = {
+    code_block: (props) => (
+      // eslint-disable-next-line react/no-children-prop
+      <Codeblock children={props?.children} language={props?.lang} />
+    )
+  };
+
   return (
     <>
       <Head>
@@ -46,7 +54,9 @@ const About: NextPage<AboutProp> = ({data}) => {
       <OpacityPageTransitionMotion>
         <Cards classes="m-4 sm:m-8 p-4 sm:p-8">
           {title && <h1 className="mb-8">{title}</h1>}
-          <div className="markdown"><TinaMarkdown content={body} /></div>
+          <div className="markdown">
+            <TinaMarkdown content={body} components={components} />
+          </div>
         </Cards>
         {overallWebSkillsExist && <Cards classes="m-4 sm:m-8 p-4 sm:p-8">
           <Progress progressDataList={overallWebSkills} />

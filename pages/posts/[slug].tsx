@@ -3,9 +3,10 @@ import type { GetStaticPathsResult, GetStaticPropsResult, NextPage } from 'next'
 import Head from 'next/head';
 import Image from 'next/image';
 import { staticRequest } from 'tinacms';
-import { TinaMarkdown, TinaMarkdownContent } from 'tinacms/dist/rich-text';
+import { Components, TinaMarkdown, TinaMarkdownContent } from 'tinacms/dist/rich-text';
 import Cards from '@components/cards';
 import Chips from '@components/chips';
+import Codeblock from '@components/codeblock';
 import { OpacityPageTransitionMotion } from '@components/custom-motion';
 
 interface PostData {
@@ -48,6 +49,13 @@ const Post: NextPage<PostProp> = ({slug, data}) => {
     }
   ).format(new Date(postDateTime));
 
+  const components: Components<{}> = {
+    code_block: (props) => (
+      // eslint-disable-next-line react/no-children-prop
+      <Codeblock children={props?.children} language={props?.lang} />
+    )
+  };
+
   return (
     <>
       <Head>
@@ -71,7 +79,9 @@ const Post: NextPage<PostProp> = ({slug, data}) => {
               />
             </div>
           </div>}
-          <article className="mt-4 markdown"><TinaMarkdown content={body} /></article>
+          <article className="mt-4 markdown">
+            <TinaMarkdown content={body} components={components} />
+          </article>
         </Cards>
       </OpacityPageTransitionMotion>
     </>

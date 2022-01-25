@@ -40,6 +40,12 @@ span {
   display: block;
 }
 
+code {
+  span {
+    display: revert;
+  }
+}
+
 p, span {
   font-size: 1.125rem;
 }
@@ -67,12 +73,6 @@ blockquote {
   font-style: italic;
   margin: 1rem 0;
   padding-left: 2rem;
-}
-
-pre {
-  border: 2px solid;
-  margin: 1rem 0;
-  padding: 1rem;
 }
 
 .light-gradient {
