@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { staticRequest } from 'tinacms';
+import { useTina } from 'tinacms/dist/edit-state';
 import Cards from '@components/cards';
 import Chips from '@components/chips';
 import { OpacityPageTransitionMotion } from '@components/custom-motion';
@@ -16,11 +17,33 @@ interface PostsData {
 }
 
 interface PostsProp {
-  query: string;
   data: any;
 }
 
-const Posts: NextPage<PostsProp> = ({data}) => {
+const query = `{
+  getPostList {
+    edges {
+      node {
+        sys {
+          filename
+        },
+        data {
+          title,
+          tags,
+          excerpt,
+          heroImage
+        }
+      }
+    }
+  }
+}`;
+
+const Posts: NextPage<PostsProp> = (props) => {
+  const { data } = useTina({
+    query,
+    variables: {},
+    data: props.data,
+  });
   let postsTags: string[] = [];
   const postsData: PostsData[] = data.getPostList.edges.map((edge: any) => {
     const curNode = edge.node;
@@ -51,7 +74,7 @@ const Posts: NextPage<PostsProp> = ({data}) => {
               {postsTags.length > 0 && <Chips labels={postsTags} clickLocation="tags" />}
             </Cards>
           </section>
-          <section className="md:grow md:order-first grid gap-8 grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 md:auto-rows-[360px]">
+          <section className="md:grow md:order-first grid gap-8 grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 md:auto-rows-[440px]">
             {postsData.map((data, index) => (
               <Cards
                 classes="p-4 sm:p-8 flex flex-col"
@@ -86,30 +109,10 @@ const Posts: NextPage<PostsProp> = ({data}) => {
 };
 
 export async function getStaticProps(): Promise<GetStaticPropsResult<PostsProp>> {
-  const query = `
-    query {
-      getPostList {
-        edges {
-          node {
-            sys {
-              filename
-            },
-            data {
-              title,
-              tags,
-              excerpt,
-              heroImage
-            }
-          }
-        }
-      }
-    }
-  `;
-  const data: any = await staticRequest({ query });
+  const data = await staticRequest({ query });
 
   return {
     props: {
-      query,
       data
     }
   };

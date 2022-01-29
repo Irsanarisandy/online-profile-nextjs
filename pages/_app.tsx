@@ -10,17 +10,19 @@ import '@styles/globals.scss';
 const TinaCMS = dynamic(() => import('tinacms'), { ssr: false });
 
 function MyApp({ Component, pageProps }: AppProps) {
+  // https://vercel.com/docs/concepts/projects/environment-variables#system-environment-variables
+  const branch = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF || 'main';
+  const clientId = process.env.NEXT_PUBLIC_TINA_CLIENT_ID;
+  const apiURL = process.env.NODE_ENV == 'development'
+    ? 'http://localhost:4001/graphql'
+    : `https://content.tinajs.io/content/${clientId}/github/${branch}`;
   return typeof window !== 'undefined' ? (
     <>
       <DefaultSeo {...SEO} />
       <TinaEditProvider
         editMode={
           <TinaCMS
-            clientId={process.env.NEXT_PUBLIC_TINA_CLIENT_ID}
-            branch={process.env.NEXT_PUBLIC_EDIT_BRANCH}
-            isLocalClient={Boolean(
-              Number(process.env.NEXT_PUBLIC_USE_LOCAL_CLIENT ?? true)
-            )}
+            apiURL={apiURL}
             documentCreatorCallback={{
               onNewDocument: ({ collection: { slug }, breadcrumbs }) => {
                 const relativeUrl = `/${slug}s/${breadcrumbs.join('/')}`;
@@ -33,14 +35,10 @@ function MyApp({ Component, pageProps }: AppProps) {
               },
             }}
             mediaStore={TinaCloudCloudinaryMediaStore}
-            {...pageProps}
           >
-            {
-              (livePageProps: any) =>
-                <Layout>
-                  <Component {...livePageProps} />
-                </Layout>
-            }
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
           </TinaCMS>
         }
       >

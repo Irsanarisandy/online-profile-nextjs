@@ -2,16 +2,29 @@ import type { GetStaticPropsResult, NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { staticRequest } from 'tinacms';
+import { useTina } from 'tinacms/dist/edit-state';
 import { EmojiHappyIcon, NewspaperIcon, PlayIcon } from '@heroicons/react/outline';
 import { OpacityPageTransitionMotion } from '@components/custom-motion';
 import DisplayTextAnimation from '@components/display-text-animation';
 
 interface HomeProp {
-  query: string;
   data: any;
 }
 
-const Home: NextPage<HomeProp> = ({data}) => {
+const query = `{
+  getHomeDocument(relativePath: "Home.md") {
+    data {
+      intro
+    }
+  }
+}`;
+
+const Home: NextPage<HomeProp> = (props) => {
+  const { data } = useTina({
+    query,
+    variables: {},
+    data: props.data,
+  });
   const { intro } = data.getHomeDocument.data;
   const speed = (n: number) => n / 10 * 2 + 1;
   const router = useRouter();
@@ -58,20 +71,10 @@ const Home: NextPage<HomeProp> = ({data}) => {
 };
 
 export async function getStaticProps(): Promise<GetStaticPropsResult<HomeProp>> {
-  const query = `
-    query {
-      getHomeDocument(relativePath: "Home.md") {
-        data {
-          intro
-        }
-      }
-    }
-  `;
   const data = await staticRequest({ query });
 
   return {
     props: {
-      query,
       data
     }
   };
