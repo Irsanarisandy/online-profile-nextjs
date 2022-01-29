@@ -1,6 +1,7 @@
 import type { GetStaticPropsResult, NextPage } from 'next';
 import Head from 'next/head';
 import { staticRequest } from 'tinacms';
+import { useTina } from 'tinacms/dist/edit-state';
 import { Components, TinaMarkdown, TinaMarkdownContent } from 'tinacms/dist/rich-text';
 import Cards from '@components/cards';
 import Codeblock from '@components/codeblock';
@@ -18,11 +19,33 @@ interface AboutData {
 }
 
 interface AboutProp {
-  query: string;
   data: any;
 }
 
-const About: NextPage<AboutProp> = ({data}) => {
+const query = `{
+  getAboutDocument(relativePath: "About.md") {
+    data {
+      title,
+      body,
+      overallWebSkills {
+        name
+        percentage
+        color
+      },
+      frontend,
+      backend,
+      generalCoding,
+      others
+    }
+  }
+}`;
+
+const About: NextPage<AboutProp> = (props) => {
+  const { data } = useTina({
+    query,
+    variables: {},
+    data: props.data,
+  });
   const {
     title,
     body,
@@ -40,9 +63,9 @@ const About: NextPage<AboutProp> = ({data}) => {
   const othersExist = others && others.length > 0;
 
   const components: Components<{}> = {
-    code_block: (props) => (
+    code_block: (codeBlockProps) => (
       // eslint-disable-next-line react/no-children-prop
-      <Codeblock children={props?.children} language={props?.lang} />
+      <Codeblock children={codeBlockProps?.children} language={codeBlockProps?.lang} />
     )
   };
 
@@ -95,30 +118,10 @@ const About: NextPage<AboutProp> = ({data}) => {
 };
 
 export async function getStaticProps(): Promise<GetStaticPropsResult<AboutProp>> {
-  const query = `
-    query {
-      getAboutDocument(relativePath: "About.md") {
-        data {
-          title,
-          body,
-          overallWebSkills {
-            name
-            percentage
-            color
-          },
-          frontend,
-          backend,
-          generalCoding,
-          others
-        }
-      }
-    }
-  `;
   const data = await staticRequest({ query });
 
   return {
     props: {
-      query,
       data
     }
   };

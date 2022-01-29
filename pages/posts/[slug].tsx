@@ -3,6 +3,7 @@ import type { GetStaticPathsResult, GetStaticPropsResult, NextPage } from 'next'
 import Head from 'next/head';
 import Image from 'next/image';
 import { staticRequest } from 'tinacms';
+import { useTina } from 'tinacms/dist/edit-state';
 import { Components, TinaMarkdown, TinaMarkdownContent } from 'tinacms/dist/rich-text';
 import Cards from '@components/cards';
 import Chips from '@components/chips';
@@ -18,13 +19,30 @@ interface PostData {
 }
 
 interface PostProp {
-  query: string;
   variables: { relativePath: string; };
   slug: string;
   data: any;
 }
 
-const Post: NextPage<PostProp> = ({slug, data}) => {
+const query = `query BlogPostQuery($relativePath: String!) {
+  getPostDocument(relativePath: $relativePath) {
+    data {
+      title,
+      postDateTime,
+      tags,
+      heroImage,
+      body
+    }
+  }
+}`;
+
+const Post: NextPage<PostProp> = (props) => {
+  const { data } = useTina({
+    query,
+    variables: props.variables,
+    data: props.data,
+  });
+
   if (!(data && data.getPostDocument)) {
     return <div>No Data</div>;
   }
@@ -50,16 +68,16 @@ const Post: NextPage<PostProp> = ({slug, data}) => {
   ).format(new Date(postDateTime));
 
   const components: Components<{}> = {
-    code_block: (props) => (
+    code_block: (codeBlockProps) => (
       // eslint-disable-next-line react/no-children-prop
-      <Codeblock children={props?.children} language={props?.lang} />
+      <Codeblock children={codeBlockProps?.children} language={codeBlockProps?.lang} />
     )
   };
 
   return (
     <>
       <Head>
-        <meta name="description" content={slug.replace(/([A-Z])/g, ' $1').trim()} />
+        <meta name="description" content={props.slug.replace(/([A-Z])/g, ' $1').trim()} />
       </Head>
       <OpacityPageTransitionMotion>
         <Cards classes="m-4 sm:m-8 p-4 sm:p-8">
@@ -90,19 +108,6 @@ const Post: NextPage<PostProp> = ({slug, data}) => {
 
 export async function getStaticProps({ params }: any): Promise<GetStaticPropsResult<PostProp>> {
   const { slug } = params;
-  const query = `
-    query BlogPostQuery($relativePath: String!) {
-      getPostDocument(relativePath: $relativePath) {
-        data {
-          title,
-          postDateTime,
-          tags,
-          heroImage,
-          body
-        }
-      }
-    }
-  `;
   const variables = { relativePath: `${slug}.mdx` };
   const data: any = await staticRequest({ query, variables });
   if (!data.getPostDocument.data.postDateTime) {
@@ -114,7 +119,6 @@ export async function getStaticProps({ params }: any): Promise<GetStaticPropsRes
 
   return {
     props: {
-      query,
       variables,
       slug,
       data
@@ -123,20 +127,18 @@ export async function getStaticProps({ params }: any): Promise<GetStaticPropsRes
 }
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
-  const query = `
-    query {
-      getPostList {
-        edges {
-          node {
-            sys {
-              filename
-            }
+  const pathsQuery = `{
+    getPostList {
+      edges {
+        node {
+          sys {
+            filename
           }
         }
       }
     }
-  `;
-  const postListData: any = await staticRequest({ query });
+  }`;
+  const postListData: any = await staticRequest({ query: pathsQuery });
 
   return {
     paths: postListData.getPostList.edges.map((edge: any) => ({

@@ -24,7 +24,7 @@
     "react-syntax-highlighter": "^15.4.5",
     "styled-components": "^5.3.3",
     "swr": "^1.2.0",
-    "tinacms": "^0.65.2"
+    "tinacms": "^0.65.3"
   },
   "devDependencies": {
     "@types/node": "^17.0.13",
