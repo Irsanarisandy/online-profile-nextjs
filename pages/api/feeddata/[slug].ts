@@ -1,8 +1,11 @@
 import { Feed } from 'feed';
 import fs from 'fs';
 import matter from 'gray-matter';
+import MarkdownIt from 'markdown-it';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import path from 'path';
+
+const markdown = new MarkdownIt();
 
 export default function handler(
   req: NextApiRequest,
@@ -15,17 +18,17 @@ export default function handler(
 
   const feed = new Feed({
     title: `Irsan's Online Profile & Blog`,
-    id: siteURL,
-    link: siteURL,
+    id: `${siteURL}/`,
+    link: `${siteURL}/`,
     description: 'Hire professional fullstack website developer to build interactive and high-end solutions.',
     image: `${siteURL}/images/logo.png`,
     favicon: `${siteURL}/images/favicon.ico`,
-    copyright: `Copyright &copy; ${(new Date()).getFullYear()} Irsan Arisandy`,
+    copyright: `Copyright © ${(new Date()).getFullYear()} Irsan Arisandy`,
     generator: 'Feed for Node.js',
     feedLinks: {
-      rss2: `${siteURL}/rss/feed.xml`,
-      json: `${siteURL}/rss/feed.json`,
-      atom: `${siteURL}/rss/atom.xml`,
+      atom: `${siteURL}/api/feeddata/atom`,
+      json: `${siteURL}/api/feeddata/json`,
+      rss: `${siteURL}/api/feeddata/rss`,
     },
     author,
   });
@@ -38,7 +41,7 @@ export default function handler(
     id: aboutUrl,
     link: aboutUrl,
     description: 'About Page',
-    content: content.trim(),
+    content: markdown.render(content.trim()),
     author: [author],
     contributor: [author],
     date: new Date('2022-01-09T05:54:32.399Z')
@@ -54,10 +57,11 @@ export default function handler(
       id: postUrl,
       link: postUrl,
       description: data.excerpt,
-      content: content.trim(),
+      content: markdown.render(content.trim()),
       author: [author],
       contributor: [author],
-      date: new Date(data.postDateTime)
+      date: new Date(data.postDateTime),
+      image: data.heroImage
     });
   });
 
@@ -68,8 +72,29 @@ export default function handler(
       res.status(200).send(feed.atom1());
       break;
     case 'json':
+      let jsonFeed: any = {};
+      const generatedJSON = JSON.parse(feed.json1());
+      for (let key in generatedJSON) {
+        if (key === 'version') {
+          jsonFeed[key] = `${generatedJSON[key]}.1`;
+        } else if (key === 'author') {
+          jsonFeed['authors'] = [generatedJSON[key]];
+        } else if (key === 'items') {
+          jsonFeed[key] = [];
+          generatedJSON[key].forEach((item: any) => {
+            item['authors'] = [item.author];
+            delete item.author;
+            jsonFeed[key].push(item);
+          });
+        } else {
+          jsonFeed[key] = generatedJSON[key];
+        }
+        if (key === 'icon') {
+          jsonFeed['favicon'] = `${siteURL}/images/favicon.ico`;
+        }
+      }
       res.setHeader('Content-Disposition', 'attachment;filename=feed.json');
-      res.status(200).send(feed.json1());
+      res.status(200).send(JSON.stringify(jsonFeed, null, 4));
       break;
     case 'rss':
       res.setHeader('Content-Disposition', 'attachment;filename=feed.xml');
