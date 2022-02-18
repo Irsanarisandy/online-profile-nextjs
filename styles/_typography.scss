@@ -92,10 +92,3 @@ blockquote {
     text-decoration: underline;
   }
 }
-
-// overwrite TinaCMS component styling
-.tina-tailwind {
-  select {
-    color: black !important;
-  }
-}

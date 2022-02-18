@@ -381,47 +381,47 @@ export type PostMutation = {
   body?: InputMaybe<Scalars['JSON']>;
 };
 
-export type HomePartsFragment = { __typename?: 'Home', intro?: Array<string | null | undefined> | null | undefined };
+export type HomePartsFragment = { __typename?: 'Home', intro?: Array<string | null> | null };
 
-export type AboutPartsFragment = { __typename?: 'About', title?: string | null | undefined, body?: any | null | undefined, frontend?: Array<string | null | undefined> | null | undefined, backend?: Array<string | null | undefined> | null | undefined, generalCoding?: Array<string | null | undefined> | null | undefined, others?: Array<string | null | undefined> | null | undefined, overallWebSkills?: Array<{ __typename: 'AboutOverallWebSkills', name?: string | null | undefined, percentage?: number | null | undefined, color?: string | null | undefined } | null | undefined> | null | undefined };
+export type AboutPartsFragment = { __typename?: 'About', title?: string | null, body?: any | null, frontend?: Array<string | null> | null, backend?: Array<string | null> | null, generalCoding?: Array<string | null> | null, others?: Array<string | null> | null, overallWebSkills?: Array<{ __typename: 'AboutOverallWebSkills', name?: string | null, percentage?: number | null, color?: string | null } | null> | null };
 
-export type PostPartsFragment = { __typename?: 'Post', title?: string | null | undefined, postDateTime?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined, excerpt?: string | null | undefined, heroImage?: string | null | undefined, body?: any | null | undefined };
+export type PostPartsFragment = { __typename?: 'Post', title?: string | null, postDateTime?: string | null, tags?: Array<string | null> | null, excerpt?: string | null, heroImage?: string | null, body?: any | null };
 
 export type GetHomeDocumentQueryVariables = Exact<{
   relativePath: Scalars['String'];
 }>;
 
 
-export type GetHomeDocumentQuery = { __typename?: 'Query', getHomeDocument: { __typename?: 'HomeDocument', id: string, sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, data: { __typename?: 'Home', intro?: Array<string | null | undefined> | null | undefined } } };
+export type GetHomeDocumentQuery = { __typename?: 'Query', getHomeDocument: { __typename?: 'HomeDocument', id: string, sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, data: { __typename?: 'Home', intro?: Array<string | null> | null } } };
 
 export type GetHomeListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetHomeListQuery = { __typename?: 'Query', getHomeList: { __typename?: 'HomeConnection', totalCount: number, edges?: Array<{ __typename?: 'HomeConnectionEdges', node?: { __typename?: 'HomeDocument', id: string, sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, data: { __typename?: 'Home', intro?: Array<string | null | undefined> | null | undefined } } | null | undefined } | null | undefined> | null | undefined } };
+export type GetHomeListQuery = { __typename?: 'Query', getHomeList: { __typename?: 'HomeConnection', totalCount: number, edges?: Array<{ __typename?: 'HomeConnectionEdges', node?: { __typename?: 'HomeDocument', id: string, sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, data: { __typename?: 'Home', intro?: Array<string | null> | null } } | null } | null> | null } };
 
 export type GetAboutDocumentQueryVariables = Exact<{
   relativePath: Scalars['String'];
 }>;
 
 
-export type GetAboutDocumentQuery = { __typename?: 'Query', getAboutDocument: { __typename?: 'AboutDocument', id: string, sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, data: { __typename?: 'About', title?: string | null | undefined, body?: any | null | undefined, frontend?: Array<string | null | undefined> | null | undefined, backend?: Array<string | null | undefined> | null | undefined, generalCoding?: Array<string | null | undefined> | null | undefined, others?: Array<string | null | undefined> | null | undefined, overallWebSkills?: Array<{ __typename: 'AboutOverallWebSkills', name?: string | null | undefined, percentage?: number | null | undefined, color?: string | null | undefined } | null | undefined> | null | undefined } } };
+export type GetAboutDocumentQuery = { __typename?: 'Query', getAboutDocument: { __typename?: 'AboutDocument', id: string, sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, data: { __typename?: 'About', title?: string | null, body?: any | null, frontend?: Array<string | null> | null, backend?: Array<string | null> | null, generalCoding?: Array<string | null> | null, others?: Array<string | null> | null, overallWebSkills?: Array<{ __typename: 'AboutOverallWebSkills', name?: string | null, percentage?: number | null, color?: string | null } | null> | null } } };
 
 export type GetAboutListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAboutListQuery = { __typename?: 'Query', getAboutList: { __typename?: 'AboutConnection', totalCount: number, edges?: Array<{ __typename?: 'AboutConnectionEdges', node?: { __typename?: 'AboutDocument', id: string, sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, data: { __typename?: 'About', title?: string | null | undefined, body?: any | null | undefined, frontend?: Array<string | null | undefined> | null | undefined, backend?: Array<string | null | undefined> | null | undefined, generalCoding?: Array<string | null | undefined> | null | undefined, others?: Array<string | null | undefined> | null | undefined, overallWebSkills?: Array<{ __typename: 'AboutOverallWebSkills', name?: string | null | undefined, percentage?: number | null | undefined, color?: string | null | undefined } | null | undefined> | null | undefined } } | null | undefined } | null | undefined> | null | undefined } };
+export type GetAboutListQuery = { __typename?: 'Query', getAboutList: { __typename?: 'AboutConnection', totalCount: number, edges?: Array<{ __typename?: 'AboutConnectionEdges', node?: { __typename?: 'AboutDocument', id: string, sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, data: { __typename?: 'About', title?: string | null, body?: any | null, frontend?: Array<string | null> | null, backend?: Array<string | null> | null, generalCoding?: Array<string | null> | null, others?: Array<string | null> | null, overallWebSkills?: Array<{ __typename: 'AboutOverallWebSkills', name?: string | null, percentage?: number | null, color?: string | null } | null> | null } } | null } | null> | null } };
 
 export type GetPostDocumentQueryVariables = Exact<{
   relativePath: Scalars['String'];
 }>;
 
 
-export type GetPostDocumentQuery = { __typename?: 'Query', getPostDocument: { __typename?: 'PostDocument', id: string, sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, data: { __typename?: 'Post', title?: string | null | undefined, postDateTime?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined, excerpt?: string | null | undefined, heroImage?: string | null | undefined, body?: any | null | undefined } } };
+export type GetPostDocumentQuery = { __typename?: 'Query', getPostDocument: { __typename?: 'PostDocument', id: string, sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, data: { __typename?: 'Post', title?: string | null, postDateTime?: string | null, tags?: Array<string | null> | null, excerpt?: string | null, heroImage?: string | null, body?: any | null } } };
 
 export type GetPostListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPostListQuery = { __typename?: 'Query', getPostList: { __typename?: 'PostConnection', totalCount: number, edges?: Array<{ __typename?: 'PostConnectionEdges', node?: { __typename?: 'PostDocument', id: string, sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, data: { __typename?: 'Post', title?: string | null | undefined, postDateTime?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined, excerpt?: string | null | undefined, heroImage?: string | null | undefined, body?: any | null | undefined } } | null | undefined } | null | undefined> | null | undefined } };
+export type GetPostListQuery = { __typename?: 'Query', getPostList: { __typename?: 'PostConnection', totalCount: number, edges?: Array<{ __typename?: 'PostConnectionEdges', node?: { __typename?: 'PostDocument', id: string, sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, data: { __typename?: 'Post', title?: string | null, postDateTime?: string | null, tags?: Array<string | null> | null, excerpt?: string | null, heroImage?: string | null, body?: any | null } } | null } | null> | null } };
 
 export const HomePartsFragmentDoc = gql`
     fragment HomeParts on Home {
