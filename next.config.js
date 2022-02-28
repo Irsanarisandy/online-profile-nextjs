@@ -6,11 +6,11 @@ module.exports = {
       {
         source: '/tags',
         destination: '/posts',
-        permanent: true,
-      },
+        permanent: true
+      }
     ];
   },
   images: {
     domains: ['res.cloudinary.com']
-  },
+  }
 };

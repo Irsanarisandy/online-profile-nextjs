@@ -9,7 +9,7 @@ module.exports = {
     },
     {
       rel: 'icon',
-      href: '/images/favicon.ico',
+      href: '/images/favicon.ico'
     },
     {
       rel: 'icon',
@@ -62,7 +62,8 @@ module.exports = {
   // },
   openGraph: {
     title: 'IA | Fullstack Website Developer | Mentor',
-    description: 'Hire professional fullstack website developer to build interactive and high-end solutions.',
+    description:
+      'Hire professional fullstack website developer to build interactive and high-end solutions.',
     type: 'website',
     site_name: "Irsan's Online Profile",
     profile: {
@@ -70,7 +71,7 @@ module.exports = {
       lastName: 'Arisandy',
       gender: 'male'
     },
-    locale: 'en_US',
+    locale: 'en_US'
     // images: [
     //   {
     //     url: '/images/og.jpg',

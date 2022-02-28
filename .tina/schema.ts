@@ -12,7 +12,7 @@ export default defineSchema({
           label: 'Intro',
           name: 'intro',
           list: true
-        },
+        }
       ]
     },
     {
@@ -54,7 +54,7 @@ export default defineSchema({
               ui: {
                 component: 'color'
               }
-            },
+            }
           ]
         },
         {
@@ -80,7 +80,7 @@ export default defineSchema({
           label: 'Other Skills',
           name: 'others',
           list: true
-        },
+        }
       ]
     },
     {
@@ -126,8 +126,8 @@ export default defineSchema({
           label: 'Body',
           name: 'body',
           isBody: true
-        },
-      ],
-    },
+        }
+      ]
+    }
   ]
 });

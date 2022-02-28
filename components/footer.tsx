@@ -8,13 +8,13 @@ interface IProp {
   links: Links;
 }
 
-function Footer({links}: IProp): JSX.Element {
+function Footer({ links }: IProp): JSX.Element {
   let linkElements: JSX.Element[] = [];
   let linkDropdownMenus: JSX.Element[] = [];
   const [feedExpanded, setFeedExpanded] = useState(false);
 
   if (links != null) {
-    Object.entries(links).map(link => {
+    Object.entries(links).map((link) => {
       if (!link[0].includes('feed')) {
         linkElements.push(
           <a
@@ -59,14 +59,16 @@ function Footer({links}: IProp): JSX.Element {
         >
           {linkElementPair('feed', styles.feed_icon, 24)}
         </button>
-        {feedExpanded && <div
-          className="absolute bottom-10 right-0 w-32 rounded-md bg-white py-1"
-          role="menu"
-          aria-orientation="vertical"
-          aria-labelledby="menu-button"
-        >
-          {linkDropdownMenus}
-        </div>}
+        {feedExpanded && (
+          <div
+            className="absolute bottom-10 right-0 w-32 rounded-md bg-white py-1"
+            role="menu"
+            aria-orientation="vertical"
+            aria-labelledby="menu-button"
+          >
+            {linkDropdownMenus}
+          </div>
+        )}
       </div>
     );
   }
@@ -83,10 +85,10 @@ function Footer({links}: IProp): JSX.Element {
         {linkElements}
       </div>
       <span className="text-center">
-        Copyright &copy; {(new Date()).getFullYear()} Irsan Arisandy
+        Copyright &copy; {new Date().getFullYear()} Irsan Arisandy
       </span>
     </footer>
   );
-};
+}
 
 export default Footer;

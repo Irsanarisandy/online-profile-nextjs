@@ -32,9 +32,10 @@ class Progress extends React.Component<ProgressProp, ProgressState> {
     window.removeEventListener('resize', this.updateWindowDimensions);
   }
 
-  updateWindowDimensions = () => this.setState({
-    displayPercentage: window.innerWidth >= 640
-  });
+  updateWindowDimensions = () =>
+    this.setState({
+      displayPercentage: window.innerWidth >= 640
+    });
 
   render() {
     let { progressDataList, hideName, hideInfo, bgColor, height } = this.props;
@@ -43,7 +44,10 @@ class Progress extends React.Component<ProgressProp, ProgressState> {
     height = height || 24;
 
     return (
-      <div className="flex rounded-lg animate-pulse" style={{ backgroundColor: bgColor, height }}>
+      <div
+        className="flex rounded-lg animate-pulse"
+        style={{ backgroundColor: bgColor, height }}
+      >
         {progressDataList.length === 1 && (
           <div
             className="flex justify-center rounded-lg"
@@ -53,34 +57,41 @@ class Progress extends React.Component<ProgressProp, ProgressState> {
               width: `${progressDataList[0].percentage}%`
             }}
           >
-            {!hideInfo ?
-              `${!hideName ? progressDataList[0].name : ''} ${hideName || displayPercentage ? `(${
-                progressDataList[0].percentage
-              }%)`: ''}`
-            : ''}
+            {!hideInfo
+              ? `${!hideName ? progressDataList[0].name : ''} ${
+                  hideName || displayPercentage
+                    ? `(${progressDataList[0].percentage}%)`
+                    : ''
+                }`
+              : ''}
           </div>
         )}
-        {progressDataList.length > 1 && progressDataList.map((progressData, index) => (
-          <div
-            className={`flex justify-center ${
-              index === 0 ? 'rounded-l-lg' :
-                index === progressDataList.length - 1 ? 'rounded-r-lg' :
-                ''
-            }`}
-            style={{
-              backgroundColor: progressData.color,
-              height,
-              width: `${progressData.percentage}%`
-            }}
-            key={`Progress data ${index+1}`}
-          >
-            {!hideInfo ?
-              `${!hideName ? progressData.name : ''} ${hideName || displayPercentage ? `(${
-                progressData.percentage
-              }%)`: ''}`
-            : ''}
-          </div>
-        ))}
+        {progressDataList.length > 1 &&
+          progressDataList.map((progressData, index) => (
+            <div
+              className={`flex justify-center ${
+                index === 0
+                  ? 'rounded-l-lg'
+                  : index === progressDataList.length - 1
+                  ? 'rounded-r-lg'
+                  : ''
+              }`}
+              style={{
+                backgroundColor: progressData.color,
+                height,
+                width: `${progressData.percentage}%`
+              }}
+              key={`Progress data ${index + 1}`}
+            >
+              {!hideInfo
+                ? `${!hideName ? progressData.name : ''} ${
+                    hideName || displayPercentage
+                      ? `(${progressData.percentage}%)`
+                      : ''
+                  }`
+                : ''}
+            </div>
+          ))}
       </div>
     );
   }

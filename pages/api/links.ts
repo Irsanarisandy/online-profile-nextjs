@@ -14,4 +14,4 @@ export default function handler(
     feedJson: '/api/feeddata/json',
     feedRss: '/api/feeddata/rss'
   });
-};
+}

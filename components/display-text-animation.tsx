@@ -8,28 +8,26 @@ interface IProp {
 
 function DisplayTextAnimation({
   paragraph,
-  speed = ((n: number) => n / 10 + 1),
+  speed = (n: number) => n / 10 + 1,
   classes
 }: IProp): JSX.Element {
   let curIndex = 0;
-  const result = paragraph.map(
-    (line, lineIndex) => line.split('').map(
-      (char, charIndex) => {
-        curIndex++;
-        return (
-          <span
-            aria-hidden="true"
-            key={`line${lineIndex}char${charIndex}`}
-            className={classes}
-            style={{
-              animationDelay: `${speed(curIndex)}s`
-            }}
-          >
-            {char === ' ' ? '\u00A0' : char}
-          </span>
-        );
-      }
-    )
+  const result = paragraph.map((line, lineIndex) =>
+    line.split('').map((char, charIndex) => {
+      curIndex++;
+      return (
+        <span
+          aria-hidden="true"
+          key={`line${lineIndex}char${charIndex}`}
+          className={classes}
+          style={{
+            animationDelay: `${speed(curIndex)}s`
+          }}
+        >
+          {char === ' ' ? '\u00A0' : char}
+        </span>
+      );
+    })
   );
 
   return (

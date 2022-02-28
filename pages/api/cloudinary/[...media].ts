@@ -1,4 +1,7 @@
-import { createMediaHandler, mediaHandlerConfig } from 'next-tinacms-cloudinary/dist/handlers';
+import {
+  createMediaHandler,
+  mediaHandlerConfig
+} from 'next-tinacms-cloudinary/dist/handlers';
 import { isAuthorized, TinaCloudUser } from '@tinacms/auth';
 
 export const config = mediaHandlerConfig;
@@ -13,11 +16,11 @@ export default createMediaHandler({
         return true;
       }
 
-      const user = await isAuthorized(req) as TinaCloudUser;
+      const user = (await isAuthorized(req)) as TinaCloudUser;
       return user && user.verified;
     } catch (e) {
       console.error(e);
       return false;
     }
-  },
+  }
 });

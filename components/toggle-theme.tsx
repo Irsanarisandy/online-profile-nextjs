@@ -19,12 +19,12 @@ function useToggleTheme() {
       setTheme(() => {
         const result = mediaQuery.matches ? 'dark' : 'light';
         if (result === 'dark') {
-					document.documentElement.classList.add('dark');
-					document.body.classList.add('bg-black', 'text-white');
+          document.documentElement.classList.add('dark');
+          document.body.classList.add('bg-black', 'text-white');
           pageContent.className = 'dark-gradient';
         } else {
-					document.documentElement.classList.remove('dark');
-					document.body.classList.remove('bg-black', 'text-white');
+          document.documentElement.classList.remove('dark');
+          document.body.classList.remove('bg-black', 'text-white');
           pageContent.className = 'light-gradient';
         }
         return result;

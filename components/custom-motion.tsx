@@ -5,7 +5,7 @@ interface IProp {
   classes?: string;
 }
 
-const OpacityPageTransitionMotion = ({children, classes}: IProp) => (
+const OpacityPageTransitionMotion = ({ children, classes }: IProp) => (
   <motion.div
     variants={{
       hidden: { opacity: 0 },

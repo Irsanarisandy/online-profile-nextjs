@@ -7,10 +7,7 @@ import path from 'path';
 
 const markdown = new MarkdownIt();
 
-export default function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const siteURL = 'https://irsanarisandy.vercel.app';
   const author = {
     name: 'Irsan Arisandy'
@@ -20,17 +17,18 @@ export default function handler(
     title: `Irsan's Online Profile & Blog`,
     id: `${siteURL}/`,
     link: `${siteURL}/`,
-    description: 'Hire professional fullstack website developer to build interactive and high-end solutions.',
+    description:
+      'Hire professional fullstack website developer to build interactive and high-end solutions.',
     image: `${siteURL}/images/logo.png`,
     favicon: `${siteURL}/images/favicon.ico`,
-    copyright: `Copyright © ${(new Date()).getFullYear()} Irsan Arisandy`,
+    copyright: `Copyright © ${new Date().getFullYear()} Irsan Arisandy`,
     generator: 'Feed for Node.js',
     feedLinks: {
       atom: `${siteURL}/api/feeddata/atom`,
       json: `${siteURL}/api/feeddata/json`,
-      rss: `${siteURL}/api/feeddata/rss`,
+      rss: `${siteURL}/api/feeddata/rss`
     },
-    author,
+    author
   });
 
   const aboutFile = path.join(process.cwd(), '/content/about/About.md');
@@ -101,4 +99,4 @@ export default function handler(
       res.status(200).send(feed.rss2());
       break;
   }
-};
+}

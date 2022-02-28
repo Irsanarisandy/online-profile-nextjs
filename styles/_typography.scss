@@ -6,7 +6,7 @@ $scrollbar-track-color: #1F2937;
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Quicksand', sans-serif;
+  font-family: Quicksand, sans-serif;
 }
 
 * {
@@ -40,17 +40,17 @@ span {
   display: block;
 }
 
+p, span {
+  font-size: 1.125rem;
+}
+
 code {
   span {
     display: revert;
   }
 }
 
-p, span {
-  font-size: 1.125rem;
-}
-
-// undo TailwindCSS preflight styling
+// START: undo TailwindCSS preflight styling
 h1,
 h2,
 h3,
@@ -74,6 +74,8 @@ blockquote {
   margin: 1rem 0;
   padding-left: 2rem;
 }
+
+// END: undo TailwindCSS preflight styling
 
 .light-gradient {
   background-image: linear-gradient(90deg, #F9FAFB, #9CA3AF);

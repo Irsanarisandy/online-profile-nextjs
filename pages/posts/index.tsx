@@ -42,7 +42,7 @@ const Posts: NextPage<PostsProp> = (props) => {
   const { data } = useTina({
     query,
     variables: {},
-    data: props.data,
+    data: props.data
   });
   let postsTags: string[] = [];
   const postsData: PostsData[] = data.getPostList.edges.map((edge: any) => {
@@ -63,22 +63,26 @@ const Posts: NextPage<PostsProp> = (props) => {
       <Head>
         <meta name="description" content="Posts Page" />
       </Head>
-      {postsData.length === 0 && <OpacityPageTransitionMotion classes="h-full flex items-center justify-center">
-        <h1>No Posts Available</h1>
-      </OpacityPageTransitionMotion>}
-      {postsData.length > 0 &&
+      {postsData.length === 0 && (
+        <OpacityPageTransitionMotion classes="h-full flex items-center justify-center">
+          <h1>No Posts Available</h1>
+        </OpacityPageTransitionMotion>
+      )}
+      {postsData.length > 0 && (
         <OpacityPageTransitionMotion classes="flex flex-col md:flex-row min-h-full px-4 pt-4 sm:px-8 sm:pt-8">
           <section className="mb-8 md:mb-0 md:ml-8">
             <Cards classes="p-4 sm:p-8 flex flex-col md:w-[320px]">
               <h1 className="mb-4">Tags</h1>
-              {postsTags.length > 0 && <Chips labels={postsTags} clickLocation="tags" />}
+              {postsTags.length > 0 && (
+                <Chips labels={postsTags} clickLocation="tags" />
+              )}
             </Cards>
           </section>
           <section className="md:grow md:order-first grid gap-8 grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 md:auto-rows-[440px]">
             {postsData.map((data, index) => (
               <Cards
                 classes="p-4 sm:p-8 flex flex-col"
-                key={`post${index+1}`}
+                key={`post${index + 1}`}
               >
                 <div className="mb-4 flex">
                   <Link href={`/posts/${data.location}`} passHref>
@@ -87,28 +91,32 @@ const Posts: NextPage<PostsProp> = (props) => {
                     </a>
                   </Link>
                 </div>
-                {data.heroImage && <div className="block w-full">
-                  <div className="max-w-md mx-auto">
-                    <Image
-                      src={data.heroImage}
-                      layout="responsive"
-                      alt="hero image"
-                      height={540}
-                      width={960}
-                    />
+                {data.heroImage && (
+                  <div className="block w-full">
+                    <div className="max-w-md mx-auto">
+                      <Image
+                        src={data.heroImage}
+                        layout="responsive"
+                        alt="hero image"
+                        height={540}
+                        width={960}
+                      />
+                    </div>
                   </div>
-                </div>}
+                )}
                 {data.excerpt && <p className="mt-4">{data.excerpt}</p>}
               </Cards>
             ))}
           </section>
         </OpacityPageTransitionMotion>
-      }
+      )}
     </>
   );
 };
 
-export async function getStaticProps(): Promise<GetStaticPropsResult<PostsProp>> {
+export async function getStaticProps(): Promise<
+  GetStaticPropsResult<PostsProp>
+> {
   const data = await staticRequest({ query });
 
   return {

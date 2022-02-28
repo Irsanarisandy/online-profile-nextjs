@@ -12,9 +12,21 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 First, run the development server:
 
 ```bash
+# run locally
 npm run dev
-# or
-yarn dev
+
+# build project
+npm run build
+
+# lint scripts (JS/JSX/TS/TSX)
+npm run lint
+# lint and fix scripts (JS/JSX/TS/TSX)
+npm run lint-fix
+
+# lint styles (CSS/SCSS)
+npm run stylelint
+# lint and fix styles (CSS/SCSS)
+npm run stylelint-fix
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with the browser to see the result.
@@ -23,7 +35,7 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 
 ## Local URLs
 
-- [http://localhost:3000](http://localhost:3000) : browse the website 
+- [http://localhost:3000](http://localhost:3000) : browse the website
 - [http://localhost:3000/admin](http://localhost:3000/admin) : connect to Tina Cloud and go in edit mode
 - [http://localhost:3000/admin/logout](http://localhost:3000/admin/logout) : log out of Tina Cloud
 - [http://localhost:4001/altair](http://localhost:4001/altair) : GraphQL playground to test queries and browse the API documentation

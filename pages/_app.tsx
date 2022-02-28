@@ -13,9 +13,10 @@ function MyApp({ Component, pageProps }: AppProps) {
   // https://vercel.com/docs/concepts/projects/environment-variables#system-environment-variables
   const branch = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF || 'main';
   const clientId = process.env.NEXT_PUBLIC_TINA_CLIENT_ID;
-  const apiURL = process.env.NODE_ENV == 'development'
-    ? 'http://localhost:4001/graphql'
-    : `https://content.tinajs.io/content/${clientId}/github/${branch}`;
+  const apiURL =
+    process.env.NODE_ENV == 'development'
+      ? 'http://localhost:4001/graphql'
+      : `https://content.tinajs.io/content/${clientId}/github/${branch}`;
   return typeof window !== 'undefined' ? (
     <>
       <DefaultSeo {...SEO} />
@@ -32,7 +33,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 return options.filter(
                   (option) => option.label === 'Blog Posts'
                 );
-              },
+              }
             }}
             mediaStore={TinaCloudCloudinaryMediaStore}
           >

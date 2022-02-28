@@ -33,7 +33,12 @@ interface NavbarState {
   width?: number;
 }
 
-const NavOpacityMotionContainer = ({isMobile, isOpen, children, classes}: CustomMotionProp) => {
+const NavOpacityMotionContainer = ({
+  isMobile,
+  isOpen,
+  children,
+  classes
+}: CustomMotionProp) => {
   return isMobile ? (
     <div className={classes} style={{ opacity: Number(isOpen) }}>
       {children}
@@ -54,15 +59,25 @@ const NavOpacityMotionContainer = ({isMobile, isOpen, children, classes}: Custom
   );
 };
 
-const Navlink = ({href, name, isOpen, colorTheme, handleClick}: NavlinkProp) => (
+const Navlink = ({
+  href,
+  name,
+  isOpen,
+  colorTheme,
+  handleClick
+}: NavlinkProp) => (
   <div
-    className={`text-center ${colorTheme !== 'dark' ? styles.navlink : styles.navlink_dark}`}
+    className={`text-center ${
+      colorTheme !== 'dark' ? styles.navlink : styles.navlink_dark
+    }`}
     onClick={handleClick}
   >
     <Link href={href} passHref>
-      <a style={{
-        pointerEvents: isOpen ? 'auto' : 'none'
-      }}>
+      <a
+        style={{
+          pointerEvents: isOpen ? 'auto' : 'none'
+        }}
+      >
         <motion.span
           whileHover={{
             opacity: [1, 0.5],
@@ -98,14 +113,24 @@ class Navbar extends React.Component<NavbarProp, NavbarState> {
     window.removeEventListener('resize', this.updateWindowDimensions);
   }
 
-  updateWindowDimensions = () => this.setState({
-    height: window.innerHeight,
-    width: window.innerWidth,
-    isMobile: window.innerHeight <= 570 || window.innerWidth <= 640 || window.innerHeight >= window.innerWidth,
-    isOpen: window.innerHeight > 570 && window.innerWidth > 640 && window.innerHeight < window.innerWidth
-  });
+  updateWindowDimensions = () =>
+    this.setState({
+      height: window.innerHeight,
+      width: window.innerWidth,
+      isMobile:
+        window.innerHeight <= 570 ||
+        window.innerWidth <= 640 ||
+        window.innerHeight >= window.innerWidth,
+      isOpen:
+        window.innerHeight > 570 &&
+        window.innerWidth > 640 &&
+        window.innerHeight < window.innerWidth
+    });
 
-  handleClick = () => this.setState(state => ({ isOpen: state.isMobile ? !state.isOpen : true }));
+  handleClick = () =>
+    this.setState((state) => ({
+      isOpen: state.isMobile ? !state.isOpen : true
+    }));
 
   render() {
     const { links, colorTheme } = this.props;
@@ -113,7 +138,7 @@ class Navbar extends React.Component<NavbarProp, NavbarState> {
     let linkElements: JSX.Element[] = [];
     if (links != null) {
       const certainLinks = ['linkedin', 'github', 'gitlab'] as const;
-      certainLinks.forEach(name => {
+      certainLinks.forEach((name) => {
         if (!!links[name]) {
           linkElements.push(
             <a
@@ -137,13 +162,19 @@ class Navbar extends React.Component<NavbarProp, NavbarState> {
         <nav
           role="navigation"
           aria-label="main navigation"
-          className={`z-10 flex flex-col ${styles.navbar} ${isOpen ? styles.navbar_display : ''}`}
+          className={`z-10 flex flex-col ${styles.navbar} ${
+            isOpen ? styles.navbar_display : ''
+          }`}
         >
           <div
             className={isOpen ? styles.logo_section : ''}
             style={{
-              backgroundColor: (isMobile && isOpen) ?
-                (colorTheme !== 'dark' ? 'white' : 'black') : 'transparent'
+              backgroundColor:
+                isMobile && isOpen
+                  ? colorTheme !== 'dark'
+                    ? 'white'
+                    : 'black'
+                  : 'transparent'
             }}
           >
             <NavOpacityMotionContainer
@@ -178,9 +209,27 @@ class Navbar extends React.Component<NavbarProp, NavbarState> {
               classes="flex flex-col items-center"
             >
               <div className="w-full my-12">
-                <Navlink href="/about" name="About" isOpen={isOpen} colorTheme={colorTheme} handleClick={this.handleClick} />
-                <Navlink href="/posts" name="Blog" isOpen={isOpen} colorTheme={colorTheme} handleClick={this.handleClick} />
-                <Navlink href="/coming-soon" name="Games" isOpen={isOpen} colorTheme={colorTheme} handleClick={this.handleClick} />
+                <Navlink
+                  href="/about"
+                  name="About"
+                  isOpen={isOpen}
+                  colorTheme={colorTheme}
+                  handleClick={this.handleClick}
+                />
+                <Navlink
+                  href="/posts"
+                  name="Blog"
+                  isOpen={isOpen}
+                  colorTheme={colorTheme}
+                  handleClick={this.handleClick}
+                />
+                <Navlink
+                  href="/coming-soon"
+                  name="Games"
+                  isOpen={isOpen}
+                  colorTheme={colorTheme}
+                  handleClick={this.handleClick}
+                />
               </div>
               <div
                 className="mb-2 grid gap-3 items-center"
@@ -199,15 +248,33 @@ class Navbar extends React.Component<NavbarProp, NavbarState> {
           className={`z-10 text-black bg-gray-200 flex flex-col justify-center items-center ${styles.toggle_nav_button}`}
           onClick={() => this.setState({ isOpen: !isOpen })}
         >
-          {isMobile && <div>
-            <span className={`bg-black ${isOpen ? styles.top_bar : ''}`}></span>
-            <span className={`bg-black ${isOpen ? styles.middle_bar : ''}`}></span>
-            <span className={`bg-black ${isOpen ? styles.bottom_bar : ''}`}></span>
-          </div>}
-          {!isMobile && <div>
-            <span className={`bg-black ${isOpen ? styles.top_left_arrow : styles.top_right_arrow}`}></span>
-            <span className={`bg-black ${isOpen ? styles.bottom_left_arrow : styles.bottom_right_arrow}`}></span>
-          </div>}
+          {isMobile && (
+            <div>
+              <span
+                className={`bg-black ${isOpen ? styles.top_bar : ''}`}
+              ></span>
+              <span
+                className={`bg-black ${isOpen ? styles.middle_bar : ''}`}
+              ></span>
+              <span
+                className={`bg-black ${isOpen ? styles.bottom_bar : ''}`}
+              ></span>
+            </div>
+          )}
+          {!isMobile && (
+            <div>
+              <span
+                className={`bg-black ${
+                  isOpen ? styles.top_left_arrow : styles.top_right_arrow
+                }`}
+              ></span>
+              <span
+                className={`bg-black ${
+                  isOpen ? styles.bottom_left_arrow : styles.bottom_right_arrow
+                }`}
+              ></span>
+            </div>
+          )}
         </button>
       </>
     );

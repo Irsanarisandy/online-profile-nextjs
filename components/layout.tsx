@@ -12,8 +12,8 @@ interface IProp {
   children: React.ReactNode;
 }
 
-function Layout({children}: IProp): JSX.Element {
-  const fetcher = (url: string) => axios.get(url).then(res => res.data);
+function Layout({ children }: IProp): JSX.Element {
+  const fetcher = (url: string) => axios.get(url).then((res) => res.data);
   const { data, error } = useSWR('/api/links', fetcher);
 
   const [colorTheme, setTheme] = useToggleTheme();
@@ -23,7 +23,10 @@ function Layout({children}: IProp): JSX.Element {
     <div className="h-screen flex flex-row">
       <Navbar links={data} colorTheme={colorTheme} />
       <div className="flex flex-col flex-auto overflow-y-auto">
-        <AnimatePresence exitBeforeEnter onExitComplete={() => window.scrollTo(0, 0)}>
+        <AnimatePresence
+          exitBeforeEnter
+          onExitComplete={() => window.scrollTo(0, 0)}
+        >
           <main key={router.asPath} className="grow">
             {children}
           </main>
@@ -36,15 +39,15 @@ function Layout({children}: IProp): JSX.Element {
         onClick={() => setTheme(colorTheme === 'light' ? 'dark' : 'light')}
       >
         <span className="flex justify-center">
-          {
-            colorTheme === 'light' ?
-              <SunIcon className={styles.toggle_icon} /> :
-              <MoonIcon className={styles.toggle_icon} />
-          }
+          {colorTheme === 'light' ? (
+            <SunIcon className={styles.toggle_icon} />
+          ) : (
+            <MoonIcon className={styles.toggle_icon} />
+          )}
         </span>
       </button>
     </div>
   );
-};
+}
 
 export default Layout;

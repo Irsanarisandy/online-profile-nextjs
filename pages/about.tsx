@@ -2,7 +2,11 @@ import type { GetStaticPropsResult, NextPage } from 'next';
 import Head from 'next/head';
 import { staticRequest } from 'tinacms';
 import { useTina } from 'tinacms/dist/edit-state';
-import { Components, TinaMarkdown, TinaMarkdownContent } from 'tinacms/dist/rich-text';
+import {
+  Components,
+  TinaMarkdown,
+  TinaMarkdownContent
+} from 'tinacms/dist/rich-text';
 import Cards from '@components/cards';
 import Codeblock from '@components/codeblock';
 import { OpacityPageTransitionMotion } from '@components/custom-motion';
@@ -44,7 +48,7 @@ const About: NextPage<AboutProp> = (props) => {
   const { data } = useTina({
     query,
     variables: {},
-    data: props.data,
+    data: props.data
   });
   const {
     title,
@@ -65,7 +69,10 @@ const About: NextPage<AboutProp> = (props) => {
   const components: Components<{}> = {
     code_block: (codeBlockProps) => (
       // eslint-disable-next-line react/no-children-prop
-      <Codeblock children={codeBlockProps?.children} language={codeBlockProps?.lang} />
+      <Codeblock
+        children={codeBlockProps?.children}
+        language={codeBlockProps?.lang}
+      />
     )
   };
 
@@ -81,43 +88,66 @@ const About: NextPage<AboutProp> = (props) => {
             <TinaMarkdown content={body} components={components} />
           </div>
         </Cards>
-        {overallWebSkillsExist && <Cards classes="m-4 sm:m-8 p-4 sm:p-8">
-          <Progress progressDataList={overallWebSkills} />
-        </Cards>}
-        {(frontendExist || backendExist || generalCodingExist || othersExist) &&
+        {overallWebSkillsExist && (
+          <Cards classes="m-4 sm:m-8 p-4 sm:p-8">
+            <Progress progressDataList={overallWebSkills} />
+          </Cards>
+        )}
+        {(frontendExist ||
+          backendExist ||
+          generalCodingExist ||
+          othersExist) && (
           <div className="grid gap-8 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 m-4 sm:m-8">
-            {frontendExist && <Cards classes="p-4 sm:p-8">
-              <h2 className="mb-2">Frontend Skills</h2>
-              <ul>
-                {frontend.map((skill: string) => <li key={skill}>{skill}</li>)}
-              </ul>
-            </Cards>}
-            {backendExist && <Cards classes="p-4 sm:p-8">
-              <h2 className="mb-2">Backend Skills</h2>
-              <ul>
-                {backend.map((skill: string) => <li key={skill}>{skill}</li>)}
-              </ul>
-            </Cards>}
-            {generalCodingExist && <Cards classes="p-4 sm:p-8">
-              <h2 className="mb-2">General Coding Skills</h2>
-              <ul>
-                {generalCoding.map((skill: string) => <li key={skill}>{skill}</li>)}
-              </ul>
-            </Cards>}
-            {othersExist && <Cards classes="p-4 sm:p-8">
-              <h2 className="mb-2">Other Skills</h2>
-              <ul>
-                {others.map((skill: string) => <li key={skill}>{skill}</li>)}
-              </ul>
-            </Cards>}
+            {frontendExist && (
+              <Cards classes="p-4 sm:p-8">
+                <h2 className="mb-2">Frontend Skills</h2>
+                <ul>
+                  {frontend.map((skill: string) => (
+                    <li key={skill}>{skill}</li>
+                  ))}
+                </ul>
+              </Cards>
+            )}
+            {backendExist && (
+              <Cards classes="p-4 sm:p-8">
+                <h2 className="mb-2">Backend Skills</h2>
+                <ul>
+                  {backend.map((skill: string) => (
+                    <li key={skill}>{skill}</li>
+                  ))}
+                </ul>
+              </Cards>
+            )}
+            {generalCodingExist && (
+              <Cards classes="p-4 sm:p-8">
+                <h2 className="mb-2">General Coding Skills</h2>
+                <ul>
+                  {generalCoding.map((skill: string) => (
+                    <li key={skill}>{skill}</li>
+                  ))}
+                </ul>
+              </Cards>
+            )}
+            {othersExist && (
+              <Cards classes="p-4 sm:p-8">
+                <h2 className="mb-2">Other Skills</h2>
+                <ul>
+                  {others.map((skill: string) => (
+                    <li key={skill}>{skill}</li>
+                  ))}
+                </ul>
+              </Cards>
+            )}
           </div>
-        }
+        )}
       </OpacityPageTransitionMotion>
     </>
   );
 };
 
-export async function getStaticProps(): Promise<GetStaticPropsResult<AboutProp>> {
+export async function getStaticProps(): Promise<
+  GetStaticPropsResult<AboutProp>
+> {
   const data = await staticRequest({ query });
 
   return {

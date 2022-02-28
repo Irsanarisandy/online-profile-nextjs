@@ -6,8 +6,12 @@ interface IProp {
   language?: string;
 }
 
-const Codeblock = ({children, language}: IProp) => (
-  <Prism code={children || ''} language={language || 'markdown'} style={darcula} />
+const Codeblock = ({ children, language }: IProp) => (
+  <Prism
+    code={children || ''}
+    language={language || 'markdown'}
+    style={darcula}
+  />
 );
 
 export default Codeblock;

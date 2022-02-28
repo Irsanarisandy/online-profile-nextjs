@@ -1,12 +1,12 @@
 @use './variables' as *;
 
 .customfont_name {
-  font-family: 'Merienda', sans-serif;
+  font-family: Merienda, sans-serif;
   font-weight: $font-weight-bold;
 }
 
 .customfont_role {
-  font: $font-weight-regular 0.75rem 'Merienda', sans-serif;
+  font: $font-weight-regular 0.75rem Merienda, sans-serif;
 }
 
 .icon {

@@ -16,7 +16,7 @@ $screen-width-xl: 1280px;
 @mixin btn-border-drawing($original-color, $hover-color, $width: 2px, $vertical: top, $horizontal: left, $duration: 0.25s) {
   box-shadow: inset 0 0 0 $width $original-color;
   color: $hover-color;
-  transition: color $duration calc($duration/3);
+  transition: color $duration calc($duration / 3);
   position: relative;
 
   &::before,
@@ -33,14 +33,24 @@ $screen-width-xl: 1280px;
   }
 
   &::before {
-    $h-side: if($horizontal == 'left', 'right', 'left');
+    $h-side: '';
+    @if $horizontal == 'left' {
+      $h-side: 'right';
+    } @else {
+      $h-side: 'left';
+    }
 
     border-#{$vertical}-width: $width;
     border-#{$h-side}-width: $width;
   }
 
   &::after {
-    $v-side: if($vertical == 'top', 'bottom', 'top');
+    $v-side: '';
+    @if $vertical == 'top' {
+      $v-side: 'bottom';
+    } @else {
+      $v-side: 'top';
+    }
 
     border-#{$v-side}-width: $width;
     border-#{$horizontal}-width: $width;
@@ -70,9 +80,11 @@ $screen-width-xl: 1280px;
   25% {
     transform: scale(1.3, 0.6);
   }
+
   50% {
     transform: scale(1.1, 0.9);
   }
+
   100% {
     transform: scale(1, 1);
   }
@@ -82,9 +94,11 @@ $screen-width-xl: 1280px;
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
