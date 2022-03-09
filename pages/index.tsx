@@ -9,7 +9,7 @@ import {
   PlayIcon
 } from '@heroicons/react/outline';
 import { OpacityPageTransitionMotion } from '@components/custom-motion';
-import DisplayTextAnimation from '@components/display-text-animation';
+import { DisplayTextAnimation } from '@components/display-text-animation';
 
 interface HomeProp {
   data: any;

@@ -18,7 +18,7 @@ interface ProgressState {
   displayPercentage: boolean;
 }
 
-class Progress extends React.Component<ProgressProp, ProgressState> {
+export class Progress extends React.Component<ProgressProp, ProgressState> {
   constructor(props: ProgressProp) {
     super(props);
     this.state = { displayPercentage: window.innerWidth >= 640 };
@@ -96,5 +96,3 @@ class Progress extends React.Component<ProgressProp, ProgressState> {
     );
   }
 }
-
-export default Progress;

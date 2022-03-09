@@ -1,4 +1,4 @@
-import styles from '@styles/DisplayTextAnimation.module.scss';
+import styles from '../styles/DisplayTextAnimation.module.scss';
 
 interface IProp {
   paragraph: string[];
@@ -6,11 +6,11 @@ interface IProp {
   classes?: string;
 }
 
-function DisplayTextAnimation({
+export const DisplayTextAnimation = ({
   paragraph,
   speed = (n: number) => n / 10 + 1,
   classes
-}: IProp): JSX.Element {
+}: IProp) => {
   let curIndex = 0;
   const result = paragraph.map((line, lineIndex) =>
     line.split('').map((char, charIndex) => {
@@ -39,6 +39,4 @@ function DisplayTextAnimation({
       ))}
     </div>
   );
-}
-
-export default DisplayTextAnimation;
+};

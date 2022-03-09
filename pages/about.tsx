@@ -7,10 +7,10 @@ import {
   TinaMarkdown,
   TinaMarkdownContent
 } from 'tinacms/dist/rich-text';
-import Cards from '@components/cards';
+import { Cards } from '@components/cards';
 import Codeblock from '@components/codeblock';
 import { OpacityPageTransitionMotion } from '@components/custom-motion';
-import Progress, { ProgressData } from '@components/progress';
+import { Progress, ProgressData } from '@components/progress';
 
 interface AboutData {
   title: string;

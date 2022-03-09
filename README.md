@@ -6,13 +6,12 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - [Vercel](https://vercel.com) deployment to visually edit the site from the `/admin` route.
 - [Cloudinary](https://cloudinary.com) to manage the media.
 - Local development workflow from the filesystem with a local GraqhQL server.
+- [Storybook](https://storybook.js.org/) to document custom components. To initialise in project run `npx sb init --builder webpack5`, which will also make sure to use webpack 5 as the default builder.
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
-# run locally
+# run project locally
 npm run dev
 
 # build project
@@ -27,9 +26,15 @@ npm run lint-fix
 npm run stylelint
 # lint and fix styles (CSS/SCSS)
 npm run stylelint-fix
+
+# run storybook locally
+npm run storybook
+
+# build storybook
+npm run build-storybook
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with the browser to see the result.
+Run `npm run dev` and open [http://localhost:3000](http://localhost:3000) with the browser to see the result.
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
@@ -39,6 +44,7 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 - [http://localhost:3000/admin](http://localhost:3000/admin) : connect to Tina Cloud and go in edit mode
 - [http://localhost:3000/admin/logout](http://localhost:3000/admin/logout) : log out of Tina Cloud
 - [http://localhost:4001/altair](http://localhost:4001/altair) : GraphQL playground to test queries and browse the API documentation
+- [http://localhost:6006](http://localhost:6006) : browse storybook
 
 ## Learn More
 

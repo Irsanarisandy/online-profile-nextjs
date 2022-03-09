@@ -8,7 +8,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { staticRequest } from 'tinacms';
 import { useTina } from 'tinacms/dist/edit-state';
-import Cards from '@components/cards';
+import { Cards } from '@components/cards';
 import { OpacityPageTransitionMotion } from '@components/custom-motion';
 
 interface PostsData {

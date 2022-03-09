@@ -6,7 +6,7 @@ interface IProp {
   classes?: string;
 }
 
-const Chips = ({ labels, clickLocation, classes }: IProp) => (
+export const Chips = ({ labels, clickLocation, classes }: IProp) => (
   <div className={`flex flex-wrap ${classes}`}>
     {clickLocation == null &&
       labels.map((label, index) => (
@@ -38,5 +38,3 @@ const Chips = ({ labels, clickLocation, classes }: IProp) => (
       ))}
   </div>
 );
-
-export default Chips;

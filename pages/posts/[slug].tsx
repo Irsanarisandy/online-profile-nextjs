@@ -13,8 +13,8 @@ import {
   TinaMarkdown,
   TinaMarkdownContent
 } from 'tinacms/dist/rich-text';
-import Cards from '@components/cards';
-import Chips from '@components/chips';
+import { Cards } from '@components/cards';
+import { Chips } from '@components/chips';
 import Codeblock from '@components/codeblock';
 import { OpacityPageTransitionMotion } from '@components/custom-motion';
 
