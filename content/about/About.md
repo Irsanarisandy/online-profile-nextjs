@@ -14,6 +14,7 @@ frontend:
   - Svelte
   - TypeScript / JavaScript
   - HTML & CSS
+  - Cypress & Cucumber
 backend:
   - Node.js
   - .Net Core (C#)
@@ -40,6 +41,6 @@ I like to discover new web technologies, while also keep up with the latest tren
 
 Outside my career, I love to read manga, go for hiking/travelling, and play shooting/strategy games. Some games I currently play include:
 
-*   Rainbow Six Siege
-*   League of Legends (mostly on mobile)
-*   Chess
+- Rainbow Six Siege
+- League of Legends (mostly on mobile)
+- Chess

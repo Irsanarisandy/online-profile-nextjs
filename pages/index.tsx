@@ -52,6 +52,7 @@ const Home: NextPage<HomeProp> = (props) => {
           )}
           <div className="mt-4 flex">
             <button
+              id="homeButtonAbout"
               aria-label="navigate to about page button"
               className="mr-8 w-[120px] hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors duration-500 font-bold py-2 px-4 border border-transparent rounded shadow-lg shadow-gray-50 dark:shadow-gray-900"
               onClick={() => router.push('/about')}
@@ -61,7 +62,8 @@ const Home: NextPage<HomeProp> = (props) => {
               </span>
             </button>
             <button
-              aria-label="navigate to about page button"
+              id="homeButtonBlog"
+              aria-label="navigate to blog page button"
               className="mr-8 w-[120px] hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors duration-500 font-bold py-2 px-4 border border-transparent rounded shadow-lg shadow-gray-50 dark:shadow-gray-900"
               onClick={() => router.push('/posts')}
             >
@@ -70,7 +72,8 @@ const Home: NextPage<HomeProp> = (props) => {
               </span>
             </button>
             <button
-              aria-label="navigate to about page button"
+              id="homeButtonGames"
+              aria-label="navigate to games page button"
               className="w-[120px] hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors duration-500 font-bold py-2 px-4 border border-transparent rounded shadow-lg shadow-gray-50 dark:shadow-gray-900"
               onClick={() => router.push('/coming-soon')}
             >

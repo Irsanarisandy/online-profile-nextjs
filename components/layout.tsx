@@ -34,6 +34,7 @@ function Layout({ children }: IProp): JSX.Element {
         <Footer links={data} />
       </div>
       <button
+        id="themeToggleButton"
         aria-label="theme toggle button"
         className={`fixed bottom-4 right-4 text-black bg-gray-200 ${styles.toggle_button}`}
         onClick={() => setTheme(colorTheme === 'light' ? 'dark' : 'light')}

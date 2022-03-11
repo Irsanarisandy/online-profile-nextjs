@@ -36,6 +36,7 @@ function Footer({ links }: IProp): JSX.Element {
         linkDropdownMenus.push(
           <Link href={link[1]} replace passHref key={name}>
             <a
+              id={`feed${feedType}`}
               className="text-sm py-2 px-4 block w-full bg-transparent text-gray-700 hover:bg-gray-100"
               target="_blank"
               role="menuitem"
@@ -49,7 +50,7 @@ function Footer({ links }: IProp): JSX.Element {
     linkElements.push(
       <div className="relative flex">
         <button
-          id="menu-button"
+          id="feedMenuButton"
           className="hover:opacity-50"
           aria-label="feed dropdown button"
           aria-expanded={feedExpanded}
@@ -64,7 +65,7 @@ function Footer({ links }: IProp): JSX.Element {
             className="absolute bottom-10 right-0 w-32 rounded-md bg-white py-1"
             role="menu"
             aria-orientation="vertical"
-            aria-labelledby="menu-button"
+            aria-labelledby="feedMenuButton"
           >
             {linkDropdownMenus}
           </div>
