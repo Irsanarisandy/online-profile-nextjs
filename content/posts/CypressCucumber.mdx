@@ -1,0 +1,53 @@
+---
+title: Automate farming with Cypress & Cucumber
+postDateTime: '2022-03-11T10:03:00.000Z'
+tags:
+  - Web Development
+  - Cypress
+  - Cucumber
+excerpt: >-
+  A definite (clickbait) guide to farm automation for the benefit of the
+  community.
+heroImage: >-
+  https://res.cloudinary.com/irsanpersonalcloudinary/image/upload/v1646990972/cucumbers_yiy5hz.jpg
+---
+
+Well it's official: I have started farming! And what better way to do it than to start growing [Cypress](https://www.cypress.io/) and [Cucumber](https://cucumber.io/), right? Well, you may think that the latter makes sense, but what about the former and how does these things relate to automating farming, especially when we already have machinery to help with farming? It makes more sense if I also start raising cows to sell [Beef](https://www.beeflang.org/) instead of the former, right? If you realized that this is clickbait then congratulations for figuring this out, but I can assure it is not 100% false.
+
+—————
+
+What I meant by farming is actually testing, as when you add more features into your websites the amount of tests you need to include will also increase (assuming you have testing in your project). This is parallel to the amount of tasks you need to do if you are increasing the number of food you are growing in the farm. For this you have 2 options: hire more people to do the tasks or try to automate the tasks. Since this is programming, not real farming, I have obviously chosen to automate testing by using these frontend tools: [Cypress](https://www.cypress.io/) and [Cucumber](https://cucumber.io/) (hence the pun). I have integrated these tools recently into this website project as they are currently some of the most popular tools to test your frontend and that more companies nowadays are considering frontend testing as a skill requirement to have. [Cypress](https://www.cypress.io/) is used for automating unit, integration and end-to-end testing, while [Cucumber](https://cucumber.io/) is used for implementing a BDD approach to testing by making it as readable as possible to people.
+
+```
+Feature: Home Page
+  Scenario: Check Home Buttons
+    Given user is offline
+    Then home buttons exist
+```
+
+As you can see, this example test is very easy to understand for a non-technical person. This is made possible by using [Cucumber](https://cucumber.io/), which uses [Gherkin syntax](https://cucumber.io/docs/gherkin/reference/) to structure this test. By combining this with [Cypress](https://www.cypress.io/), automation of these tests are made possible and that translating the example test to tasks to be processed can be done as shown in the example below:
+
+```typescript
+/// <reference types="cypress" />
+import { Given, Then } from 'cypress-cucumber-preprocessor/steps';
+
+const envMapping: { [key: string]: string } = {
+  offline: 'http://localhost:3000/',
+  online: 'https://irsanarisandy.vercel.app/'
+};
+
+Given('user is {word}', (status) => {
+  cy.visit(envMapping[status]);
+});
+
+Then('home buttons exist', () => {
+  cy.get('#homeButtonAbout')
+    .should('have.attr', 'aria-label')
+    .and('include', 'about page button');
+  cy.get('#homeButtonBlog')
+    .should('have.attr', 'aria-label')
+    .and('include', 'blog page button');
+});
+```
+
+These are only basic examples and that the testing tools mentioned can do a lot more than what I have mentioned. In conclusion, it is probably a good idea to start learning how to do automation testing if you want to do frontend as a career and haven't done so already, which I recommend using these tools if you don't know which tools to use.
