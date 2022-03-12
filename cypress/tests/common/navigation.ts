@@ -26,24 +26,10 @@ And('user is at {word} page', (page) => {
 And('links API is valid', () => {
   cy.request(`${window.location.origin}/api/links`).then((response) => {
     expect(response).property('status').to.be.oneOf([200, 304]);
-    expect(response.body)
-      .property('cv')
-      .to.be.equal('https://www.dropbox.com/s/lfazvco9hgy6qq0/CV.pdf?dl=1');
-    expect(response.body)
-      .property('linkedin')
-      .to.be.equal('https://www.linkedin.com/in/irsan-arisandy');
-    expect(response.body)
-      .property('github')
-      .to.be.equal('https://github.com/irsanarisandy');
-    expect(response.body)
-      .property('gitlab')
-      .to.be.equal('https://gitlab.com/irsanarisandy');
-    expect(response.body)
-      .property('feedAtom')
-      .to.be.equal('/api/feeddata/atom');
-    expect(response.body)
-      .property('feedJson')
-      .to.be.equal('/api/feeddata/json');
-    expect(response.body).property('feedRss').to.be.equal('/api/feeddata/rss');
+    cy.fixture('testLinks').then((testLinks) => {
+      Object.entries(testLinks).map((link) => {
+        expect(response.body).property(link[0]).to.be.equal(link[1]);
+      });
+    });
   });
 });

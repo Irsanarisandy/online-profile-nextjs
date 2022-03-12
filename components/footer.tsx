@@ -48,7 +48,7 @@ function Footer({ links }: IProp): JSX.Element {
       }
     });
     linkElements.push(
-      <div className="relative flex">
+      <div className="relative flex" key="feed-type-button">
         <button
           id="feedMenuButton"
           className="hover:opacity-50"

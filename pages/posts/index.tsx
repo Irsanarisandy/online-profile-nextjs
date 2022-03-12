@@ -93,7 +93,7 @@ const Posts: NextPage<PostsProp> = (props) => {
                 </div>
                 {data.heroImage && (
                   <div className="block w-full">
-                    <div className="max-w-md mx-auto">
+                    <div className="max-w-[300px] mx-auto">
                       <Image
                         src={data.heroImage}
                         layout="responsive"
@@ -104,7 +104,9 @@ const Posts: NextPage<PostsProp> = (props) => {
                     </div>
                   </div>
                 )}
-                {data.excerpt && <p className="mt-4">{data.excerpt}</p>}
+                {data.excerpt && (
+                  <p className="mt-4 overflow-y-auto">{data.excerpt}</p>
+                )}
               </Cards>
             ))}
           </section>

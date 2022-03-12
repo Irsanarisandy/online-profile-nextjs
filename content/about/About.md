@@ -25,6 +25,8 @@ backend:
 generalCoding:
   - Python
   - TypeScript / JavaScript
+  - C#
+  - C / C++
 others:
   - Git
   - Agile Methodology
@@ -33,11 +35,11 @@ others:
 
 I am a Fullstack Website Developer, currently working for an Australian company. I am passionate and well-organised, with high attention to detail and dedication to getting things done. I chose this career because I have a passion for learning and helping people solve real-life problems.
 
-﻿
+&nbsp;
 
 I like to discover new web technologies, while also keep up with the latest trend in my career. This website, for example, was created using [Next.js](https://nextjs.org/), [TailwindCSS](https://tailwindcss.com/) and [TinaCMS](https://tina.io/). I am also interested in blockchain and cryptocurrency.
 
-﻿
+&nbsp;
 
 Outside my career, I love to read manga, go for hiking/travelling, and play shooting/strategy games. Some games I currently play include:
 

@@ -1,5 +1,6 @@
 import type { GetStaticPropsResult, NextPage } from 'next';
 import Head from 'next/head';
+import Link from 'next/link';
 import { staticRequest } from 'tinacms';
 import { useTina } from 'tinacms/dist/edit-state';
 import {
@@ -7,6 +8,7 @@ import {
   TinaMarkdown,
   TinaMarkdownContent
 } from 'tinacms/dist/rich-text';
+import { DocumentDownloadIcon } from '@heroicons/react/solid';
 import { Cards } from '@components/cards';
 import Codeblock from '@components/codeblock';
 import { OpacityPageTransitionMotion } from '@components/custom-motion';
@@ -86,6 +88,20 @@ const About: NextPage<AboutProp> = (props) => {
           {title && <h1 className="mb-8">{title}</h1>}
           <div className="markdown">
             <TinaMarkdown content={body} components={components} />
+          </div>
+          <div className="inline-block border-2 rounded-full mt-8 px-4 py-2">
+            <Link
+              href="https://www.dropbox.com/s/lfazvco9hgy6qq0/CV.pdf?dl=1"
+              replace
+              passHref
+            >
+              <a id="downloadCV" target="_blank">
+                <span className="flex">
+                  <DocumentDownloadIcon className="h-auto w-[28px]" />
+                  &nbsp;Download CV
+                </span>
+              </a>
+            </Link>
           </div>
         </Cards>
         {overallWebSkillsExist && (

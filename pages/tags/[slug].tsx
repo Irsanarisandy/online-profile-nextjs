@@ -78,7 +78,7 @@ const Tags: NextPage<PostsProp> = (props) => {
               </div>
               {curPost.heroImage && (
                 <div className="block w-full">
-                  <div className="max-w-md mx-auto">
+                  <div className="max-w-[300px] mx-auto">
                     <Image
                       src={curPost.heroImage}
                       layout="responsive"
@@ -89,7 +89,9 @@ const Tags: NextPage<PostsProp> = (props) => {
                   </div>
                 </div>
               )}
-              {curPost.excerpt && <p className="mt-4">{curPost.excerpt}</p>}
+              {curPost.excerpt && (
+                <p className="mt-4 overflow-y-auto">{curPost.excerpt}</p>
+              )}
             </Cards>
           ))}
         </section>
