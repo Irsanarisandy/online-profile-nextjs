@@ -30,16 +30,22 @@ module.exports = {
   ],
   additionalMetaTags: [
     {
-      property: 'author',
+      name: 'author',
       content: 'Irsan Arisandy'
     },
     {
-      property: 'keywords',
+      name: 'keywords',
       content: [
         'irsan arisandy',
+        'irsan arisandy vercel',
+        "irsan's online profile",
+        'irsan arisandy online profile',
+        'irsan arisandy online portfolio',
+        'irsan arisandy online cv',
         'online profile',
         'online portfolio',
         'online cv',
+        'web developer',
         'website developer',
         'software developer',
         'fullstack developer',
@@ -51,8 +57,33 @@ module.exports = {
         'backend developer',
         'back-end developer',
         'back end developer',
-        'mentor'
+        'mentor',
+        'tutor'
       ].join(', ')
+    },
+    {
+      name: 'application-name',
+      content: "Irsan's Online Profile PWA"
+    },
+    {
+      name: 'apple-mobile-web-app-capable',
+      content: 'yes'
+    },
+    {
+      name: 'apple-mobile-web-app-status-bar-style',
+      content: 'default'
+    },
+    {
+      name: 'apple-mobile-web-app-title',
+      content: "Irsan's Online Profile PWA"
+    },
+    {
+      name: 'mobile-web-app-capable',
+      content: 'yes'
+    },
+    {
+      name: 'theme-color',
+      content: '#ffffff'
     }
   ],
   // twitter: {
