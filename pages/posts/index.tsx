@@ -1,7 +1,7 @@
 import { GetStaticPropsResult, NextPage } from 'next';
-import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import { NextSeo } from 'next-seo';
 import { staticRequest } from 'tinacms';
 import { useTina } from 'tinacms/dist/edit-state';
 import { Cards } from '@components/cards';
@@ -60,9 +60,10 @@ const Posts: NextPage<PostsProp> = (props) => {
 
   return (
     <>
-      <Head>
-        <meta name="description" content="Posts Page" />
-      </Head>
+      <NextSeo
+        title="My Posts"
+        description="Posts page written by Irsan Arisandy, mostly about website technologies."
+      />
       {postsData.length === 0 && (
         <OpacityPageTransitionMotion classes="h-full flex items-center justify-center">
           <h1>No Posts Available</h1>

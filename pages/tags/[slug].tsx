@@ -3,9 +3,9 @@ import type {
   GetStaticPropsResult,
   NextPage
 } from 'next';
-import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import { NextSeo } from 'next-seo';
 import { staticRequest } from 'tinacms';
 import { useTina } from 'tinacms/dist/edit-state';
 import { Cards } from '@components/cards';
@@ -59,9 +59,7 @@ const Tags: NextPage<PostsProp> = (props) => {
     });
   return (
     <>
-      <Head>
-        <meta name="description" content={`Tag: ${props.slug}`} />
-      </Head>
+      <NextSeo title="Posts Tags" description={`Tag: ${props.slug}`} />
       <OpacityPageTransitionMotion classes="flex flex-col min-h-full px-4 pt-4 sm:px-8 sm:pt-8">
         <Cards classes="p-4 sm:p-8 mb-4 md:mb-8">
           <h1>Tag: {props.slug}</h1>

@@ -4,8 +4,8 @@ import type {
   GetStaticPropsResult,
   NextPage
 } from 'next';
-import Head from 'next/head';
 import Image from 'next/image';
+import { NextSeo } from 'next-seo';
 import { staticRequest } from 'tinacms';
 import { useTina } from 'tinacms/dist/edit-state';
 import {
@@ -22,6 +22,7 @@ interface PostData {
   title: string;
   postDateTime: string;
   tags: string[];
+  excerpt: string;
   heroImage: string;
   body: TinaMarkdownContent | TinaMarkdownContent[];
 }
@@ -38,6 +39,7 @@ const query = `query BlogPostQuery($relativePath: String!) {
       title,
       postDateTime,
       tags,
+      excerpt,
       heroImage,
       body
     }
@@ -55,8 +57,8 @@ const Post: NextPage<PostProp> = (props) => {
     return <div>No Data</div>;
   }
 
-  const { title, postDateTime, tags, heroImage, body } = data.getPostDocument
-    .data as PostData;
+  const { title, postDateTime, tags, excerpt, heroImage, body } = data
+    .getPostDocument.data as PostData;
 
   const tagsExist = tags && tags.length > 0;
 
@@ -82,12 +84,10 @@ const Post: NextPage<PostProp> = (props) => {
 
   return (
     <>
-      <Head>
-        <meta
-          name="description"
-          content={props.slug.replace(/([A-Z])/g, ' $1').trim()}
-        />
-      </Head>
+      <NextSeo
+        title={props.slug.replace(/([A-Z])/g, ' $1').trim()}
+        description={excerpt || 'No description'}
+      />
       <OpacityPageTransitionMotion>
         <Cards classes="m-4 sm:m-8 p-4 sm:p-8">
           <h1>{title}</h1>

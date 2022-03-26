@@ -1,5 +1,4 @@
 import type { GetStaticPropsResult, NextPage } from 'next';
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { staticRequest } from 'tinacms';
 import { useTina } from 'tinacms/dist/edit-state';
@@ -35,9 +34,6 @@ const Home: NextPage<HomeProp> = (props) => {
 
   return (
     <>
-      <Head>
-        <meta name="description" content="Home Page" />
-      </Head>
       <OpacityPageTransitionMotion>
         <div
           className="p-4 sm:p-8 flex flex-col justify-center"

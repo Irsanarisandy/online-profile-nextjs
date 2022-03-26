@@ -1,6 +1,6 @@
 import type { GetStaticPropsResult, NextPage } from 'next';
-import Head from 'next/head';
 import Link from 'next/link';
+import { NextSeo } from 'next-seo';
 import { staticRequest } from 'tinacms';
 import { useTina } from 'tinacms/dist/edit-state';
 import {
@@ -80,9 +80,10 @@ const About: NextPage<AboutProp> = (props) => {
 
   return (
     <>
-      <Head>
-        <meta name="description" content="About Page" />
-      </Head>
+      <NextSeo
+        title="About Me"
+        description="An about page containing some information about Irsan Arisandy, as a website developer."
+      />
       <OpacityPageTransitionMotion>
         <Cards classes="m-4 sm:m-8 p-4 sm:p-8">
           {title && <h1 className="mb-8">{title}</h1>}

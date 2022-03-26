@@ -1,13 +1,11 @@
 import type { NextPage } from 'next';
-import Head from 'next/head';
+import { NextSeo } from 'next-seo';
 import { OpacityPageTransitionMotion } from '@components/custom-motion';
 
 const ComingSoon: NextPage = () => {
   return (
     <>
-      <Head>
-        <meta name="description" content="Coming Soon" />
-      </Head>
+      <NextSeo title="Coming Soon" description="Coming Soon" />
       <OpacityPageTransitionMotion classes="h-full flex items-center justify-center">
         <h1>Coming Soon</h1>
       </OpacityPageTransitionMotion>

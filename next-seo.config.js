@@ -1,6 +1,8 @@
 module.exports = {
   defaultTitle: 'IA | Fullstack Website Developer | Mentor',
-  // description: 'Hire professional fullstack website developer to build interactive and high-end solutions.',
+  titleTemplate: '%s | Irsan Arisandy',
+  description:
+    'Hire professional fullstack website developer, Irsan Arisandy, to build interactive and high-end solutions.',
   additionalLinkTags: [
     {
       rel: 'apple-touch-icon',

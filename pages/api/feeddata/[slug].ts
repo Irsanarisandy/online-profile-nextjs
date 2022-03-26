@@ -38,7 +38,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     title: 'About',
     id: aboutUrl,
     link: aboutUrl,
-    description: 'About Page',
+    description:
+      'An about page containing some information about Irsan Arisandy, as a website developer.',
     content: markdown.render(content.trim()),
     author: [author],
     contributor: [author],
@@ -54,7 +55,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       title: data.title,
       id: postUrl,
       link: postUrl,
-      description: data.excerpt,
+      description: data.excerpt || 'No description',
       content: markdown.render(content.trim()),
       author: [author],
       contributor: [author],
