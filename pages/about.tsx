@@ -29,20 +29,18 @@ interface AboutProp {
 }
 
 const query = `{
-  getAboutDocument(relativePath: "About.md") {
-    data {
-      title,
-      body,
-      overallWebSkills {
-        name
-        percentage
-        color
-      },
-      frontend,
-      backend,
-      generalCoding,
-      others
-    }
+  about(relativePath: "About.md") {
+    title,
+    body,
+    overallWebSkills {
+      name
+      percentage
+      color
+    },
+    frontend,
+    backend,
+    generalCoding,
+    others
   }
 }`;
 
@@ -60,7 +58,7 @@ const About: NextPage<AboutProp> = (props) => {
     backend,
     generalCoding,
     others
-  } = data.getAboutDocument.data as AboutData;
+  } = data.about as AboutData;
 
   const overallWebSkillsExist = overallWebSkills && overallWebSkills.length > 0;
   const frontendExist = frontend && frontend.length > 0;
@@ -70,11 +68,9 @@ const About: NextPage<AboutProp> = (props) => {
 
   const components: Components<{}> = {
     code_block: (codeBlockProps) => (
-      // eslint-disable-next-line react/no-children-prop
-      <Codeblock
-        children={codeBlockProps?.children}
-        language={codeBlockProps?.lang}
-      />
+      <Codeblock language={codeBlockProps?.lang}>
+        {codeBlockProps?.children.toString()}
+      </Codeblock>
     )
   };
 
@@ -86,13 +82,13 @@ const About: NextPage<AboutProp> = (props) => {
       />
       <OpacityPageTransitionMotion>
         <Cards classes="m-4 sm:m-8 p-4 sm:p-8">
-          {title && <h1 className="mb-8">{title}</h1>}
+          <h1 className="mb-8">{title}</h1>
           <div className="markdown">
             <TinaMarkdown content={body} components={components} />
           </div>
           <div className="inline-block border-2 rounded-full mt-8 px-4 py-2">
             <Link
-              href="https://www.dropbox.com/s/lfazvco9hgy6qq0/CV.pdf?dl=1"
+              href="https://filen.io/d/5941aa6b-79eb-4780-911d-1aaa8886a14f#!Nop9m3euENPRol1YmdztggZ1vRoJ1Wlh"
               replace
               passHref
             >
@@ -120,7 +116,7 @@ const About: NextPage<AboutProp> = (props) => {
                 <h2 className="mb-2">Frontend Skills</h2>
                 <ul>
                   {frontend.map((skill: string) => (
-                    <li key={skill}>{skill}</li>
+                    <li key={`Frontend: ${skill}`}>{skill}</li>
                   ))}
                 </ul>
               </Cards>
@@ -130,7 +126,7 @@ const About: NextPage<AboutProp> = (props) => {
                 <h2 className="mb-2">Backend Skills</h2>
                 <ul>
                   {backend.map((skill: string) => (
-                    <li key={skill}>{skill}</li>
+                    <li key={`Backend: ${skill}`}>{skill}</li>
                   ))}
                 </ul>
               </Cards>
@@ -140,7 +136,7 @@ const About: NextPage<AboutProp> = (props) => {
                 <h2 className="mb-2">General Coding Skills</h2>
                 <ul>
                   {generalCoding.map((skill: string) => (
-                    <li key={skill}>{skill}</li>
+                    <li key={`General: ${skill}`}>{skill}</li>
                   ))}
                 </ul>
               </Cards>
@@ -150,7 +146,7 @@ const About: NextPage<AboutProp> = (props) => {
                 <h2 className="mb-2">Other Skills</h2>
                 <ul>
                   {others.map((skill: string) => (
-                    <li key={skill}>{skill}</li>
+                    <li key={`Other: ${skill}`}>{skill}</li>
                   ))}
                 </ul>
               </Cards>

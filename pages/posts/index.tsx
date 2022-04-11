@@ -21,18 +21,16 @@ interface PostsProp {
 }
 
 const query = `{
-  getPostList {
+  postConnection {
     edges {
       node {
-        sys {
+        _sys {
           filename
         },
-        data {
-          title,
-          tags,
-          excerpt,
-          heroImage
-        }
+        title,
+        tags,
+        excerpt,
+        heroImage
       }
     }
   }
@@ -45,15 +43,15 @@ const Posts: NextPage<PostsProp> = (props) => {
     data: props.data
   });
   let postsTags: string[] = [];
-  const postsData: PostsData[] = data.getPostList.edges.map((edge: any) => {
+  const postsData: PostsData[] = data.postConnection.edges.map((edge: any) => {
     const curNode = edge.node;
-    if (curNode.data.tags != null && curNode.data.tags.length > 0) {
-      postsTags.push(...curNode.data.tags);
+    if (curNode.tags != null && curNode.tags.length > 0) {
+      postsTags.push(...curNode.tags);
     }
 
     return {
-      location: curNode.sys.filename,
-      ...curNode.data
+      location: curNode._sys.filename,
+      ...curNode
     };
   });
   postsTags = Array.from(new Set(postsTags)).sort();
@@ -105,9 +103,7 @@ const Posts: NextPage<PostsProp> = (props) => {
                     </div>
                   </div>
                 )}
-                {data.excerpt && (
-                  <p className="mt-4 overflow-y-auto">{data.excerpt}</p>
-                )}
+                <p className="mt-4 overflow-y-auto">{data.excerpt}</p>
               </Cards>
             ))}
           </section>

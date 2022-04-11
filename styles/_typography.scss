@@ -89,6 +89,12 @@ blockquote {
   animation: gradient 15s ease infinite;
 }
 
+.with-toolbar {  // TinaCMS body editor
+  span {
+    display: revert;
+  }
+}
+
 .markdown {
   a {
     text-decoration: underline dotted;

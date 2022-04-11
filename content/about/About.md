@@ -15,6 +15,7 @@ frontend:
   - TypeScript / JavaScript
   - HTML & CSS
   - Cypress & Cucumber
+  - React Native
 backend:
   - Node.js
   - .Net Core (C#)

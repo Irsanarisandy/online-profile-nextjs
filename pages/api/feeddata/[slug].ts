@@ -8,7 +8,9 @@ import path from 'path';
 const markdown = new MarkdownIt();
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  const siteURL = 'https://irsanarisandy.vercel.app';
+  const siteURL = `${
+    process.env.NODE_ENV !== 'production' ? 'http' : 'https'
+  }://${req.headers.host}`;
   const author = {
     name: 'Irsan Arisandy'
   };
@@ -55,7 +57,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       title: data.title,
       id: postUrl,
       link: postUrl,
-      description: data.excerpt || 'No description',
+      description: data.excerpt,
       content: markdown.render(content.trim()),
       author: [author],
       contributor: [author],
@@ -71,17 +73,17 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       res.status(200).send(feed.atom1());
       break;
     case 'json':
-      let jsonFeed: any = {};
+      let jsonFeed: { [key: string]: any } = {};
       const generatedJSON = JSON.parse(feed.json1());
       for (let key in generatedJSON) {
         if (key === 'version') {
           jsonFeed[key] = `${generatedJSON[key]}.1`;
         } else if (key === 'author') {
-          jsonFeed['authors'] = [generatedJSON[key]];
+          jsonFeed.authors = [generatedJSON[key]];
         } else if (key === 'items') {
           jsonFeed[key] = [];
-          generatedJSON[key].forEach((item: any) => {
-            item['authors'] = [item.author];
+          generatedJSON[key].forEach((item: { [key: string]: any }) => {
+            item.authors = [item.author];
             delete item.author;
             jsonFeed[key].push(item);
           });
@@ -89,7 +91,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           jsonFeed[key] = generatedJSON[key];
         }
         if (key === 'icon') {
-          jsonFeed['favicon'] = `${siteURL}/images/favicon.ico`;
+          jsonFeed.favicon = `${siteURL}/images/favicon.ico`;
         }
       }
       res.setHeader('Content-Disposition', 'attachment;filename=feed.json');

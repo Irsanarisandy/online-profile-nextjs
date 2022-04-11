@@ -1,17 +1,15 @@
+import { PropsWithChildren } from 'react';
 import { Prism } from 'react-syntax-highlighter';
 import { darcula } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 interface IProp {
-  children?: React.ReactNode;
   language?: string;
 }
 
-const Codeblock = ({ children, language }: IProp) => (
-  <Prism
-    code={children || ''}
-    language={language || 'markdown'}
-    style={darcula}
-  />
+const Codeblock = ({ children, language }: PropsWithChildren<IProp>) => (
+  <Prism language={language || 'markdown'} style={darcula}>
+    {children?.toString() || ''}
+  </Prism>
 );
 
 export default Codeblock;

@@ -3,7 +3,7 @@ Feature: Common Content
   Scenario Outline: Check Feed Links
     Given user is online
     When user clicks on feed menu button
-    Then user can see feed menu
+    Then user can see <type> feed in menu
     When user generate <type> feed
     Then user downloads <type> feed file
 

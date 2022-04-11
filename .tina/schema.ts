@@ -1,6 +1,6 @@
-import { defineSchema } from '@tinacms/cli';
+import { defineConfig, defineSchema } from 'tinacms';
 
-export default defineSchema({
+const schema = defineSchema({
   collections: [
     {
       label: 'Home',
@@ -23,7 +23,14 @@ export default defineSchema({
         {
           type: 'string',
           label: 'Title',
-          name: 'title'
+          name: 'title',
+          ui: {
+            validate: (val) => {
+              if (val == null || val.trim().length === 0) {
+                return 'Title must not be empty!';
+              }
+            }
+          }
         },
         {
           type: 'rich-text',
@@ -92,14 +99,26 @@ export default defineSchema({
         {
           type: 'string',
           label: 'Title',
-          name: 'title'
+          name: 'title',
+          ui: {
+            validate: (val) => {
+              if (val == null || val.trim().length === 0) {
+                return 'Title must not be empty!';
+              }
+            }
+          }
         },
         {
           type: 'datetime',
           label: 'Post Date & Time',
           name: 'postDateTime',
           ui: {
-            dateFormat: 'DD/MM/YYYY h:mm a'
+            dateFormat: 'DD/MM/YYYY h:mm a',
+            validate: (val) => {
+              if (val == null || val.trim().length === 0) {
+                return 'Datetime must not be empty!';
+              }
+            }
           }
         },
         {
@@ -113,7 +132,12 @@ export default defineSchema({
           label: 'Excerpt',
           name: 'excerpt',
           ui: {
-            component: 'textarea'
+            component: 'textarea',
+            validate: (val) => {
+              if (val == null || val.trim().length === 0) {
+                return 'Excerpt must not be empty!';
+              }
+            }
           }
         },
         {
@@ -131,3 +155,65 @@ export default defineSchema({
     }
   ]
 });
+
+// https://vercel.com/docs/concepts/projects/environment-variables#system-environment-variables
+const branch = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF || 'main';
+const clientId = process.env.NEXT_PUBLIC_TINA_CLIENT_ID;
+const apiURL =
+  process.env.NODE_ENV == 'development'
+    ? 'http://localhost:4001/graphql'
+    : `https://content.tinajs.io/content/${clientId}/github/${branch}`;
+
+export const tinaConfig = defineConfig({
+  apiURL,
+  schema,
+  documentCreatorCallback: {
+    onNewDocument: ({ collection: { slug }, breadcrumbs }) => {
+      const relativeUrl = `/${slug}s/${breadcrumbs.join('/')}`;
+      return (window.location.href = relativeUrl);
+    },
+    filterCollections: (options) => {
+      return options.filter((option) => option.label === 'Blog Posts');
+    }
+  },
+  mediaStore: async () => {
+    const pack = await import('next-tinacms-cloudinary');
+    return pack.TinaCloudCloudinaryMediaStore;
+  }
+  // cmsCallback: (cms) => {
+  //   /**
+  //    * Enables experimental branch switcher
+  //    */
+  //   cms.flags.set("branch-switcher", true);
+  //   /**
+  //    * When `tina-admin` is enabled, this plugin configures contextual editing for collections
+  //    */
+  //   import("tinacms").then(({ RouteMappingPlugin }) => {
+  //     const RouteMapping = new RouteMappingPlugin((collection, document) => {
+  //       if (["authors", "global"].includes(collection.name)) {
+  //         return undefined;
+  //       }
+  //       if (["pages"].includes(collection.name)) {
+  //         if (document.sys.filename === "home") {
+  //           return `/`;
+  //         }
+  //         if (document.sys.filename === "about") {
+  //           return `/about`;
+  //         }
+  //         return undefined;
+  //       }
+  //       return `/${collection.name}/${document.sys.filename}`;
+  //     });
+  //     cms.plugins.add(RouteMapping);
+  //   });
+  //   return cms;
+  // },
+  // formifyCallback: ({ formConfig, createForm, createGlobalForm }) => {
+  //   if (formConfig.id === "content/global/index.json") {
+  //     return createGlobalForm(formConfig);
+  //   }
+  //   return createForm(formConfig);
+  // },
+});
+
+export default schema;

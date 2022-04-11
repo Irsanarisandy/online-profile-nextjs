@@ -21,8 +21,8 @@ function Footer({ links }: IProp): JSX.Element {
             href={link[1]}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`${link[0]} link`}
-            key={link[0]}
+            aria-label={`${link[0]} footer link`}
+            key={`${link[0]} footer link`}
           >
             {linkElementPair(link[0], styles.icon, 24)}
           </a>
@@ -77,7 +77,7 @@ function Footer({ links }: IProp): JSX.Element {
   return (
     <footer className="flex flex-col items-center py-4">
       <div
-        className="mb-2 transition-opacity duration-1500 grid gap-5 items-center"
+        className="mb-2 transition-opacity duration-1500 grid gap-5"
         style={{
           opacity: linkElements.length === 0 ? 0 : 1,
           gridTemplateColumns: `repeat(${linkElements.length}, minmax(0, 1fr))`
@@ -85,9 +85,7 @@ function Footer({ links }: IProp): JSX.Element {
       >
         {linkElements}
       </div>
-      <span className="text-center">
-        Copyright &copy; {new Date().getFullYear()} Irsan Arisandy
-      </span>
+      <span>Copyright &copy; {new Date().getFullYear()} Irsan Arisandy</span>
     </footer>
   );
 }

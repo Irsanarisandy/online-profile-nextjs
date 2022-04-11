@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import Links from '@entities/links.interface';
 import linkElementPair from './link-element-pair';
 import styles from '@styles/Navbar.module.scss';
@@ -9,7 +9,6 @@ import styles from '@styles/Navbar.module.scss';
 interface CustomMotionProp {
   isMobile: boolean;
   isOpen: boolean;
-  children: React.ReactNode;
   classes?: string;
 }
 
@@ -34,11 +33,11 @@ interface NavbarState {
 }
 
 const NavOpacityMotionContainer = ({
+  children,
   isMobile,
   isOpen,
-  children,
   classes
-}: CustomMotionProp) => {
+}: PropsWithChildren<CustomMotionProp>) => {
   return isMobile ? (
     <div className={classes} style={{ opacity: Number(isOpen) }}>
       {children}
@@ -145,8 +144,8 @@ class Navbar extends React.Component<NavbarProp, NavbarState> {
               href={links[name]}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`${name} link`}
-              key={name}
+              aria-label={`${name} navbar link`}
+              key={`${name} navbar link`}
               style={{
                 pointerEvents: isOpen ? 'auto' : 'none'
               }}
@@ -232,7 +231,7 @@ class Navbar extends React.Component<NavbarProp, NavbarState> {
                 />
               </div>
               <div
-                className="mb-2 grid gap-3 items-center"
+                className="mb-2 grid gap-4"
                 style={{
                   opacity: linkElements.length === 0 ? 0 : 1,
                   gridTemplateColumns: `repeat(${linkElements.length}, minmax(0, 1fr))`

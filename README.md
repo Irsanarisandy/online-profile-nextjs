@@ -49,7 +49,6 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 
 - [http://localhost:3000](http://localhost:3000) : browse the website
 - [http://localhost:3000/admin](http://localhost:3000/admin) : connect to Tina Cloud and go in edit mode
-- [http://localhost:3000/admin/logout](http://localhost:3000/admin/logout) : log out of Tina Cloud
 - [http://localhost:4001/altair](http://localhost:4001/altair) : GraphQL playground to test queries and browse the API documentation
 - [http://localhost:6006](http://localhost:6006) : browse storybook
 

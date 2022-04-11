@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/router';
+import { PropsWithChildren } from 'react';
 import useSWR from 'swr';
 import { MoonIcon, SunIcon } from '@heroicons/react/solid';
 import Navbar from './navbar';
@@ -8,11 +9,7 @@ import Footer from './footer';
 import useToggleTheme from './toggle-theme';
 import styles from '@styles/Layout.module.scss';
 
-interface IProp {
-  children: React.ReactNode;
-}
-
-function Layout({ children }: IProp): JSX.Element {
+function Layout({ children }: PropsWithChildren<object>): JSX.Element {
   const fetcher = (url: string) => axios.get(url).then((res) => res.data);
   const { data, error } = useSWR('/api/links', fetcher);
 

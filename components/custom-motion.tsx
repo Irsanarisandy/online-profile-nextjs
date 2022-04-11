@@ -1,11 +1,14 @@
 import { motion } from 'framer-motion';
+import { PropsWithChildren } from 'react';
 
 interface IProp {
-  children: React.ReactNode;
   classes?: string;
 }
 
-const OpacityPageTransitionMotion = ({ children, classes }: IProp) => (
+const OpacityPageTransitionMotion = ({
+  children,
+  classes
+}: PropsWithChildren<IProp>) => (
   <motion.div
     variants={{
       hidden: { opacity: 0 },

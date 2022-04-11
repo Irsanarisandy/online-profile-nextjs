@@ -18,16 +18,10 @@ When('user clicks on feed menu button', () => {
   cy.get('#feedMenuButton').click();
 });
 
-Then('user can see feed menu', () => {
-  cy.get('#feedAtom')
+Then('user can see {word} feed in menu', (feedType) => {
+  cy.get(`#feed${feedType}`)
     .should('have.attr', 'href')
-    .and('include', feedLinkMapping['Atom']);
-  cy.get('#feedJSON')
-    .should('have.attr', 'href')
-    .and('include', feedLinkMapping['JSON']);
-  cy.get('#feedRSS')
-    .should('have.attr', 'href')
-    .and('include', feedLinkMapping['RSS']);
+    .and('include', feedLinkMapping[feedType]);
 });
 
 When('user generate {word} feed', (feedType) => {

@@ -25,18 +25,16 @@ interface PostsProp {
 }
 
 const query = `{
-  getPostList {
+  postConnection {
     edges {
       node {
-        sys {
+        _sys {
           filename
         },
-        data {
-          title,
-          tags,
-          excerpt,
-          heroImage
-        }
+        title,
+        tags,
+        excerpt,
+        heroImage
       }
     }
   }
@@ -48,10 +46,10 @@ const Tags: NextPage<PostsProp> = (props) => {
     variables: {},
     data: props.data
   });
-  const postList: PostsData[] = data.getPostList.edges
+  const postList: PostsData[] = data.postConnection.edges
     .map((edge: any) => ({
-      location: edge.node.sys.filename,
-      ...edge.node.data
+      location: edge.node._sys.filename,
+      ...edge.node
     }))
     .filter((curData: PostsData) => {
       const tags = curData.tags;
@@ -87,9 +85,7 @@ const Tags: NextPage<PostsProp> = (props) => {
                   </div>
                 </div>
               )}
-              {curPost.excerpt && (
-                <p className="mt-4 overflow-y-auto">{curPost.excerpt}</p>
-              )}
+              <p className="mt-4 overflow-y-auto">{curPost.excerpt}</p>
             </Cards>
           ))}
         </section>
@@ -116,19 +112,17 @@ export async function getStaticProps({
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
   // Temporary: needs to be changed when Tina finally supports filtering
   const pathsQuery = `{
-    getPostList {
+    postConnection {
       edges {
         node {
-          data {
-            tags
-          }
+          tags
         }
       }
     }
   }`;
   const postListData: any = await staticRequest({ query: pathsQuery });
-  let tags: string[] = postListData.getPostList.edges
-    .map((edge: any) => edge.node.data.tags)
+  let tags: string[] = postListData.postConnection.edges
+    .map((edge: any) => edge.node.tags)
     .flat();
   tags = Array.from(new Set(tags));
 

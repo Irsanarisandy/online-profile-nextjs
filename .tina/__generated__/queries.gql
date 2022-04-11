@@ -1,115 +1,115 @@
-query getHomeDocument($relativePath: String!) {
-  getHomeDocument(relativePath: $relativePath) {
-    sys {
-      filename
-      basename
-      breadcrumbs
-      path
-      relativePath
-      extension
+query home($relativePath: String!) {
+  home(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
     }
-    id
-    data {
-      ...HomeParts
-    }
+    ...HomeParts
   }
 }
 
-query getHomeList {
-  getHomeList {
+query homeConnection {
+  homeConnection {
     totalCount
     edges {
       node {
-        id
-        sys {
-          filename
-          basename
-          breadcrumbs
-          path
-          relativePath
-          extension
+        ... on Document {
+          _sys {
+            filename
+            basename
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
         }
-        data {
-          ...HomeParts
-        }
+        ...HomeParts
       }
     }
   }
 }
 
-query getAboutDocument($relativePath: String!) {
-  getAboutDocument(relativePath: $relativePath) {
-    sys {
-      filename
-      basename
-      breadcrumbs
-      path
-      relativePath
-      extension
+query about($relativePath: String!) {
+  about(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
     }
-    id
-    data {
-      ...AboutParts
-    }
+    ...AboutParts
   }
 }
 
-query getAboutList {
-  getAboutList {
+query aboutConnection {
+  aboutConnection {
     totalCount
     edges {
       node {
-        id
-        sys {
-          filename
-          basename
-          breadcrumbs
-          path
-          relativePath
-          extension
+        ... on Document {
+          _sys {
+            filename
+            basename
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
         }
-        data {
-          ...AboutParts
-        }
+        ...AboutParts
       }
     }
   }
 }
 
-query getPostDocument($relativePath: String!) {
-  getPostDocument(relativePath: $relativePath) {
-    sys {
-      filename
-      basename
-      breadcrumbs
-      path
-      relativePath
-      extension
+query post($relativePath: String!) {
+  post(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
     }
-    id
-    data {
-      ...PostParts
-    }
+    ...PostParts
   }
 }
 
-query getPostList {
-  getPostList {
+query postConnection {
+  postConnection {
     totalCount
     edges {
       node {
-        id
-        sys {
-          filename
-          basename
-          breadcrumbs
-          path
-          relativePath
-          extension
+        ... on Document {
+          _sys {
+            filename
+            basename
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
         }
-        data {
-          ...PostParts
-        }
+        ...PostParts
       }
     }
   }

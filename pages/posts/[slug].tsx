@@ -1,4 +1,3 @@
-import fs from 'fs';
 import type {
   GetStaticPathsResult,
   GetStaticPropsResult,
@@ -34,15 +33,13 @@ interface PostProp {
 }
 
 const query = `query BlogPostQuery($relativePath: String!) {
-  getPostDocument(relativePath: $relativePath) {
-    data {
-      title,
-      postDateTime,
-      tags,
-      excerpt,
-      heroImage,
-      body
-    }
+  post(relativePath: $relativePath) {
+    title,
+    postDateTime,
+    tags,
+    excerpt,
+    heroImage,
+    body
   }
 }`;
 
@@ -53,12 +50,12 @@ const Post: NextPage<PostProp> = (props) => {
     data: props.data
   });
 
-  if (!(data && data.getPostDocument)) {
+  if (!(data && data.post)) {
     return <div>No Data</div>;
   }
 
-  const { title, postDateTime, tags, excerpt, heroImage, body } = data
-    .getPostDocument.data as PostData;
+  const { title, postDateTime, tags, excerpt, heroImage, body } =
+    data.post as PostData;
 
   const tagsExist = tags && tags.length > 0;
 
@@ -74,11 +71,9 @@ const Post: NextPage<PostProp> = (props) => {
 
   const components: Components<{}> = {
     code_block: (codeBlockProps) => (
-      // eslint-disable-next-line react/no-children-prop
-      <Codeblock
-        children={codeBlockProps?.children}
-        language={codeBlockProps?.lang}
-      />
+      <Codeblock language={codeBlockProps?.lang}>
+        {codeBlockProps?.children.toString()}
+      </Codeblock>
     )
   };
 
@@ -125,15 +120,6 @@ export async function getStaticProps({
   const { slug } = params;
   const variables = { relativePath: `${slug}.mdx` };
   const data: any = await staticRequest({ query, variables });
-  if (!data.getPostDocument.data.postDateTime) {
-    const file = `./content/posts/${slug}.mdx`;
-    const creationDateTime = fs.statSync(file).mtime.toISOString();
-    fs.writeFileSync(
-      file,
-      `---\ntitle: ${slug}\npostDateTime: '${creationDateTime}'\n---`
-    );
-    data.getPostDocument.data.postDateTime = creationDateTime;
-  }
 
   return {
     props: {
@@ -146,10 +132,10 @@ export async function getStaticProps({
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
   const pathsQuery = `{
-    getPostList {
+    postConnection {
       edges {
         node {
-          sys {
+          _sys {
             filename
           }
         }
@@ -159,8 +145,8 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
   const postListData: any = await staticRequest({ query: pathsQuery });
 
   return {
-    paths: postListData.getPostList.edges.map((edge: any) => ({
-      params: { slug: edge.node.sys.filename }
+    paths: postListData.postConnection.edges.map((edge: any) => ({
+      params: { slug: edge.node._sys.filename }
     })),
     fallback: 'blocking'
   };
