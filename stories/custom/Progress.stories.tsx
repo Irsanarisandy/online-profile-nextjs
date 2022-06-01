@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { Progress } from '../../components/progress';
+import { Progress } from '@components/progress';
 
 export default {
   title: 'Custom/Progress',
@@ -18,6 +18,5 @@ Example.args = {
       percentage: 80,
       color: 'green'
     }
-  ],
-  bgColor: 'aqua'
+  ]
 };

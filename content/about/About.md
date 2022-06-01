@@ -15,6 +15,7 @@ frontend:
   - TypeScript / JavaScript
   - HTML & CSS
   - Cypress & Cucumber
+  - Storybook & Jest
   - React Native
 backend:
   - Node.js

@@ -1,6 +1,9 @@
 import { PropsWithChildren } from 'react';
 
 interface IProp {
+  /**
+   * Class names from custom SCSS files and [Tailwind CSS](https://tailwindcss.com/)
+   */
   classes?: string;
 }
 

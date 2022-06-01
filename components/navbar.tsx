@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { PropsWithChildren } from 'react';
 import Links from '@entities/links.interface';
-import linkElementPair from './link-element-pair';
+import { LinkElementPair } from './link-element-pair';
 import styles from '@styles/Navbar.module.scss';
 
 interface CustomMotionProp {
@@ -150,7 +150,7 @@ class Navbar extends React.Component<NavbarProp, NavbarState> {
                 pointerEvents: isOpen ? 'auto' : 'none'
               }}
             >
-              {linkElementPair(name, styles.icon)}
+              <LinkElementPair linkName={name} classes={styles.icon} />
             </a>
           );
         }

@@ -1,49 +1,66 @@
 import { DocumentDownloadIcon, RssIcon } from '@heroicons/react/solid';
 import { GitHubLogo, GitLabLogo, LinkedInLogo } from './svg-icons';
 
-const linkElementPair = (
-  linkName: string,
-  classes?: string,
-  otherIconSize?: number
-) => {
+interface IProp {
+  /**
+   * Name of link corresponding to icon
+   */
+  linkName?: string;
+  /**
+   * Class names from custom SCSS files and [Tailwind CSS](https://tailwindcss.com/)
+   */
+  classes?: string;
+  /**
+   * Size of default other icon
+   */
+  otherIconSize?: number;
+}
+
+export const LinkElementPair = ({
+  linkName,
+  classes,
+  otherIconSize
+}: IProp) => {
   switch (linkName) {
     case 'linkedin':
       return (
-        <span className={classes}>
+        <span className={classes} data-testid="linkedin">
           <LinkedInLogo fill="#0A66C2" />
         </span>
       );
     case 'github':
       return (
-        <span className={classes}>
+        <span className={classes} data-testid="github">
           <GitHubLogo fill="currentcolor" />
         </span>
       );
     case 'gitlab':
       return (
-        <span className={classes}>
+        <span className={classes} data-testid="gitlab">
           <GitLabLogo fill="#FCA121" />
         </span>
       );
     case 'cv':
       return (
-        <span className={classes}>
+        <span className={classes} data-testid="cv">
           <DocumentDownloadIcon />
         </span>
       );
     case 'feed':
       return (
-        <span className={classes}>
+        <span className={classes} data-testid="feed">
           <RssIcon />
         </span>
       );
     default:
       return (
-        <span className={classes} style={{ fontSize: otherIconSize }}>
+        <span
+          className={classes}
+          style={{ fontSize: otherIconSize }}
+          data-testid="other"
+        >
           &#128279;
         </span>
       );
   }
 };
-
-export default linkElementPair;

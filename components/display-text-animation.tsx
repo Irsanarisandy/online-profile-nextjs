@@ -1,8 +1,17 @@
 import styles from '../styles/DisplayTextAnimation.module.scss';
 
 interface IProp {
+  /**
+   * List of sentences
+   */
   paragraph: string[];
+  /**
+   * Animation delay in seconds
+   */
   speed?: (n: number) => number;
+  /**
+   * Class names from custom SCSS files and [Tailwind CSS](https://tailwindcss.com/)
+   */
   classes?: string;
 }
 

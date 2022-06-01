@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useState } from 'react';
-import linkElementPair from './link-element-pair';
+import { LinkElementPair } from './link-element-pair';
 import Links from '@entities/links.interface';
 import styles from '@styles/Footer.module.scss';
 
@@ -24,7 +24,11 @@ function Footer({ links }: IProp): JSX.Element {
             aria-label={`${link[0]} footer link`}
             key={`${link[0]} footer link`}
           >
-            {linkElementPair(link[0], styles.icon, 24)}
+            <LinkElementPair
+              linkName={link[0]}
+              classes={styles.icon}
+              otherIconSize={20}
+            />
           </a>
         );
       } else {
@@ -58,7 +62,7 @@ function Footer({ links }: IProp): JSX.Element {
           onClick={() => setFeedExpanded(!feedExpanded)}
           title="Feed Dropdown"
         >
-          {linkElementPair('feed', styles.feed_icon, 24)}
+          <LinkElementPair linkName={'feed'} classes={styles.feed_icon} />
         </button>
         {feedExpanded && (
           <div

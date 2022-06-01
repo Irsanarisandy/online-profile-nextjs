@@ -7,10 +7,25 @@ export interface ProgressData {
 }
 
 interface ProgressProp {
+  /**
+   * List of objects, each containing name, percentage and color attributes
+   */
   progressDataList: ProgressData[];
+  /**
+   * Hide progress name
+   */
   hideName?: boolean;
+  /**
+   * Hide progress percentage
+   */
   hideInfo?: boolean;
+  /**
+   * Progress background color
+   */
   bgColor?: string;
+  /**
+   * Progress height
+   */
   height?: number;
 }
 
@@ -23,6 +38,13 @@ export class Progress extends React.Component<ProgressProp, ProgressState> {
     super(props);
     this.state = { displayPercentage: window.innerWidth >= 640 };
   }
+
+  static defaultProps = {
+    hideName: false,
+    hideInfo: false,
+    bgColor: '#A3A3A3',
+    height: 24
+  };
 
   componentDidMount() {
     window.addEventListener('resize', this.updateWindowDimensions);
@@ -38,18 +60,19 @@ export class Progress extends React.Component<ProgressProp, ProgressState> {
     });
 
   render() {
-    let { progressDataList, hideName, hideInfo, bgColor, height } = this.props;
+    const { progressDataList, hideName, hideInfo, bgColor, height } =
+      this.props;
     const { displayPercentage } = this.state;
-    bgColor = bgColor || '#A3A3A3';
-    height = height || 24;
 
     return (
       <div
+        data-testid="progress-comp"
         className="flex rounded-lg animate-pulse"
         style={{ backgroundColor: bgColor, height }}
       >
         {progressDataList.length === 1 && (
           <div
+            data-testid="progress-info-1"
             className="flex justify-center rounded-lg"
             style={{
               backgroundColor: progressDataList[0].color,
@@ -69,6 +92,8 @@ export class Progress extends React.Component<ProgressProp, ProgressState> {
         {progressDataList.length > 1 &&
           progressDataList.map((progressData, index) => (
             <div
+              key={`Progress data ${index + 1}`}
+              data-testid={`progress-info-${index + 1}`}
               className={`flex justify-center ${
                 index === 0
                   ? 'rounded-l-lg'
@@ -81,7 +106,6 @@ export class Progress extends React.Component<ProgressProp, ProgressState> {
                 height,
                 width: `${progressData.percentage}%`
               }}
-              key={`Progress data ${index + 1}`}
             >
               {!hideInfo
                 ? `${!hideName ? progressData.name : ''} ${

@@ -1,9 +1,9 @@
 import { Button } from './Button';
 import styles from './header.module.scss';
 
-type User = {
+interface User {
   name: string;
-};
+}
 
 interface HeaderProps {
   user?: User;
