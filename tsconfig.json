@@ -18,11 +18,10 @@
     "paths": {
       "@components/*": ["components/*"],
       "@entities/*": ["entities/*"],
-      "@lib/*": ["lib/*"],
       "@pages/*": ["pages/*"],
       "@styles/*": ["styles/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "exclude": ["cypress"]
 }

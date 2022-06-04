@@ -1,6 +1,5 @@
-/// <reference types="cypress" />
 /// <reference types="cypress-downloadfile"/>
-import { Then, When } from 'cypress-cucumber-preprocessor/steps';
+import { Then, When } from '@badeball/cypress-cucumber-preprocessor';
 
 const feedFileMapping: { [key: string]: string } = {
   Atom: 'atom.xml',
@@ -18,13 +17,13 @@ When('user clicks on feed menu button', () => {
   cy.get('#feedMenuButton').click();
 });
 
-Then('user can see {word} feed in menu', (feedType) => {
+Then('user can see {word} feed in menu', (feedType: string) => {
   cy.get(`#feed${feedType}`)
     .should('have.attr', 'href')
     .and('include', feedLinkMapping[feedType]);
 });
 
-When('user generate {word} feed', (feedType) => {
+When('user generate {word} feed', (feedType: string) => {
   cy.downloadFile(
     `${window.location.origin}/${feedLinkMapping[feedType]}`,
     'cypress/downloads',
@@ -32,7 +31,7 @@ When('user generate {word} feed', (feedType) => {
   );
 });
 
-Then('user downloads {word} feed file', (feedType) => {
+Then('user downloads {word} feed file', (feedType: string) => {
   cy.readFile(`cypress/downloads/${feedFileMapping[feedType]}`).then(
     (fileContent) => {
       if (feedType === 'JSON')

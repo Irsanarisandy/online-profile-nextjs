@@ -29,14 +29,14 @@ As you can see, this example test is very easy to understand for a non-technical
 
 ```typescript
 /// <reference types="cypress" />
-import { Given, Then } from 'cypress-cucumber-preprocessor/steps';
+import { Given, Then } from '@badeball/cypress-cucumber-preprocessor';
 
 const envMapping: { [key: string]: string } = {
   offline: 'http://localhost:3000/',
-  online: 'https://irsanarisandy.vercel.app/'
+  online: Cypress.env('online-url')
 };
 
-Given('user is {word}', (status) => {
+Given('user is {word}', (status: string) => {
   cy.visit(envMapping[status]);
 });
 

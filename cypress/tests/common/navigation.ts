@@ -1,9 +1,8 @@
-/// <reference types="cypress" />
-import { And, Given } from 'cypress-cucumber-preprocessor/steps';
+import { And, Given } from '@badeball/cypress-cucumber-preprocessor';
 
 const envMapping: { [key: string]: string } = {
   offline: 'http://localhost:3000/',
-  online: 'https://irsanarisandy.vercel.app/'
+  online: Cypress.env('online-url')
 };
 
 const pageMapping: { [key: string]: string } = {
@@ -11,15 +10,15 @@ const pageMapping: { [key: string]: string } = {
   about: '/about'
 };
 
-Given('user is {word}', (status) => {
+Given('user is {word}', (status: string) => {
   cy.visit(envMapping[status]);
 });
 
-Given('user goes to {word} page', (page) => {
+Given('user goes to {word} page', (page: string) => {
   cy.visit(pageMapping[page]);
 });
 
-And('user is at {word} page', (page) => {
+And('user is at {word} page', (page: string) => {
   cy.url().should('include', pageMapping[page]);
 });
 
