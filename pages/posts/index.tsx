@@ -21,7 +21,7 @@ interface PostsProp {
 }
 
 const query = `{
-  postConnection {
+  postConnection(sort: "postDateTime") {
     edges {
       node {
         _sys {
