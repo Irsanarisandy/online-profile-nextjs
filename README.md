@@ -6,6 +6,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - [Vercel](https://vercel.com) deployment to visually edit the site from the `/admin` route.
 - [Cloudinary](https://cloudinary.com) to manage the media.
 - Local development workflow from the filesystem with a local GraqhQL server.
+- [Jest](https://jestjs.io/) to do unit testing.
 - [Storybook](https://storybook.js.org) to document custom components and component testing. To initialise in project run `npx sb init --builder webpack5`, which will also make sure to use webpack 5 as the default builder.
 - [Cypress](https://www.cypress.io) to do integration and e2e testing. It has been integrated with [Cucumber](https://cucumber.io) to implement BDD automation testing.
 
@@ -27,6 +28,9 @@ npm run lint-fix
 npm run stylelint
 # lint and fix styles (CSS/SCSS)
 npm run stylelint-fix
+
+# run jest tests
+npm run test
 
 # run storybook locally
 npm run storybook

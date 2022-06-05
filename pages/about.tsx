@@ -82,7 +82,9 @@ const About: NextPage<AboutProp> = (props) => {
       />
       <OpacityPageTransitionMotion>
         <Cards classes="m-4 sm:m-8 p-4 sm:p-8">
-          <h1 className="mb-8">{title}</h1>
+          <h1 data-testid="aboutTitle" className="mb-8">
+            {title}
+          </h1>
           <div className="markdown">
             <TinaMarkdown content={body} components={components} />
           </div>
@@ -114,7 +116,7 @@ const About: NextPage<AboutProp> = (props) => {
             {frontendExist && (
               <Cards classes="p-4 sm:p-8">
                 <h2 className="mb-2">Frontend Skills</h2>
-                <ul>
+                <ul data-testid="aboutFrontend">
                   {frontend.map((skill: string) => (
                     <li key={`Frontend: ${skill}`}>{skill}</li>
                   ))}
@@ -124,7 +126,7 @@ const About: NextPage<AboutProp> = (props) => {
             {backendExist && (
               <Cards classes="p-4 sm:p-8">
                 <h2 className="mb-2">Backend Skills</h2>
-                <ul>
+                <ul data-testid="aboutBackend">
                   {backend.map((skill: string) => (
                     <li key={`Backend: ${skill}`}>{skill}</li>
                   ))}
@@ -134,7 +136,7 @@ const About: NextPage<AboutProp> = (props) => {
             {generalCodingExist && (
               <Cards classes="p-4 sm:p-8">
                 <h2 className="mb-2">General Coding Skills</h2>
-                <ul>
+                <ul data-testid="aboutGeneralCoding">
                   {generalCoding.map((skill: string) => (
                     <li key={`General: ${skill}`}>{skill}</li>
                   ))}
@@ -144,7 +146,7 @@ const About: NextPage<AboutProp> = (props) => {
             {othersExist && (
               <Cards classes="p-4 sm:p-8">
                 <h2 className="mb-2">Other Skills</h2>
-                <ul>
+                <ul data-testid="aboutOthers">
                   {others.map((skill: string) => (
                     <li key={`Other: ${skill}`}>{skill}</li>
                   ))}
