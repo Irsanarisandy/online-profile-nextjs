@@ -40,8 +40,8 @@ const schema = defineSchema({
         },
         {
           type: 'object',
-          label: 'Overall Web Skills',
-          name: 'overallWebSkills',
+          label: 'Overall Dev Skills',
+          name: 'overallDevSkills',
           list: true,
           fields: [
             {
@@ -160,7 +160,7 @@ const schema = defineSchema({
 const branch = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF || 'main';
 const clientId = process.env.NEXT_PUBLIC_TINA_CLIENT_ID;
 const apiURL =
-  process.env.NODE_ENV == 'development'
+  process.env.NODE_ENV !== 'production'
     ? 'http://localhost:4001/graphql'
     : `https://content.tinajs.io/content/${clientId}/github/${branch}`;
 

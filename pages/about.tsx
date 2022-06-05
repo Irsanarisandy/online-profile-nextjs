@@ -17,7 +17,7 @@ import { Progress, ProgressData } from '@components/progress';
 interface AboutData {
   title: string;
   body: TinaMarkdownContent | TinaMarkdownContent[];
-  overallWebSkills: ProgressData[];
+  overallDevSkills: ProgressData[];
   frontend: string[];
   backend: string[];
   generalCoding: string[];
@@ -32,7 +32,7 @@ const query = `{
   about(relativePath: "About.md") {
     title,
     body,
-    overallWebSkills {
+    overallDevSkills {
       name
       percentage
       color
@@ -50,17 +50,22 @@ const About: NextPage<AboutProp> = (props) => {
     variables: {},
     data: props.data
   });
+
+  if (data == null || data.about == null) {
+    return <div>About data does not exist!</div>;
+  }
+
   const {
     title,
     body,
-    overallWebSkills,
+    overallDevSkills,
     frontend,
     backend,
     generalCoding,
     others
   } = data.about as AboutData;
 
-  const overallWebSkillsExist = overallWebSkills && overallWebSkills.length > 0;
+  const overallDevSkillsExist = overallDevSkills && overallDevSkills.length > 0;
   const frontendExist = frontend && frontend.length > 0;
   const backendExist = backend && backend.length > 0;
   const generalCodingExist = generalCoding && generalCoding.length > 0;
@@ -103,9 +108,9 @@ const About: NextPage<AboutProp> = (props) => {
             </Link>
           </div>
         </Cards>
-        {overallWebSkillsExist && (
+        {overallDevSkillsExist && (
           <Cards classes="m-4 sm:m-8 p-4 sm:p-8">
-            <Progress progressDataList={overallWebSkills} />
+            <Progress progressDataList={overallDevSkills} />
           </Cards>
         )}
         {(frontendExist ||

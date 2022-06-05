@@ -25,7 +25,7 @@ interface PostsProp {
 }
 
 const query = `{
-  postConnection {
+  postConnection(sort: "postDateTime") {
     edges {
       node {
         _sys {
@@ -46,6 +46,11 @@ const Tags: NextPage<PostsProp> = (props) => {
     variables: {},
     data: props.data
   });
+
+  if (data == null || data.postConnection?.edges == null) {
+    return <div>Tags data does not exist!</div>;
+  }
+
   const postList: PostsData[] = data.postConnection.edges
     .map((edge: any) => ({
       location: edge.node._sys.filename,

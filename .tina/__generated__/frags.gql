@@ -5,7 +5,7 @@ fragment HomeParts on Home {
 fragment AboutParts on About {
   title
   body
-  overallWebSkills {
+  overallDevSkills {
     __typename
     name
     percentage

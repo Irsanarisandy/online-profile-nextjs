@@ -21,7 +21,7 @@ interface PostsProp {
 }
 
 const query = `{
-  postConnection {
+  postConnection(sort: "postDateTime") {
     edges {
       node {
         _sys {
@@ -42,6 +42,11 @@ const Posts: NextPage<PostsProp> = (props) => {
     variables: {},
     data: props.data
   });
+
+  if (data == null || data.postConnection?.edges == null) {
+    return <div>Posts data does not exist!</div>;
+  }
+
   let postsTags: string[] = [];
   const postsData: PostsData[] = data.postConnection.edges.map((edge: any) => {
     const curNode = edge.node;
@@ -64,7 +69,7 @@ const Posts: NextPage<PostsProp> = (props) => {
       />
       {postsData.length === 0 && (
         <OpacityPageTransitionMotion classes="h-full flex items-center justify-center">
-          <h1>No Posts Available</h1>
+          <h1>No posts available!</h1>
         </OpacityPageTransitionMotion>
       )}
       {postsData.length > 0 && (

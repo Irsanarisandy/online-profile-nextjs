@@ -99,7 +99,7 @@ type HomeConnection implements Connection {
   edges: [HomeConnectionEdges]
 }
 
-type AboutOverallWebSkills {
+type AboutOverallDevSkills {
   name: String
   percentage: Float
   color: String
@@ -108,7 +108,7 @@ type AboutOverallWebSkills {
 type About implements Node & Document {
   title: String
   body: JSON
-  overallWebSkills: [AboutOverallWebSkills]
+  overallDevSkills: [AboutOverallDevSkills]
   frontend: [String]
   backend: [String]
   generalCoding: [String]
@@ -175,7 +175,7 @@ input HomeMutation {
   intro: [String]
 }
 
-input AboutOverallWebSkillsMutation {
+input AboutOverallDevSkillsMutation {
   name: String
   percentage: Float
   color: String
@@ -184,7 +184,7 @@ input AboutOverallWebSkillsMutation {
 input AboutMutation {
   title: String
   body: JSON
-  overallWebSkills: [AboutOverallWebSkillsMutation]
+  overallDevSkills: [AboutOverallDevSkillsMutation]
   frontend: [String]
   backend: [String]
   generalCoding: [String]

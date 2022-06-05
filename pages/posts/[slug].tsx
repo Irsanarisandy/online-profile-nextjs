@@ -50,8 +50,8 @@ const Post: NextPage<PostProp> = (props) => {
     data: props.data
   });
 
-  if (!(data && data.post)) {
-    return <div>No Data</div>;
+  if (data == null || data.post == null) {
+    return <div>Post data does not exist!</div>;
   }
 
   const { title, postDateTime, tags, excerpt, heroImage, body } =

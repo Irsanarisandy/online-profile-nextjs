@@ -25,14 +25,19 @@ const query = `{
 }`;
 
 const Home: NextPage<HomeProp> = (props) => {
+  const router = useRouter();
   const { data } = useTina({
     query,
     variables: {},
     data: props.data
   });
+
+  if (data == null || data.home == null) {
+    return <div>Home data does not exist!</div>;
+  }
+
   const { intro } = data.home as HomeData;
   const speed = (n: number) => (n / 10) * 2 + 1;
-  const router = useRouter();
 
   return (
     <OpacityPageTransitionMotion>

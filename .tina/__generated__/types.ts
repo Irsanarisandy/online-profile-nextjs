@@ -202,8 +202,8 @@ export type HomeConnection = Connection & {
   edges?: Maybe<Array<Maybe<HomeConnectionEdges>>>;
 };
 
-export type AboutOverallWebSkills = {
-  __typename?: 'AboutOverallWebSkills';
+export type AboutOverallDevSkills = {
+  __typename?: 'AboutOverallDevSkills';
   name?: Maybe<Scalars['String']>;
   percentage?: Maybe<Scalars['Float']>;
   color?: Maybe<Scalars['String']>;
@@ -213,7 +213,7 @@ export type About = Node & Document & {
   __typename?: 'About';
   title?: Maybe<Scalars['String']>;
   body?: Maybe<Scalars['JSON']>;
-  overallWebSkills?: Maybe<Array<Maybe<AboutOverallWebSkills>>>;
+  overallDevSkills?: Maybe<Array<Maybe<AboutOverallDevSkills>>>;
   frontend?: Maybe<Array<Maybe<Scalars['String']>>>;
   backend?: Maybe<Array<Maybe<Scalars['String']>>>;
   generalCoding?: Maybe<Array<Maybe<Scalars['String']>>>;
@@ -349,7 +349,7 @@ export type HomeMutation = {
   intro?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-export type AboutOverallWebSkillsMutation = {
+export type AboutOverallDevSkillsMutation = {
   name?: InputMaybe<Scalars['String']>;
   percentage?: InputMaybe<Scalars['Float']>;
   color?: InputMaybe<Scalars['String']>;
@@ -358,7 +358,7 @@ export type AboutOverallWebSkillsMutation = {
 export type AboutMutation = {
   title?: InputMaybe<Scalars['String']>;
   body?: InputMaybe<Scalars['JSON']>;
-  overallWebSkills?: InputMaybe<Array<InputMaybe<AboutOverallWebSkillsMutation>>>;
+  overallDevSkills?: InputMaybe<Array<InputMaybe<AboutOverallDevSkillsMutation>>>;
   frontend?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   backend?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   generalCoding?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
@@ -376,7 +376,7 @@ export type PostMutation = {
 
 export type HomePartsFragment = { __typename?: 'Home', intro?: Array<string | null> | null };
 
-export type AboutPartsFragment = { __typename?: 'About', title?: string | null, body?: any | null, frontend?: Array<string | null> | null, backend?: Array<string | null> | null, generalCoding?: Array<string | null> | null, others?: Array<string | null> | null, overallWebSkills?: Array<{ __typename: 'AboutOverallWebSkills', name?: string | null, percentage?: number | null, color?: string | null } | null> | null };
+export type AboutPartsFragment = { __typename?: 'About', title?: string | null, body?: any | null, frontend?: Array<string | null> | null, backend?: Array<string | null> | null, generalCoding?: Array<string | null> | null, others?: Array<string | null> | null, overallDevSkills?: Array<{ __typename: 'AboutOverallDevSkills', name?: string | null, percentage?: number | null, color?: string | null } | null> | null };
 
 export type PostPartsFragment = { __typename?: 'Post', title?: string | null, postDateTime?: string | null, tags?: Array<string | null> | null, excerpt?: string | null, heroImage?: string | null, body?: any | null };
 
@@ -387,7 +387,13 @@ export type HomeQueryVariables = Exact<{
 
 export type HomeQuery = { __typename?: 'Query', home: { __typename?: 'Home', id: string, intro?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
-export type HomeConnectionQueryVariables = Exact<{ [key: string]: never; }>;
+export type HomeConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']>;
+  after?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Float']>;
+  last?: InputMaybe<Scalars['Float']>;
+  sort?: InputMaybe<Scalars['String']>;
+}>;
 
 
 export type HomeConnectionQuery = { __typename?: 'Query', homeConnection: { __typename?: 'HomeConnection', totalCount: number, edges?: Array<{ __typename?: 'HomeConnectionEdges', node?: { __typename?: 'Home', id: string, intro?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
@@ -397,12 +403,18 @@ export type AboutQueryVariables = Exact<{
 }>;
 
 
-export type AboutQuery = { __typename?: 'Query', about: { __typename?: 'About', id: string, title?: string | null, body?: any | null, frontend?: Array<string | null> | null, backend?: Array<string | null> | null, generalCoding?: Array<string | null> | null, others?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, overallWebSkills?: Array<{ __typename: 'AboutOverallWebSkills', name?: string | null, percentage?: number | null, color?: string | null } | null> | null } };
+export type AboutQuery = { __typename?: 'Query', about: { __typename?: 'About', id: string, title?: string | null, body?: any | null, frontend?: Array<string | null> | null, backend?: Array<string | null> | null, generalCoding?: Array<string | null> | null, others?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, overallDevSkills?: Array<{ __typename: 'AboutOverallDevSkills', name?: string | null, percentage?: number | null, color?: string | null } | null> | null } };
 
-export type AboutConnectionQueryVariables = Exact<{ [key: string]: never; }>;
+export type AboutConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']>;
+  after?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Float']>;
+  last?: InputMaybe<Scalars['Float']>;
+  sort?: InputMaybe<Scalars['String']>;
+}>;
 
 
-export type AboutConnectionQuery = { __typename?: 'Query', aboutConnection: { __typename?: 'AboutConnection', totalCount: number, edges?: Array<{ __typename?: 'AboutConnectionEdges', node?: { __typename?: 'About', id: string, title?: string | null, body?: any | null, frontend?: Array<string | null> | null, backend?: Array<string | null> | null, generalCoding?: Array<string | null> | null, others?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, overallWebSkills?: Array<{ __typename: 'AboutOverallWebSkills', name?: string | null, percentage?: number | null, color?: string | null } | null> | null } | null } | null> | null } };
+export type AboutConnectionQuery = { __typename?: 'Query', aboutConnection: { __typename?: 'AboutConnection', totalCount: number, edges?: Array<{ __typename?: 'AboutConnectionEdges', node?: { __typename?: 'About', id: string, title?: string | null, body?: any | null, frontend?: Array<string | null> | null, backend?: Array<string | null> | null, generalCoding?: Array<string | null> | null, others?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, overallDevSkills?: Array<{ __typename: 'AboutOverallDevSkills', name?: string | null, percentage?: number | null, color?: string | null } | null> | null } | null } | null> | null } };
 
 export type PostQueryVariables = Exact<{
   relativePath: Scalars['String'];
@@ -411,7 +423,13 @@ export type PostQueryVariables = Exact<{
 
 export type PostQuery = { __typename?: 'Query', post: { __typename?: 'Post', id: string, title?: string | null, postDateTime?: string | null, tags?: Array<string | null> | null, excerpt?: string | null, heroImage?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
-export type PostConnectionQueryVariables = Exact<{ [key: string]: never; }>;
+export type PostConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']>;
+  after?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Float']>;
+  last?: InputMaybe<Scalars['Float']>;
+  sort?: InputMaybe<Scalars['String']>;
+}>;
 
 
 export type PostConnectionQuery = { __typename?: 'Query', postConnection: { __typename?: 'PostConnection', totalCount: number, edges?: Array<{ __typename?: 'PostConnectionEdges', node?: { __typename?: 'Post', id: string, title?: string | null, postDateTime?: string | null, tags?: Array<string | null> | null, excerpt?: string | null, heroImage?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
@@ -425,7 +443,7 @@ export const AboutPartsFragmentDoc = gql`
     fragment AboutParts on About {
   title
   body
-  overallWebSkills {
+  overallDevSkills {
     __typename
     name
     percentage
@@ -466,8 +484,14 @@ export const HomeDocument = gql`
 }
     ${HomePartsFragmentDoc}`;
 export const HomeConnectionDocument = gql`
-    query homeConnection {
-  homeConnection {
+    query homeConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String) {
+  homeConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+  ) {
     totalCount
     edges {
       node {
@@ -507,8 +531,14 @@ export const AboutDocument = gql`
 }
     ${AboutPartsFragmentDoc}`;
 export const AboutConnectionDocument = gql`
-    query aboutConnection {
-  aboutConnection {
+    query aboutConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String) {
+  aboutConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+  ) {
     totalCount
     edges {
       node {
@@ -548,8 +578,14 @@ export const PostDocument = gql`
 }
     ${PostPartsFragmentDoc}`;
 export const PostConnectionDocument = gql`
-    query postConnection {
-  postConnection {
+    query postConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String) {
+  postConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+  ) {
     totalCount
     edges {
       node {

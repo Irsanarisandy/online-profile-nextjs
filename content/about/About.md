@@ -1,6 +1,6 @@
 ---
 title: 'Me, Myself & I'
-overallWebSkills:
+overallDevSkills:
   - name: Frontend
     percentage: 65
     color: '#B39063'

@@ -15,8 +15,14 @@ query home($relativePath: String!) {
   }
 }
 
-query homeConnection {
-  homeConnection {
+query homeConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String) {
+  homeConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+  ) {
     totalCount
     edges {
       node {
@@ -54,8 +60,14 @@ query about($relativePath: String!) {
   }
 }
 
-query aboutConnection {
-  aboutConnection {
+query aboutConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String) {
+  aboutConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+  ) {
     totalCount
     edges {
       node {
@@ -93,8 +105,14 @@ query post($relativePath: String!) {
   }
 }
 
-query postConnection {
-  postConnection {
+query postConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String) {
+  postConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+  ) {
     totalCount
     edges {
       node {
