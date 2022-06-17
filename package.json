@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.18.5",
-    "@badeball/cypress-cucumber-preprocessor": "^10.0.2",
+    "@badeball/cypress-cucumber-preprocessor": "^11.1.0",
     "@cypress/browserify-preprocessor": "^3.0.2",
     "@mdx-js/react": "^2.1.1",
     "@storybook/addon-actions": "^6.5.9",
@@ -63,7 +63,7 @@
     "autoprefixer": "^10.4.7",
     "babel-loader": "^8.2.5",
     "css-loader": "^6.7.1",
-    "cypress": "^9.7.0",
+    "cypress": "^10.2.0",
     "cypress-downloadfile": "^1.2.2",
     "eslint": "^8.18.0",
     "eslint-config-next": "^12.1.6",
