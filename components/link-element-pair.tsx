@@ -1,4 +1,4 @@
-import { DocumentDownloadIcon, RssIcon } from '@heroicons/react/solid';
+import { DocumentArrowDownIcon, RssIcon } from '@heroicons/react/24/solid';
 import { GitHubLogo, GitLabLogo, LinkedInLogo } from './svg-icons';
 
 interface IProp {
@@ -43,7 +43,7 @@ export const LinkElementPair = ({
     case 'cv':
       return (
         <span className={classes} data-testid="cv">
-          <DocumentDownloadIcon />
+          <DocumentArrowDownIcon />
         </span>
       );
     case 'feed':

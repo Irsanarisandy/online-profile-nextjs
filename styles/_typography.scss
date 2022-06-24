@@ -89,9 +89,15 @@ blockquote {
   animation: gradient 15s ease infinite;
 }
 
-.with-toolbar {  // TinaCMS body editor
+.with-toolbar {  // Overwrite TinaCMS body editor styling
   span {
     display: revert;
+  }
+}
+
+.tina-tailwind {  // Overwrite TinaCMS Tailwind styling
+  .w-32 {
+    width: 135px !important;
   }
 }
 

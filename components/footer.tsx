@@ -62,7 +62,7 @@ function Footer({ links }: IProp): JSX.Element {
           onClick={() => setFeedExpanded(!feedExpanded)}
           title="Feed Dropdown"
         >
-          <LinkElementPair linkName={'feed'} classes={styles.feed_icon} />
+          <LinkElementPair linkName="feed" classes={styles.icon} />
         </button>
         {feedExpanded && (
           <div
