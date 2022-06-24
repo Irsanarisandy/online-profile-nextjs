@@ -1,11 +1,6 @@
 /** @type {import('next').NextConfig} */
-const withPWA = require('next-pwa');
-
-module.exports = withPWA({
+const nextConfig = {
   reactStrictMode: true,
-  pwa: {
-    dest: 'public'
-  },
   async redirects() {
     return [
       {
@@ -18,4 +13,10 @@ module.exports = withPWA({
   images: {
     domains: ['res.cloudinary.com']
   }
+};
+
+const withPWA = require('next-pwa')({
+  dest: 'public'
 });
+
+module.exports = withPWA(nextConfig);

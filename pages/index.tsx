@@ -3,10 +3,10 @@ import { useRouter } from 'next/router';
 import { staticRequest } from 'tinacms';
 import { useTina } from 'tinacms/dist/edit-state';
 import {
-  EmojiHappyIcon,
+  FaceSmileIcon,
   NewspaperIcon,
   PlayIcon
-} from '@heroicons/react/outline';
+} from '@heroicons/react/24/outline';
 import { OpacityPageTransitionMotion } from '@components/custom-motion';
 import { DisplayTextAnimation } from '@components/display-text-animation';
 
@@ -61,7 +61,7 @@ const Home: NextPage<HomeProp> = (props) => {
             onClick={() => router.push('/about')}
           >
             <span>
-              About Me <EmojiHappyIcon className="hidden md:block" />
+              About Me <FaceSmileIcon className="hidden md:block" />
             </span>
           </button>
           <button

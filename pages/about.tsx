@@ -8,7 +8,7 @@ import {
   TinaMarkdown,
   TinaMarkdownContent
 } from 'tinacms/dist/rich-text';
-import { DocumentDownloadIcon } from '@heroicons/react/solid';
+import { DocumentArrowDownIcon } from '@heroicons/react/24/solid';
 import { Cards } from '@components/cards';
 import Codeblock from '@components/codeblock';
 import { OpacityPageTransitionMotion } from '@components/custom-motion';
@@ -101,7 +101,7 @@ const About: NextPage<AboutProp> = (props) => {
             >
               <a id="downloadCV" target="_blank">
                 <span className="flex">
-                  <DocumentDownloadIcon className="h-auto w-[28px]" />
+                  <DocumentArrowDownIcon className="h-auto w-[28px]" />
                   &nbsp;Download CV
                 </span>
               </a>

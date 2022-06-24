@@ -3,7 +3,7 @@ import { AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { PropsWithChildren } from 'react';
 import useSWR from 'swr';
-import { MoonIcon, SunIcon } from '@heroicons/react/solid';
+import { MoonIcon, SunIcon } from '@heroicons/react/24/solid';
 import Navbar from './navbar';
 import Footer from './footer';
 import useToggleTheme from './toggle-theme';
@@ -21,7 +21,7 @@ function Layout({ children }: PropsWithChildren<object>): JSX.Element {
       <Navbar links={data} colorTheme={colorTheme} />
       <div className="flex flex-col flex-auto overflow-y-auto">
         <AnimatePresence
-          exitBeforeEnter
+          mode="wait"
           onExitComplete={() => window.scrollTo(0, 0)}
         >
           <main key={router.asPath} className="grow">
