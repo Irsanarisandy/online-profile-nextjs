@@ -55,3 +55,6 @@ Example.play = async ({ canvasElement }) => {
       break;
   }
 };
+Example.parameters = {
+  jest: ['link-element-pair.test.tsx']
+};

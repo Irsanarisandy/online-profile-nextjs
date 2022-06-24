@@ -12,6 +12,7 @@ const customJestConfig = {
     '^@components/(.*)$': '<rootDir>/components/$1',
     '^@pages/(.*)$': '<rootDir>/pages/$1'
   },
+  modulePathIgnorePatterns: ['node_modules', 'jest-test-results.json'],
   setupFilesAfterEnv: ['<rootDir>/jest/jest.setup.ts'],
   testEnvironment: 'jest-environment-jsdom'
 };

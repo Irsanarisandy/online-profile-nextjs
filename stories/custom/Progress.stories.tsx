@@ -20,3 +20,6 @@ Example.args = {
     }
   ]
 };
+Example.parameters = {
+  jest: ['progress.test.tsx']
+};

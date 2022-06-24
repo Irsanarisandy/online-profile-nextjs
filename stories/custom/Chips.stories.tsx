@@ -28,3 +28,6 @@ Example.play = async ({ canvasElement }) => {
     ).toHaveAttribute('href', `/${label}`);
   });
 };
+Example.parameters = {
+  jest: ['chips.test.tsx']
+};

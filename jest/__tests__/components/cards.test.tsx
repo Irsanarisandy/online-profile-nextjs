@@ -12,7 +12,7 @@ describe('Cards component', () => {
     const content = view.getByTestId('test-card-content');
 
     expect(content).toBeInTheDocument();
-    expect(content.tagName).toBe('H1');
+    expect(content.tagName.toLowerCase()).toBe('h1');
     expect(content.innerHTML).toBe('Hello');
   });
 });

@@ -7,9 +7,10 @@ module.exports = {
   ],
   staticDirs: ['../public'],
   addons: [
-    '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
+    '@storybook/addon-jest',
+    '@storybook/addon-links',
     '@storybook/preset-scss'
   ],
   features: {
@@ -23,9 +24,9 @@ module.exports = {
   webpackFinal: async (config, { configType }) => {
     config.resolve.alias = {
       ...config.resolve.alias,
-      '@public': path.resolve(__dirname, '../public'),
       '@components': path.resolve(__dirname, '../components'),
-      '@pages': path.resolve(__dirname, '../pages')
+      '@pages': path.resolve(__dirname, '../pages'),
+      '@public': path.resolve(__dirname, '../public')
     };
 
     return config;

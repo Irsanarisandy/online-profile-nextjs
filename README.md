@@ -7,7 +7,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - [Cloudinary](https://cloudinary.com) to manage the media.
 - Local development workflow from the filesystem with a local GraqhQL server.
 - [Jest](https://jestjs.io/) to do unit testing.
-- [Storybook](https://storybook.js.org) to document custom components and component testing. To initialise in project run `npx sb init --builder webpack5`, which will also make sure to use webpack 5 as the default builder.
+- [Storybook](https://storybook.js.org) to document custom components, do component testing, and read results of Jest unit testing. To initialise in project run `npx sb init --builder webpack5`, which will also make sure to use webpack 5 as the default builder.
 - [Cypress](https://www.cypress.io) to do integration and e2e testing. It has been integrated with [Cucumber](https://cucumber.io) to implement BDD automation testing.
 
 ## Getting Started
@@ -33,9 +33,10 @@ npm run stylelint-fix
 npm run test
 
 # run storybook locally
+# (needs jest tests to be run beforehand, make sure to run all tests)
 npm run storybook
 
-# run storybook tests
+# run storybook tests (needs storybook to be run locally beforehand)
 npm run test-storybook
 
 # build storybook

@@ -19,3 +19,6 @@ Example.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
   await expect(canvas.getByTestId('test-card-content')).toBeInTheDocument();
 };
+Example.parameters = {
+  jest: ['cards.test.tsx']
+};

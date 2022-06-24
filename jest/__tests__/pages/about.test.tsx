@@ -1,7 +1,7 @@
 import About from '@pages/about';
 import { render } from '@testing-library/react';
 
-describe('Home page', () => {
+describe('About page', () => {
   const data = {
     about: {
       title: 'Hello world',
