@@ -5,59 +5,30 @@ import type {
 } from 'next';
 import Image from 'next/image';
 import { NextSeo } from 'next-seo';
-import { staticRequest } from 'tinacms';
 import { useTina } from 'tinacms/dist/edit-state';
-import {
-  Components,
-  TinaMarkdown,
-  TinaMarkdownContent
-} from 'tinacms/dist/rich-text';
+import { Components, TinaMarkdown } from 'tinacms/dist/rich-text';
 import { Cards } from '@components/cards';
 import { Chips } from '@components/chips';
 import Codeblock from '@components/codeblock';
 import { OpacityPageTransitionMotion } from '@components/custom-motion';
+import { TinaProps } from '@entities/tina-props.interface';
+import { client } from '@generatedTina/client';
+import { PostQuery } from '@generatedTina/types';
 
-interface PostData {
-  title: string;
-  postDateTime: string;
-  tags: string[];
-  excerpt: string;
-  heroImage: string;
-  body: TinaMarkdownContent | TinaMarkdownContent[];
-}
-
-interface PostProp {
-  variables: { relativePath: string };
-  slug: string;
-  data: any;
-}
-
-const query = `query BlogPostQuery($relativePath: String!) {
-  post(relativePath: $relativePath) {
-    title,
-    postDateTime,
-    tags,
-    excerpt,
-    heroImage,
-    body
-  }
-}`;
-
-const Post: NextPage<PostProp> = (props) => {
+const Post: NextPage<TinaProps<PostQuery>> = (props) => {
   const { data } = useTina({
-    query,
+    data: props.data,
     variables: props.variables,
-    data: props.data
+    query: props.query
   });
 
   if (data == null || data.post == null) {
     return <div>Post data does not exist!</div>;
   }
 
-  const { title, postDateTime, tags, excerpt, heroImage, body } =
-    data.post as PostData;
+  const { title, postDateTime, tags, excerpt, heroImage, body } = data.post;
 
-  const tagsExist = tags && tags.length > 0;
+  const tagsExist = tags != null && tags.length > 0;
 
   const displayedDateTime = new Intl.DateTimeFormat(navigator.language, {
     weekday: 'long',
@@ -67,7 +38,7 @@ const Post: NextPage<PostProp> = (props) => {
     hour: 'numeric',
     minute: 'numeric',
     timeZoneName: 'short'
-  }).format(new Date(postDateTime));
+  }).format(new Date(postDateTime as string));
 
   const components: Components<{}> = {
     code_block: (codeBlockProps) => (
@@ -80,7 +51,10 @@ const Post: NextPage<PostProp> = (props) => {
   return (
     <>
       <NextSeo
-        title={props.slug.replace(/([A-Z])/g, ' $1').trim()}
+        title={props.variables.relativePath
+          .replace('.mdx', '')
+          .replace(/([A-Z])/g, ' $1')
+          .trim()}
         description={excerpt || 'No description'}
       />
       <OpacityPageTransitionMotion>
@@ -90,7 +64,11 @@ const Post: NextPage<PostProp> = (props) => {
             <time>{displayedDateTime}</time>
           </span>
           {tagsExist && (
-            <Chips labels={tags} clickLocation="tags" classes="mb-4" />
+            <Chips
+              labels={tags as string[]}
+              clickLocation="tags"
+              classes="mb-4"
+            />
           )}
           {heroImage && (
             <div className="w-full">
@@ -116,36 +94,24 @@ const Post: NextPage<PostProp> = (props) => {
 
 export async function getStaticProps({
   params
-}: any): Promise<GetStaticPropsResult<PostProp>> {
+}: any): Promise<GetStaticPropsResult<TinaProps<PostQuery>>> {
   const { slug } = params;
-  const variables = { relativePath: `${slug}.mdx` };
-  const data: any = await staticRequest({ query, variables });
+  const tinaProps = await client.queries.post({ relativePath: `${slug}.mdx` });
 
   return {
     props: {
-      variables,
-      slug,
-      data
+      data: tinaProps.data,
+      variables: tinaProps.variables,
+      query: tinaProps.query
     }
   };
 }
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
-  const pathsQuery = `{
-    postConnection {
-      edges {
-        node {
-          _sys {
-            filename
-          }
-        }
-      }
-    }
-  }`;
-  const postListData: any = await staticRequest({ query: pathsQuery });
+  const postListResponse: any = await client.queries.postConnection();
 
   return {
-    paths: postListData.postConnection.edges.map((edge: any) => ({
+    paths: postListResponse.data.postConnection.edges.map((edge: any) => ({
       params: { slug: edge.node._sys.filename }
     })),
     fallback: 'blocking'

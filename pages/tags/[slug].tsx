@@ -6,10 +6,12 @@ import type {
 import Image from 'next/image';
 import Link from 'next/link';
 import { NextSeo } from 'next-seo';
-import { staticRequest } from 'tinacms';
 import { useTina } from 'tinacms/dist/edit-state';
 import { Cards } from '@components/cards';
 import { OpacityPageTransitionMotion } from '@components/custom-motion';
+import { TinaConnectionProps } from '@entities/tina-props.interface';
+import { client } from '@generatedTina/client';
+import { PostConnectionQuery, PostFilter } from '@generatedTina/types';
 
 interface PostsData {
   location: string;
@@ -19,32 +21,13 @@ interface PostsData {
   heroImage: string;
 }
 
-interface PostsProp {
-  slug: string;
-  data: any;
-}
-
-const query = `{
-  postConnection(sort: "postDateTime") {
-    edges {
-      node {
-        _sys {
-          filename
-        },
-        title,
-        tags,
-        excerpt,
-        heroImage
-      }
-    }
-  }
-}`;
-
-const Tags: NextPage<PostsProp> = (props) => {
+const Tags: NextPage<TinaConnectionProps<PostConnectionQuery, PostFilter>> = (
+  props
+) => {
   const { data } = useTina({
-    query,
-    variables: {},
-    data: props.data
+    data: props.data,
+    variables: props.variables,
+    query: props.query
   });
 
   if (data == null || data.postConnection?.edges == null) {
@@ -58,7 +41,7 @@ const Tags: NextPage<PostsProp> = (props) => {
     }))
     .filter((curData: PostsData) => {
       const tags = curData.tags;
-      return tags && tags.includes(props.slug);
+      return tags && tags.includes(props.slug as string);
     });
   return (
     <>
@@ -101,32 +84,32 @@ const Tags: NextPage<PostsProp> = (props) => {
 
 export async function getStaticProps({
   params
-}: any): Promise<GetStaticPropsResult<PostsProp>> {
-  // Temporary: needs to be changed when Tina finally supports filtering
+}: any): Promise<
+  GetStaticPropsResult<TinaConnectionProps<PostConnectionQuery, PostFilter>>
+> {
+  // Temporary: needs to be changed when Tina finally supports filtering on list
   const { slug } = params;
-  const data = await staticRequest({ query });
+  const tinaProps =
+    (await client.queries.postConnection()) as TinaConnectionProps<
+      PostConnectionQuery,
+      PostFilter
+    >;
+  tinaProps.variables.sort = 'postDateTime';
 
   return {
     props: {
-      slug,
-      data
+      data: tinaProps.data,
+      variables: tinaProps.variables,
+      query: tinaProps.query,
+      slug
     }
   };
 }
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
-  // Temporary: needs to be changed when Tina finally supports filtering
-  const pathsQuery = `{
-    postConnection {
-      edges {
-        node {
-          tags
-        }
-      }
-    }
-  }`;
-  const postListData: any = await staticRequest({ query: pathsQuery });
-  let tags: string[] = postListData.postConnection.edges
+  // Temporary: needs to be changed when Tina finally supports filtering on list
+  const postListResponse: any = await client.queries.postConnection();
+  let tags: string[] = postListResponse.data.postConnection.edges
     .map((edge: any) => edge.node.tags)
     .flat();
   tags = Array.from(new Set(tags));
