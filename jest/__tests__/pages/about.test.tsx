@@ -1,3 +1,4 @@
+import { AboutQuery } from '@generatedTina/types';
 import About from '@pages/about';
 import { render } from '@testing-library/react';
 
@@ -19,8 +20,32 @@ describe('About page', () => {
     }
   };
 
+  const variables = { relativePath: 'About.md' };
+
+  const query = `{
+    about(relativePath: "About.md") {
+      title,
+      body,
+      overallDevSkills {
+        name
+        percentage
+        color
+      },
+      frontend,
+      backend,
+      generalCoding,
+      others
+    }
+  }`;
+
   it('should render correctly without data', async () => {
-    const view = render(<About data={{ about: {} }} />);
+    const view = render(
+      <About
+        data={{ about: {} } as AboutQuery}
+        variables={variables}
+        query={query}
+      />
+    );
     expect(view.queryByTestId('progress-comp')).not.toBeInTheDocument();
     expect(view.queryByTestId('aboutFrontend')).not.toBeInTheDocument();
     expect(view.queryByTestId('aboutBackend')).not.toBeInTheDocument();
@@ -29,7 +54,9 @@ describe('About page', () => {
   });
 
   it('should render correctly with data', async () => {
-    const view = render(<About data={data} />);
+    const view = render(
+      <About data={data as AboutQuery} variables={variables} query={query} />
+    );
     expect((await view.findByTestId('aboutTitle')).innerHTML).toMatch(
       /Hello world/
     );

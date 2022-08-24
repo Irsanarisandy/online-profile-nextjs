@@ -1,4 +1,5 @@
 import { defineConfig, defineSchema } from 'tinacms';
+import { client } from './__generated__/client';
 
 const schema = defineSchema({
   collections: [
@@ -153,19 +154,17 @@ const schema = defineSchema({
         }
       ]
     }
-  ]
+  ],
+  // https://vercel.com/docs/concepts/projects/environment-variables#system-environment-variables
+  config: {
+    branch: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF || 'main',
+    clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID as string,
+    token: process.env.TINA_TOKEN as string
+  }
 });
 
-// https://vercel.com/docs/concepts/projects/environment-variables#system-environment-variables
-const branch = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF || 'main';
-const clientId = process.env.NEXT_PUBLIC_TINA_CLIENT_ID;
-const apiURL =
-  process.env.NODE_ENV !== 'production'
-    ? 'http://localhost:4001/graphql'
-    : `https://content.tinajs.io/content/${clientId}/github/${branch}`;
-
 export const tinaConfig = defineConfig({
-  apiURL,
+  client,
   schema,
   documentCreatorCallback: {
     onNewDocument: ({ collection: { slug }, breadcrumbs }) => {

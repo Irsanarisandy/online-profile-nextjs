@@ -1,3 +1,4 @@
+import { HomeQuery } from '@generatedTina/types';
 import Home from '@pages/index';
 import { render } from '@testing-library/react';
 
@@ -8,8 +9,18 @@ describe('Home page', () => {
     }
   };
 
+  const variables = { relativePath: 'Home.md' };
+
+  const query = `{
+    home(relativePath: "Home.md") {
+      intro
+    }
+  }`;
+
   it('should render correctly', async () => {
-    const view = render(<Home data={data} />);
+    const view = render(
+      <Home data={data as HomeQuery} variables={variables} query={query} />
+    );
     expect((await view.findByTestId('homeButtonAbout')).innerHTML).toMatch(
       /About Me/
     );

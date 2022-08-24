@@ -1,6 +1,5 @@
 import type { GetStaticPropsResult, NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { staticRequest } from 'tinacms';
 import { useTina } from 'tinacms/dist/edit-state';
 import {
   FaceSmileIcon,
@@ -9,34 +8,24 @@ import {
 } from '@heroicons/react/24/outline';
 import { OpacityPageTransitionMotion } from '@components/custom-motion';
 import { DisplayTextAnimation } from '@components/display-text-animation';
+import { TinaProps } from '@entities/tina-props.interface';
+import { client } from '@generatedTina/client';
+import { HomeQuery } from '@generatedTina/types';
 
-interface HomeData {
-  intro: string[];
-}
-
-interface HomeProp {
-  data: any;
-}
-
-const query = `{
-  home(relativePath: "Home.md") {
-    intro
-  }
-}`;
-
-const Home: NextPage<HomeProp> = (props) => {
+const Home: NextPage<TinaProps<HomeQuery>> = (props) => {
   const router = useRouter();
   const { data } = useTina({
-    query,
-    variables: {},
-    data: props.data
+    data: props.data,
+    variables: props.variables,
+    query: props.query
   });
 
   if (data == null || data.home == null) {
     return <div>Home data does not exist!</div>;
   }
 
-  const { intro } = data.home as HomeData;
+  const { intro } = data.home;
+  const introExist = intro != null && intro.length > 0;
   const speed = (n: number) => (n / 10) * 2 + 1;
 
   return (
@@ -45,9 +34,9 @@ const Home: NextPage<HomeProp> = (props) => {
         className="p-4 sm:p-8 flex flex-col justify-center"
         style={{ height: 'calc(100vh - 103px)' }}
       >
-        {intro && (
+        {introExist && (
           <DisplayTextAnimation
-            paragraph={intro}
+            paragraph={intro as string[]}
             speed={speed}
             classes="text-[1.5rem] font-bold sm:text-[3rem] sm:font-extrabold md:text-[4rem]"
           />
@@ -92,13 +81,15 @@ const Home: NextPage<HomeProp> = (props) => {
 };
 
 export async function getStaticProps(): Promise<
-  GetStaticPropsResult<HomeProp>
+  GetStaticPropsResult<TinaProps<HomeQuery>>
 > {
-  const data = await staticRequest({ query });
+  const tinaProps = await client.queries.home({ relativePath: 'Home.md' });
 
   return {
     props: {
-      data
+      data: tinaProps.data,
+      variables: tinaProps.variables,
+      query: tinaProps.query
     }
   };
 }

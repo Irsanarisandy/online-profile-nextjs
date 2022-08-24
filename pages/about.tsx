@@ -1,54 +1,22 @@
 import type { GetStaticPropsResult, NextPage } from 'next';
 import Link from 'next/link';
 import { NextSeo } from 'next-seo';
-import { staticRequest } from 'tinacms';
 import { useTina } from 'tinacms/dist/edit-state';
-import {
-  Components,
-  TinaMarkdown,
-  TinaMarkdownContent
-} from 'tinacms/dist/rich-text';
+import { Components, TinaMarkdown } from 'tinacms/dist/rich-text';
 import { DocumentArrowDownIcon } from '@heroicons/react/24/solid';
 import { Cards } from '@components/cards';
 import Codeblock from '@components/codeblock';
 import { OpacityPageTransitionMotion } from '@components/custom-motion';
 import { Progress, ProgressData } from '@components/progress';
+import { TinaProps } from '@entities/tina-props.interface';
+import { client } from '@generatedTina/client';
+import { AboutQuery } from '@generatedTina/types';
 
-interface AboutData {
-  title: string;
-  body: TinaMarkdownContent | TinaMarkdownContent[];
-  overallDevSkills: ProgressData[];
-  frontend: string[];
-  backend: string[];
-  generalCoding: string[];
-  others: string[];
-}
-
-interface AboutProp {
-  data: any;
-}
-
-const query = `{
-  about(relativePath: "About.md") {
-    title,
-    body,
-    overallDevSkills {
-      name
-      percentage
-      color
-    },
-    frontend,
-    backend,
-    generalCoding,
-    others
-  }
-}`;
-
-const About: NextPage<AboutProp> = (props) => {
+const About: NextPage<TinaProps<AboutQuery>> = (props) => {
   const { data } = useTina({
-    query,
-    variables: {},
-    data: props.data
+    data: props.data,
+    variables: props.variables,
+    query: props.query
   });
 
   if (data == null || data.about == null) {
@@ -63,13 +31,14 @@ const About: NextPage<AboutProp> = (props) => {
     backend,
     generalCoding,
     others
-  } = data.about as AboutData;
+  } = data.about;
 
-  const overallDevSkillsExist = overallDevSkills && overallDevSkills.length > 0;
-  const frontendExist = frontend && frontend.length > 0;
-  const backendExist = backend && backend.length > 0;
-  const generalCodingExist = generalCoding && generalCoding.length > 0;
-  const othersExist = others && others.length > 0;
+  const overallDevSkillsExist =
+    overallDevSkills != null && overallDevSkills.length > 0;
+  const frontendExist = frontend != null && frontend.length > 0;
+  const backendExist = backend != null && backend.length > 0;
+  const generalCodingExist = generalCoding != null && generalCoding.length > 0;
+  const othersExist = others != null && others.length > 0;
 
   const components: Components<{}> = {
     code_block: (codeBlockProps) => (
@@ -110,7 +79,7 @@ const About: NextPage<AboutProp> = (props) => {
         </Cards>
         {overallDevSkillsExist && (
           <Cards classes="m-4 sm:m-8 p-4 sm:p-8">
-            <Progress progressDataList={overallDevSkills} />
+            <Progress progressDataList={overallDevSkills as ProgressData[]} />
           </Cards>
         )}
         {(frontendExist ||
@@ -122,7 +91,7 @@ const About: NextPage<AboutProp> = (props) => {
               <Cards classes="p-4 sm:p-8">
                 <h2 className="mb-2">Frontend Skills</h2>
                 <ul data-testid="aboutFrontend">
-                  {frontend.map((skill: string) => (
+                  {(frontend as string[]).map((skill: string) => (
                     <li key={`Frontend: ${skill}`}>{skill}</li>
                   ))}
                 </ul>
@@ -132,7 +101,7 @@ const About: NextPage<AboutProp> = (props) => {
               <Cards classes="p-4 sm:p-8">
                 <h2 className="mb-2">Backend Skills</h2>
                 <ul data-testid="aboutBackend">
-                  {backend.map((skill: string) => (
+                  {(backend as string[]).map((skill: string) => (
                     <li key={`Backend: ${skill}`}>{skill}</li>
                   ))}
                 </ul>
@@ -142,7 +111,7 @@ const About: NextPage<AboutProp> = (props) => {
               <Cards classes="p-4 sm:p-8">
                 <h2 className="mb-2">General Coding Skills</h2>
                 <ul data-testid="aboutGeneralCoding">
-                  {generalCoding.map((skill: string) => (
+                  {(generalCoding as string[]).map((skill: string) => (
                     <li key={`General: ${skill}`}>{skill}</li>
                   ))}
                 </ul>
@@ -152,7 +121,7 @@ const About: NextPage<AboutProp> = (props) => {
               <Cards classes="p-4 sm:p-8">
                 <h2 className="mb-2">Other Skills</h2>
                 <ul data-testid="aboutOthers">
-                  {others.map((skill: string) => (
+                  {(others as string[]).map((skill: string) => (
                     <li key={`Other: ${skill}`}>{skill}</li>
                   ))}
                 </ul>
@@ -166,13 +135,15 @@ const About: NextPage<AboutProp> = (props) => {
 };
 
 export async function getStaticProps(): Promise<
-  GetStaticPropsResult<AboutProp>
+  GetStaticPropsResult<TinaProps<AboutQuery>>
 > {
-  const data = await staticRequest({ query });
+  const tinaProps = await client.queries.about({ relativePath: 'About.md' });
 
   return {
     props: {
-      data
+      data: tinaProps.data,
+      variables: tinaProps.variables,
+      query: tinaProps.query
     }
   };
 }

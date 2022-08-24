@@ -19,7 +19,8 @@
       "@components/*": ["components/*"],
       "@entities/*": ["entities/*"],
       "@pages/*": ["pages/*"],
-      "@styles/*": ["styles/*"]
+      "@styles/*": ["styles/*"],
+      "@generatedTina/*": [".tina/__generated__/*"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"],

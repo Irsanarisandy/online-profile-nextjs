@@ -2,11 +2,13 @@ import { GetStaticPropsResult, NextPage } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { NextSeo } from 'next-seo';
-import { staticRequest } from 'tinacms';
 import { useTina } from 'tinacms/dist/edit-state';
 import { Cards } from '@components/cards';
 import { Chips } from '@components/chips';
 import { OpacityPageTransitionMotion } from '@components/custom-motion';
+import { TinaConnectionProps } from '@entities/tina-props.interface';
+import { client } from '@generatedTina/client';
+import { PostConnectionQuery, PostFilter } from '@generatedTina/types';
 
 interface PostsData {
   location: string;
@@ -16,31 +18,13 @@ interface PostsData {
   heroImage: string;
 }
 
-interface PostsProp {
-  data: any;
-}
-
-const query = `{
-  postConnection(sort: "postDateTime") {
-    edges {
-      node {
-        _sys {
-          filename
-        },
-        title,
-        tags,
-        excerpt,
-        heroImage
-      }
-    }
-  }
-}`;
-
-const Posts: NextPage<PostsProp> = (props) => {
+const Posts: NextPage<TinaConnectionProps<PostConnectionQuery, PostFilter>> = (
+  props
+) => {
   const { data } = useTina({
-    query,
-    variables: {},
-    data: props.data
+    data: props.data,
+    variables: props.variables,
+    query: props.query
   });
 
   if (data == null || data.postConnection?.edges == null) {
@@ -119,13 +103,20 @@ const Posts: NextPage<PostsProp> = (props) => {
 };
 
 export async function getStaticProps(): Promise<
-  GetStaticPropsResult<PostsProp>
+  GetStaticPropsResult<TinaConnectionProps<PostConnectionQuery, PostFilter>>
 > {
-  const data = await staticRequest({ query });
+  const tinaProps =
+    (await client.queries.postConnection()) as TinaConnectionProps<
+      PostConnectionQuery,
+      PostFilter
+    >;
+  tinaProps.variables.sort = 'postDateTime';
 
   return {
     props: {
-      data
+      data: tinaProps.data,
+      variables: tinaProps.variables,
+      query: tinaProps.query
     }
   };
 }
