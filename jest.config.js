@@ -6,6 +6,7 @@ const createJestConfig = nextJest({
 });
 
 // Add a custom config, which includes setup options, to be passed to Jest before running each test
+/** @type {import('jest').Config} */
 const customJestConfig = {
   moduleDirectories: ['node_modules', '<rootDir>/'],
   moduleNameMapper: {

@@ -5,6 +5,7 @@
     "prettier"
   ],
   "rules": {
-    "react/no-children-prop": "warn"
+    "react/no-children-prop": "warn",
+    "react/no-unknown-property": "warn"
   }
 }

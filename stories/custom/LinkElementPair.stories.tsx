@@ -20,7 +20,7 @@ const Template: ComponentStory<typeof LinkElementPair> = (args) => (
 
 export const Example = Template.bind({});
 Example.args = {
-  classes: 'w-14',
+  classes: 'block w-14',
   otherIconSize: 38
 };
 Example.play = async ({ canvasElement }) => {

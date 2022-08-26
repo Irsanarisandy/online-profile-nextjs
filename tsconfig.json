@@ -18,6 +18,7 @@
     "paths": {
       "@components/*": ["components/*"],
       "@entities/*": ["entities/*"],
+      "@images/*": ["public/images/*"],
       "@pages/*": ["pages/*"],
       "@styles/*": ["styles/*"],
       "@generatedTina/*": [".tina/__generated__/*"]

@@ -105,12 +105,10 @@ const Posts: NextPage<TinaConnectionProps<PostConnectionQuery, PostFilter>> = (
 export async function getStaticProps(): Promise<
   GetStaticPropsResult<TinaConnectionProps<PostConnectionQuery, PostFilter>>
 > {
-  const tinaProps =
-    (await client.queries.postConnection()) as TinaConnectionProps<
-      PostConnectionQuery,
-      PostFilter
-    >;
-  tinaProps.variables.sort = 'postDateTime';
+  const tinaProps = (await client.queries.postConnection({
+    sort: 'postDateTime',
+    last: 10
+  })) as TinaConnectionProps<PostConnectionQuery, PostFilter>;
 
   return {
     props: {

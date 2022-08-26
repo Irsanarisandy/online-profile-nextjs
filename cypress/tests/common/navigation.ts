@@ -1,4 +1,4 @@
-import { And, Given } from '@badeball/cypress-cucumber-preprocessor';
+import { Given } from '@badeball/cypress-cucumber-preprocessor';
 
 const envMapping: { [key: string]: string } = {
   offline: 'http://localhost:3000/',
@@ -16,13 +16,10 @@ Given('user is {word}', (status: string) => {
 
 Given('user goes to {word} page', (page: string) => {
   cy.visit(pageMapping[page]);
-});
-
-And('user is at {word} page', (page: string) => {
   cy.url().should('include', pageMapping[page]);
 });
 
-And('links API is valid', () => {
+Given('links API is valid', () => {
   cy.request(`${window.location.origin}/api/links`).then((response) => {
     expect(response).property('status').to.be.oneOf([200, 304]);
     cy.fixture('testLinks').then((testLinks) => {

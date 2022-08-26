@@ -36,10 +36,6 @@ a {
   text-decoration: none;
 }
 
-span {
-  display: block;
-}
-
 p, span {
   font-size: 1.125rem;
 }
@@ -87,18 +83,6 @@ blockquote {
   background-image: linear-gradient(90deg, #111827, #6B7280);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
-}
-
-.with-toolbar {  // Overwrite TinaCMS body editor styling
-  span {
-    display: revert;
-  }
-}
-
-.tina-tailwind {  // Overwrite TinaCMS Tailwind styling
-  .w-32 {
-    width: 135px !important;
-  }
 }
 
 .markdown {

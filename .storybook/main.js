@@ -19,14 +19,15 @@ module.exports = {
   },
   framework: '@storybook/react',
   core: {
-    builder: 'webpack5'
+    builder: 'webpack5',
+    disableTelemetry: true
   },
   webpackFinal: async (config, { configType }) => {
     config.resolve.alias = {
       ...config.resolve.alias,
       '@components': path.resolve(__dirname, '../components'),
       '@pages': path.resolve(__dirname, '../pages'),
-      '@public': path.resolve(__dirname, '../public')
+      '@images': path.resolve(__dirname, '../public/images')
     };
 
     return config;

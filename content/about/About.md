@@ -2,20 +2,21 @@
 title: 'Me, Myself & I'
 overallDevSkills:
   - name: Frontend
-    percentage: 65
-    color: '#B39063'
+    percentage: 50
+    color: '#DDBC95'
   - name: Backend
     percentage: 35
-    color: '#8F715B'
+    color: '#C9A66B'
+  - name: Testing
+    percentage: 15
+    color: '#B38867'
 frontend:
+  - HTML & CSS
+  - TypeScript / JavaScript
   - Next.js / React
   - Nuxt.js / Vue
   - Angular
   - Svelte
-  - TypeScript / JavaScript
-  - HTML & CSS
-  - Cypress & Cucumber
-  - Storybook & Jest
   - React Native
 backend:
   - Node.js
@@ -31,6 +32,8 @@ generalCoding:
   - C / C++
 others:
   - Git
+  - Unit testing
+  - Integration / e2e testing
   - Agile Methodology
   - Responsive Web Design
 ---

@@ -14,7 +14,12 @@ const schema = defineSchema({
           name: 'intro',
           list: true
         }
-      ]
+      ],
+      ui: {
+        router: () => {
+          return '/';
+        }
+      }
     },
     {
       label: 'About',
@@ -89,7 +94,12 @@ const schema = defineSchema({
           name: 'others',
           list: true
         }
-      ]
+      ],
+      ui: {
+        router: () => {
+          return '/about';
+        }
+      }
     },
     {
       label: 'Blog Posts',
@@ -152,67 +162,31 @@ const schema = defineSchema({
           name: 'body',
           isBody: true
         }
-      ]
+      ],
+      ui: {
+        router: ({ document }) => {
+          return `/posts/${document._sys.filename}`;
+        }
+      }
     }
   ],
   // https://vercel.com/docs/concepts/projects/environment-variables#system-environment-variables
   config: {
     branch: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF || 'main',
     clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID as string,
-    token: process.env.TINA_TOKEN as string
+    token: process.env.TINA_TOKEN as string,
+    media: {
+      loadCustomStore: async () => {
+        const pack = await import('next-tinacms-cloudinary');
+        return pack.TinaCloudCloudinaryMediaStore;
+      }
+    }
   }
 });
 
 export const tinaConfig = defineConfig({
   client,
-  schema,
-  documentCreatorCallback: {
-    onNewDocument: ({ collection: { slug }, breadcrumbs }) => {
-      const relativeUrl = `/${slug}s/${breadcrumbs.join('/')}`;
-      return (window.location.href = relativeUrl);
-    },
-    filterCollections: (options) => {
-      return options.filter((option) => option.label === 'Blog Posts');
-    }
-  },
-  mediaStore: async () => {
-    const pack = await import('next-tinacms-cloudinary');
-    return pack.TinaCloudCloudinaryMediaStore;
-  }
-  // cmsCallback: (cms) => {
-  //   /**
-  //    * Enables experimental branch switcher
-  //    */
-  //   cms.flags.set("branch-switcher", true);
-  //   /**
-  //    * When `tina-admin` is enabled, this plugin configures contextual editing for collections
-  //    */
-  //   import("tinacms").then(({ RouteMappingPlugin }) => {
-  //     const RouteMapping = new RouteMappingPlugin((collection, document) => {
-  //       if (["authors", "global"].includes(collection.name)) {
-  //         return undefined;
-  //       }
-  //       if (["pages"].includes(collection.name)) {
-  //         if (document.sys.filename === "home") {
-  //           return `/`;
-  //         }
-  //         if (document.sys.filename === "about") {
-  //           return `/about`;
-  //         }
-  //         return undefined;
-  //       }
-  //       return `/${collection.name}/${document.sys.filename}`;
-  //     });
-  //     cms.plugins.add(RouteMapping);
-  //   });
-  //   return cms;
-  // },
-  // formifyCallback: ({ formConfig, createForm, createGlobalForm }) => {
-  //   if (formConfig.id === "content/global/index.json") {
-  //     return createGlobalForm(formConfig);
-  //   }
-  //   return createForm(formConfig);
-  // },
+  schema
 });
 
 export default schema;

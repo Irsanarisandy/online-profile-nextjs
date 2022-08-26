@@ -43,7 +43,7 @@ const Post: NextPage<TinaProps<PostQuery>> = (props) => {
   const components: Components<{}> = {
     code_block: (codeBlockProps) => (
       <Codeblock language={codeBlockProps?.lang}>
-        {codeBlockProps?.children.toString()}
+        {codeBlockProps?.value}
       </Codeblock>
     )
   };
@@ -60,7 +60,7 @@ const Post: NextPage<TinaProps<PostQuery>> = (props) => {
       <OpacityPageTransitionMotion>
         <Cards classes="m-4 sm:m-8 p-4 sm:p-8">
           <h1>{title}</h1>
-          <span className="my-4">
+          <span className="block my-4">
             <time>{displayedDateTime}</time>
           </span>
           {tagsExist && (

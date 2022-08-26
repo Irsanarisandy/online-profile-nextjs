@@ -89,12 +89,10 @@ export async function getStaticProps({
 > {
   // Temporary: needs to be changed when Tina finally supports filtering on list
   const { slug } = params;
-  const tinaProps =
-    (await client.queries.postConnection()) as TinaConnectionProps<
-      PostConnectionQuery,
-      PostFilter
-    >;
-  tinaProps.variables.sort = 'postDateTime';
+  const tinaProps = (await client.queries.postConnection({
+    sort: 'postDateTime',
+    last: 10
+  })) as TinaConnectionProps<PostConnectionQuery, PostFilter>;
 
   return {
     props: {

@@ -43,7 +43,7 @@ const About: NextPage<TinaProps<AboutQuery>> = (props) => {
   const components: Components<{}> = {
     code_block: (codeBlockProps) => (
       <Codeblock language={codeBlockProps?.lang}>
-        {codeBlockProps?.children.toString()}
+        {codeBlockProps?.value}
       </Codeblock>
     )
   };
@@ -64,7 +64,7 @@ const About: NextPage<TinaProps<AboutQuery>> = (props) => {
           </div>
           <div className="inline-block border-2 rounded-full mt-8 px-4 py-2">
             <Link
-              href="https://filen.io/d/5941aa6b-79eb-4780-911d-1aaa8886a14f#!Nop9m3euENPRol1YmdztggZ1vRoJ1Wlh"
+              href="https://filen.io/d/ff5b18ff-0c7d-4712-b2d0-a5125553ea02#!Ly7wBRqKfVGsgySn7w4wr5ORE5dPwqbW"
               replace
               passHref
             >

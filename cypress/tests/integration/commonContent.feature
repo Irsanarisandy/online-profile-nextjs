@@ -14,8 +14,7 @@ Feature: Common Content
       | RSS |
 
   Scenario: Check Links from API
-    Given user is offline
-    And links API is valid
+    Given links API is valid
 
   Scenario: Check Theme Toggle Functionality
     Given user is offline

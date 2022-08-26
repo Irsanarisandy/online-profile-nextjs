@@ -98,7 +98,7 @@ module.exports = {
     description:
       'Hire professional fullstack website developer to build interactive and high-end solutions.',
     type: 'website',
-    site_name: "Irsan's Online Profile",
+    siteName: "Irsan's Online Profile",
     profile: {
       firstName: 'Irsan',
       lastName: 'Arisandy',

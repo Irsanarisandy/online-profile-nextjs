@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { PropsWithChildren } from 'react';
 import Links from '@entities/links.interface';
+import Logo from '@images/logo.png';
 import { LinkElementPair } from './link-element-pair';
 import styles from '@styles/Navbar.module.scss';
 
@@ -87,7 +88,7 @@ const Navlink = ({
               repeatType: 'reverse'
             }
           }}
-          className="py-4 font-bold"
+          className="block py-4 font-bold"
         >
           {name}
         </motion.span>
@@ -189,7 +190,7 @@ class Navbar extends React.Component<NavbarProp, NavbarState> {
                   }}
                 >
                   <Image
-                    src="/images/logo.png"
+                    src={Logo}
                     alt="logo"
                     height={100}
                     width={55}
@@ -250,25 +251,25 @@ class Navbar extends React.Component<NavbarProp, NavbarState> {
           {isMobile && (
             <div>
               <span
-                className={`bg-black ${isOpen ? styles.top_bar : ''}`}
+                className={`block bg-black ${isOpen ? styles.top_bar : ''}`}
               ></span>
               <span
-                className={`bg-black ${isOpen ? styles.middle_bar : ''}`}
+                className={`block bg-black ${isOpen ? styles.middle_bar : ''}`}
               ></span>
               <span
-                className={`bg-black ${isOpen ? styles.bottom_bar : ''}`}
+                className={`block bg-black ${isOpen ? styles.bottom_bar : ''}`}
               ></span>
             </div>
           )}
           {!isMobile && (
             <div>
               <span
-                className={`bg-black ${
+                className={`block bg-black ${
                   isOpen ? styles.top_left_arrow : styles.top_right_arrow
                 }`}
               ></span>
               <span
-                className={`bg-black ${
+                className={`block bg-black ${
                   isOpen ? styles.bottom_left_arrow : styles.bottom_right_arrow
                 }`}
               ></span>
