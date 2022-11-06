@@ -31,19 +31,16 @@ export const Chips = ({ labels, clickLocation, classes }: IProp) => (
     {clickLocation != null &&
       labels.map((label, index) => (
         <Link
-          key={`Chip ${index + 1}: ${label}`}
+          aria-label={`Chip link ${index + 1}: ${label}`}
+          key={`Chip link ${index + 1}: ${label}`}
           href={`/${clickLocation}/${label}`}
-          replace
-          passHref
         >
-          <a data-testid={`Chip ${index + 1}: ${label}`}>
-            <span
-              aria-label={`Chip ${index + 1}: ${label}`}
-              className="mr-4 mb-4 px-4 py-2 rounded-full bg-gray-900 dark:bg-gray-50 text-white dark:text-black font-semibold text-sm flex align-center transition-colors"
-            >
-              {label}
-            </span>
-          </a>
+          <span
+            data-testid={`Chip ${index + 1}: ${label}`}
+            className="mr-4 mb-4 px-4 py-2 rounded-full bg-gray-900 dark:bg-gray-50 text-white dark:text-black font-semibold text-sm flex align-center transition-colors"
+          >
+            {label}
+          </span>
         </Link>
       ))}
   </div>

@@ -72,27 +72,26 @@ const Navlink = ({
     }`}
     onClick={handleClick}
   >
-    <Link href={href} passHref>
-      <a
-        style={{
-          pointerEvents: isOpen ? 'auto' : 'none'
+    <Link
+      href={href}
+      style={{
+        pointerEvents: isOpen ? 'auto' : 'none'
+      }}
+    >
+      <motion.span
+        whileHover={{
+          opacity: [1, 0.5],
+          fontSize: ['1.125rem', '1.3rem'],
+          transition: {
+            duration: 0.8,
+            repeat: Infinity,
+            repeatType: 'reverse'
+          }
         }}
+        className="block py-4 font-bold"
       >
-        <motion.span
-          whileHover={{
-            opacity: [1, 0.5],
-            fontSize: ['1.125rem', '1.3rem'],
-            transition: {
-              duration: 0.8,
-              repeat: Infinity,
-              repeatType: 'reverse'
-            }
-          }}
-          className="block py-4 font-bold"
-        >
-          {name}
-        </motion.span>
-      </a>
+        {name}
+      </motion.span>
     </Link>
   </div>
 );
@@ -141,18 +140,17 @@ class Navbar extends React.Component<NavbarProp, NavbarState> {
       certainLinks.forEach((name) => {
         if (!!links[name]) {
           linkElements.push(
-            <a
-              href={links[name]}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
               aria-label={`${name} navbar link`}
               key={`${name} navbar link`}
+              href={links[name] as string}
+              target="_blank"
               style={{
                 pointerEvents: isOpen ? 'auto' : 'none'
               }}
             >
               <LinkElementPair linkName={name} classes={styles.icon} />
-            </a>
+            </Link>
           );
         }
       });
@@ -182,21 +180,20 @@ class Navbar extends React.Component<NavbarProp, NavbarState> {
               isOpen={isOpen}
               classes="flex flex-col items-center p-4"
             >
-              <Link href="/" passHref>
-                <a
-                  onClick={this.handleClick}
-                  style={{
-                    pointerEvents: isOpen ? 'auto' : 'none'
-                  }}
-                >
-                  <Image
-                    src={Logo}
-                    alt="logo"
-                    height={100}
-                    width={55}
-                    className="cursor-pointer"
-                  />
-                </a>
+              <Link
+                href="/"
+                onClick={this.handleClick}
+                style={{
+                  pointerEvents: isOpen ? 'auto' : 'none'
+                }}
+              >
+                <Image
+                  src={Logo}
+                  alt="logo"
+                  height={100}
+                  width={55}
+                  className="cursor-pointer"
+                />
               </Link>
               <h1 className={styles.customfont_name}>Irsan</h1>
               <span className={styles.customfont_role}>Web Developer</span>

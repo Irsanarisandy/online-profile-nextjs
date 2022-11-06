@@ -14,8 +14,7 @@ const labels = ['Storybook', 'Next.js'];
 
 export const Example = Template.bind({});
 Example.args = {
-  labels,
-  clickLocation: ''
+  labels
 };
 Example.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
@@ -23,9 +22,6 @@ Example.play = async ({ canvasElement }) => {
     await expect(
       canvas.getByTestId(`Chip ${index + 1}: ${label}`)
     ).toBeInTheDocument();
-    await expect(
-      canvas.getByTestId(`Chip ${index + 1}: ${label}`)
-    ).toHaveAttribute('href', `/${label}`);
   });
 };
 Example.parameters = {

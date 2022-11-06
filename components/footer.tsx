@@ -17,19 +17,18 @@ function Footer({ links }: IProp): JSX.Element {
     Object.entries(links).map((link) => {
       if (!link[0].includes('feed')) {
         linkElements.push(
-          <a
-            href={link[1]}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
             aria-label={`${link[0]} footer link`}
             key={`${link[0]} footer link`}
+            href={link[1]}
+            target="_blank"
           >
             <LinkElementPair
               linkName={link[0]}
               classes={styles.icon}
               otherIconSize={20}
             />
-          </a>
+          </Link>
         );
       } else {
         let feedType = link[0].substring(4);
@@ -38,15 +37,15 @@ function Footer({ links }: IProp): JSX.Element {
         }
         const name = `Feed (${feedType})`;
         linkDropdownMenus.push(
-          <Link href={link[1]} replace passHref key={name}>
-            <a
-              id={`feed${feedType}`}
-              className="text-sm py-2 px-4 block w-full bg-transparent text-gray-700 hover:bg-gray-100"
-              target="_blank"
-              role="menuitem"
-            >
-              {name}
-            </a>
+          <Link
+            key={name}
+            role="menuitem"
+            id={`feed${feedType}`}
+            className="text-sm py-2 px-4 block w-full bg-transparent text-gray-700 hover:bg-gray-100"
+            href={link[1]}
+            target="_blank"
+          >
+            {name}
           </Link>
         );
       }

@@ -64,16 +64,14 @@ const About: NextPage<TinaProps<AboutQuery>> = (props) => {
           </div>
           <div className="inline-block border-2 rounded-full mt-8 px-4 py-2">
             <Link
+              id="downloadCV"
               href="https://filen.io/d/ff5b18ff-0c7d-4712-b2d0-a5125553ea02#!Ly7wBRqKfVGsgySn7w4wr5ORE5dPwqbW"
-              replace
-              passHref
+              target="_blank"
             >
-              <a id="downloadCV" target="_blank">
-                <span className="flex">
-                  <DocumentArrowDownIcon className="h-auto w-[28px]" />
-                  &nbsp;Download CV
-                </span>
-              </a>
+              <span className="flex">
+                <DocumentArrowDownIcon className="h-auto w-[28px]" />
+                &nbsp;Download CV
+              </span>
             </Link>
           </div>
         </Cards>

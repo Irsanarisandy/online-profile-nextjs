@@ -54,10 +54,11 @@ const Tags: NextPage<TinaConnectionProps<PostConnectionQuery, PostFilter>> = (
           {postList.map((curPost, index) => (
             <Cards classes="p-4 sm:p-8 flex flex-col" key={`post${index + 1}`}>
               <div className="mb-4 flex">
-                <Link href={`/posts/${curPost.location}`} passHref>
-                  <a className="hover:text-[#FDB601]">
-                    <h1>{curPost.title}</h1>
-                  </a>
+                <Link
+                  href={`/posts/${curPost.location}`}
+                  className="hover:text-[#FDB601]"
+                >
+                  <h1>{curPost.title}</h1>
                 </Link>
               </div>
               {curPost.heroImage && (
@@ -65,7 +66,6 @@ const Tags: NextPage<TinaConnectionProps<PostConnectionQuery, PostFilter>> = (
                   <div className="max-w-[300px] mx-auto">
                     <Image
                       src={curPost.heroImage}
-                      layout="responsive"
                       alt="hero image"
                       height={540}
                       width={960}

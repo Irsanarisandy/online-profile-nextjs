@@ -73,10 +73,11 @@ const Posts: NextPage<TinaConnectionProps<PostConnectionQuery, PostFilter>> = (
                 key={`post${index + 1}`}
               >
                 <div className="mb-4 flex">
-                  <Link href={`/posts/${data.location}`} passHref>
-                    <a className="hover:text-[#FDB601]">
-                      <h1>{data.title}</h1>
-                    </a>
+                  <Link
+                    href={`/posts/${data.location}`}
+                    className="hover:text-[#FDB601]"
+                  >
+                    <h1>{data.title}</h1>
                   </Link>
                 </div>
                 {data.heroImage && (
@@ -84,7 +85,6 @@ const Posts: NextPage<TinaConnectionProps<PostConnectionQuery, PostFilter>> = (
                     <div className="max-w-[300px] mx-auto">
                       <Image
                         src={data.heroImage}
-                        layout="responsive"
                         alt="hero image"
                         height={540}
                         width={960}

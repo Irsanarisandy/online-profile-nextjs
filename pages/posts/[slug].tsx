@@ -75,7 +75,6 @@ const Post: NextPage<TinaProps<PostQuery>> = (props) => {
               <div className="max-w-md mx-auto">
                 <Image
                   src={heroImage}
-                  layout="responsive"
                   alt="hero image"
                   height={540}
                   width={960}

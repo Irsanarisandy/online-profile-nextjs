@@ -1,4 +1,6 @@
-module.exports = {
+import type { NextSeoProps } from 'next-seo';
+
+export const NEXT_SEO_DEFAULT: NextSeoProps = {
   defaultTitle: 'IA | Fullstack Website Developer | Mentor',
   titleTemplate: '%s | Irsan Arisandy',
   description:
