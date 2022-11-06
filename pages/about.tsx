@@ -1,7 +1,7 @@
 import type { GetStaticPropsResult, NextPage } from 'next';
 import Link from 'next/link';
 import { NextSeo } from 'next-seo';
-import { useTina } from 'tinacms/dist/edit-state';
+import { useTina } from 'tinacms/dist/react';
 import { Components, TinaMarkdown } from 'tinacms/dist/rich-text';
 import { DocumentArrowDownIcon } from '@heroicons/react/24/solid';
 import { Cards } from '@components/cards';

@@ -2,7 +2,7 @@ import { GetStaticPropsResult, NextPage } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { NextSeo } from 'next-seo';
-import { useTina } from 'tinacms/dist/edit-state';
+import { useTina } from 'tinacms/dist/react';
 import { Cards } from '@components/cards';
 import { Chips } from '@components/chips';
 import { OpacityPageTransitionMotion } from '@components/custom-motion';

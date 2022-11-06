@@ -1,6 +1,6 @@
 import type { GetStaticPropsResult, NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { useTina } from 'tinacms/dist/edit-state';
+import { useTina } from 'tinacms/dist/react';
 import {
   FaceSmileIcon,
   NewspaperIcon,

@@ -5,7 +5,7 @@ import type {
 } from 'next';
 import Image from 'next/image';
 import { NextSeo } from 'next-seo';
-import { useTina } from 'tinacms/dist/edit-state';
+import { useTina } from 'tinacms/dist/react';
 import { Components, TinaMarkdown } from 'tinacms/dist/rich-text';
 import { Cards } from '@components/cards';
 import { Chips } from '@components/chips';
