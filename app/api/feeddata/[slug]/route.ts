@@ -2,17 +2,26 @@ import { Feed } from 'feed';
 import fs from 'fs';
 import matter from 'gray-matter';
 import MarkdownIt from 'markdown-it';
-import type { NextApiRequest, NextApiResponse } from 'next';
+import type { NextRequest } from 'next/server';
 import path from 'path';
 
 import { publicLinks } from '.data/publicLinks';
 
 const markdown = new MarkdownIt();
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
+export async function GET(
+  request: NextRequest,
+  {
+    params
+  }: {
+    params: { slug: string };
+  }
+) {
+  const requestHeaders = new Headers(request.headers);
+  const host = requestHeaders.get('host');
   const siteURL = `${
     process.env.NODE_ENV !== 'production' ? 'http' : 'https'
-  }://${req.headers.host}`;
+  }://${host}`;
   const author = {
     name: 'Irsan Arisandy'
   };
@@ -23,7 +32,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     link: `${siteURL}/`,
     description:
       'Hire professional fullstack website developer to build interactive and high-end solutions.',
-    image: `${siteURL}/images/logo.png`,
+    image: `${siteURL}/api/initialsImage?height=250&width=250&scale=1.5`,
     favicon: `${siteURL}/images/favicon.ico`,
     copyright: `Copyright © ${new Date().getFullYear()} Irsan Arisandy`,
     generator: 'Feed for Node.js',
@@ -68,12 +77,15 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     });
   });
 
-  const { slug } = req.query;
+  const { slug } = params;
   switch (slug) {
     case 'atom':
-      res.setHeader('Content-Disposition', 'attachment;filename=atom.xml');
-      res.status(200).send(feed.atom1());
-      break;
+      return new Response(feed.atom1(), {
+        headers: {
+          'Content-Disposition': 'attachment;filename=atom.xml'
+        },
+        status: 200
+      });
     case 'json':
       let jsonFeed: { [key: string]: any } = {};
       const generatedJSON = JSON.parse(feed.json1());
@@ -96,12 +108,18 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           jsonFeed.favicon = `${siteURL}/images/favicon.ico`;
         }
       }
-      res.setHeader('Content-Disposition', 'attachment;filename=feed.json');
-      res.status(200).send(JSON.stringify(jsonFeed, null, 4));
-      break;
+      return new Response(JSON.stringify(jsonFeed, null, 4), {
+        headers: {
+          'Content-Disposition': 'attachment;filename=feed.json'
+        },
+        status: 200
+      });
     case 'rss':
-      res.setHeader('Content-Disposition', 'attachment;filename=feed.xml');
-      res.status(200).send(feed.rss2());
-      break;
+      return new Response(feed.rss2(), {
+        headers: {
+          'Content-Disposition': 'attachment;filename=feed.xml'
+        },
+        status: 200
+      });
   }
 }

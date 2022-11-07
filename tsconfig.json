@@ -16,6 +16,7 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
+      ".app/*": ["app/*"],
       ".components/*": ["components/*"],
       ".data/*": ["data/*"],
       ".entities/*": ["entities/*"],
@@ -23,8 +24,13 @@
       ".pages/*": ["pages/*"],
       ".styles/*": ["styles/*"],
       ".generatedTina/*": ["tina/__generated__/*"]
-    }
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": [".next/types/**/*.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules", "cypress", "cypress.config.ts"]
 }

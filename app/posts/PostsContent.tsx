@@ -1,28 +1,31 @@
-import { GetStaticPropsResult } from 'next';
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
-import { NextSeo } from 'next-seo';
 import { useTina } from 'tinacms/dist/react';
 
 import { Cards } from '.components/Cards';
 import { Chips } from '.components/Chips';
 import { OpacityPageTransitionMotion } from '.components/CustomMotion';
-import { client } from '.generatedTina/client';
 import type {
   Post,
   PostConnectionQuery,
   PostConnectionQueryVariables
 } from '.generatedTina/types';
 
-export default function Posts(props: {
-  data: PostConnectionQuery;
-  variables: PostConnectionQueryVariables;
-  query: string;
-}): JSX.Element {
+export default function PostsContent({
+  tinaProps
+}: {
+  tinaProps: {
+    data: PostConnectionQuery;
+    variables: PostConnectionQueryVariables;
+    query: string;
+  };
+}) {
   const { data } = useTina({
-    data: props.data,
-    variables: props.variables,
-    query: props.query
+    data: tinaProps.data,
+    variables: tinaProps.variables,
+    query: tinaProps.query
   });
 
   if (data?.postConnection?.edges == null) {
@@ -60,18 +63,14 @@ export default function Posts(props: {
     ).format(new Date(postDateTime));
 
   return (
-    <>
-      <NextSeo
-        title="My Posts"
-        description="Posts page written by Irsan Arisandy, mostly about website technologies."
-      />
+    <OpacityPageTransitionMotion keyName="posts">
       {postsData.length === 0 && (
-        <OpacityPageTransitionMotion className="h-full flex items-center justify-center">
+        <div className="h-full flex items-center justify-center">
           <h1>No posts available!</h1>
-        </OpacityPageTransitionMotion>
+        </div>
       )}
       {postsData.length > 0 && (
-        <OpacityPageTransitionMotion className="flex flex-col md:flex-row min-h-full px-4 pt-4 sm:px-8 sm:pt-8">
+        <div className="flex flex-col md:flex-row min-h-full px-4 pt-4 sm:px-8 sm:pt-8">
           <section className="mb-8 md:mb-0 md:ml-8">
             <Cards className="p-4 sm:p-8 flex flex-col md:w-[320px]">
               <h1 className="mb-4">Tags</h1>
@@ -113,29 +112,8 @@ export default function Posts(props: {
               </Cards>
             ))}
           </section>
-        </OpacityPageTransitionMotion>
+        </div>
       )}
-    </>
+    </OpacityPageTransitionMotion>
   );
-}
-
-export async function getStaticProps(): Promise<
-  GetStaticPropsResult<{
-    data: PostConnectionQuery;
-    variables: PostConnectionQueryVariables;
-    query: string;
-  }>
-> {
-  const tinaProps = await client.queries.postConnection({
-    sort: 'postDateTime',
-    last: 10
-  });
-
-  return {
-    props: {
-      data: tinaProps.data,
-      variables: tinaProps.variables,
-      query: tinaProps.query
-    }
-  };
 }

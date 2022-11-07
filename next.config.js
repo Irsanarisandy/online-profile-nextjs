@@ -20,6 +20,10 @@ const nextConfig = {
   },
   images: {
     domains: ['res.cloudinary.com']
+  },
+  // https://nextjs.org/docs/app/building-your-application/upgrading/app-router-migration
+  experimental: {
+    appDir: true
   }
 };
 

@@ -10,6 +10,7 @@ const createJestConfig = nextJest({
 const customJestConfig = {
   moduleDirectories: ['node_modules', '<rootDir>/'],
   moduleNameMapper: {
+    '^.app/(.*)$': '<rootDir>/app/$1',
     '^.components/(.*)$': '<rootDir>/components/$1',
     '^.data/(.*)$': '<rootDir>/data/$1',
     '^.pages/(.*)$': '<rootDir>/pages/$1',

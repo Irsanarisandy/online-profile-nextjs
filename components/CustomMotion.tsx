@@ -1,15 +1,18 @@
+'use client';
+
 import { motion } from 'framer-motion';
 import type { DetailedHTMLProps, HTMLAttributes } from 'react';
 
 export function OpacityPageTransitionMotion({
   className,
-  children
-}: DetailedHTMLProps<
-  HTMLAttributes<HTMLDivElement>,
-  HTMLDivElement
->): JSX.Element {
+  children,
+  keyName
+}: DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> & {
+  keyName: string;
+}): JSX.Element {
   return (
     <motion.div
+      key={keyName}
       variants={{
         hidden: { opacity: 0 },
         display: { opacity: 1 }

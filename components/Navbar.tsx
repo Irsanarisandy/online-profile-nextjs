@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
-import Image from 'next/image';
+import { Merienda } from 'next/font/google';
+import Image, { type ImageLoaderProps } from 'next/image';
 import Link from 'next/link';
 import {
   type DetailedHTMLProps,
@@ -10,8 +11,6 @@ import {
 
 import { LinkElementPair } from './LinkElementPair';
 import type Links from '.entities/links.interface';
-import logoBlack from '.images/initials-black.png';
-import logoWhite from '.images/initials-white.png';
 import styles from '.styles/Navbar.module.scss';
 
 interface CustomMotionProp
@@ -32,6 +31,14 @@ interface NavbarProp {
   links: Links;
   theme?: string;
 }
+
+const merienda = Merienda({
+  subsets: ['latin']
+});
+
+const imageLoader = ({ src }: ImageLoaderProps) => {
+  return `${location.origin}/${src}`;
+};
 
 function NavOpacityMotionContainer({
   children,
@@ -178,15 +185,18 @@ export default function Navbar({ links, theme }: NavbarProp): JSX.Element {
               }}
             >
               <Image
-                src={theme === 'dark' ? logoWhite : logoBlack}
+                loader={imageLoader}
+                src={`api/initialsImage${
+                  theme === 'dark' ? '?color=white' : ''
+                }`}
                 alt="logo"
                 height={100}
                 width={100}
                 className="cursor-pointer"
               />
             </Link>
-            <h1 className="nav-logo-desc font-bold">Irsan</h1>
-            <span className="nav-logo-desc font-normal text-xs">
+            <h1 className={`font-bold ${merienda.className}`}>Irsan</h1>
+            <span className={`font-normal text-xs ${merienda.className}`}>
               Web Developer
             </span>
           </NavOpacityMotionContainer>
