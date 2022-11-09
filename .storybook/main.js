@@ -25,9 +25,10 @@ module.exports = {
   webpackFinal: async (config, { configType }) => {
     config.resolve.alias = {
       ...config.resolve.alias,
-      '@components': path.resolve(__dirname, '../components'),
-      '@pages': path.resolve(__dirname, '../pages'),
-      '@images': path.resolve(__dirname, '../public/images')
+      '.components': path.resolve(__dirname, '../components'),
+      '.images': path.resolve(__dirname, '../public/images'),
+      '.pages': path.resolve(__dirname, '../pages'),
+      '.styles': path.resolve(__dirname, '../styles')
     };
 
     return config;

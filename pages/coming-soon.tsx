@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
-import { OpacityPageTransitionMotion } from '@components/custom-motion';
+
+import { OpacityPageTransitionMotion } from '.components/custom-motion';
 
 const ComingSoon: NextPage = () => {
   return (

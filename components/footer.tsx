@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import { useState } from 'react';
+
 import { LinkElementPair } from './link-element-pair';
-import Links from '@entities/links.interface';
-import styles from '@styles/Footer.module.scss';
+import Links from '.entities/links.interface';
+import styles from '.styles/Footer.module.scss';
 
 interface IProp {
   links: Links;

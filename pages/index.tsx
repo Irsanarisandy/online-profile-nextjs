@@ -6,11 +6,12 @@ import {
   NewspaperIcon,
   PlayIcon
 } from '@heroicons/react/24/outline';
-import { OpacityPageTransitionMotion } from '@components/custom-motion';
-import { DisplayTextAnimation } from '@components/display-text-animation';
-import { TinaProps } from '@entities/tina-props.interface';
-import { client } from '@generatedTina/client';
-import { HomeQuery } from '@generatedTina/types';
+
+import { OpacityPageTransitionMotion } from '.components/custom-motion';
+import { DisplayTextAnimation } from '.components/display-text-animation';
+import { TinaProps } from '.entities/tina-props.interface';
+import { client } from '.generatedTina/client';
+import { HomeQuery } from '.generatedTina/types';
 
 const Home: NextPage<TinaProps<HomeQuery>> = (props) => {
   const router = useRouter();

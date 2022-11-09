@@ -4,10 +4,11 @@ import { useRouter } from 'next/router';
 import { PropsWithChildren } from 'react';
 import useSWR from 'swr';
 import { MoonIcon, SunIcon } from '@heroicons/react/24/solid';
+
 import Navbar from './navbar';
 import Footer from './footer';
 import useToggleTheme from './toggle-theme';
-import styles from '@styles/Layout.module.scss';
+import styles from '.styles/Layout.module.scss';
 
 function Layout({ children }: PropsWithChildren<object>): JSX.Element {
   const fetcher = (url: string) => axios.get(url).then((res) => res.data);

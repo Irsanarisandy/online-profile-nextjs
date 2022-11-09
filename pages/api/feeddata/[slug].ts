@@ -5,6 +5,8 @@ import MarkdownIt from 'markdown-it';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import path from 'path';
 
+import { publicLinks } from '.data/publicLinks';
+
 const markdown = new MarkdownIt();
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -26,9 +28,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     copyright: `Copyright © ${new Date().getFullYear()} Irsan Arisandy`,
     generator: 'Feed for Node.js',
     feedLinks: {
-      atom: `${siteURL}/api/feeddata/atom`,
-      json: `${siteURL}/api/feeddata/json`,
-      rss: `${siteURL}/api/feeddata/rss`
+      atom: `${siteURL}${publicLinks.feedAtom}`,
+      json: `${siteURL}${publicLinks.feedJson}`,
+      rss: `${siteURL}${publicLinks.feedRss}`
     },
     author
   });

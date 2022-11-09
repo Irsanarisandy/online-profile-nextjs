@@ -2,10 +2,11 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { PropsWithChildren } from 'react';
-import Links from '@entities/links.interface';
-import Logo from '@images/logo.png';
+
+import Links from '.entities/links.interface';
+import Logo from '.images/logo.png';
 import { LinkElementPair } from './link-element-pair';
-import styles from '@styles/Navbar.module.scss';
+import styles from '.styles/Navbar.module.scss';
 
 interface CustomMotionProp {
   isMobile: boolean;
@@ -143,7 +144,7 @@ class Navbar extends React.Component<NavbarProp, NavbarState> {
             <Link
               aria-label={`${name} navbar link`}
               key={`${name} navbar link`}
-              href={links[name] as string}
+              href={links[name]}
               target="_blank"
               style={{
                 pointerEvents: isOpen ? 'auto' : 'none'

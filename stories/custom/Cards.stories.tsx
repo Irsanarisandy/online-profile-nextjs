@@ -1,7 +1,8 @@
 import { expect } from '@storybook/jest';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { within } from '@storybook/testing-library';
-import { Cards } from '@components/cards';
+
+import { Cards } from '.components/cards';
 
 export default {
   title: 'Custom/Cards',

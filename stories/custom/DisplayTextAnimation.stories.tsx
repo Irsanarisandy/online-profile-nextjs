@@ -1,5 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { DisplayTextAnimation } from '@components/display-text-animation';
+
+import { DisplayTextAnimation } from '.components/display-text-animation';
 
 export default {
   title: 'Custom/Display Text Animation',

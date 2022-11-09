@@ -10,9 +10,10 @@ const createJestConfig = nextJest({
 const customJestConfig = {
   moduleDirectories: ['node_modules', '<rootDir>/'],
   moduleNameMapper: {
-    '^@components/(.*)$': '<rootDir>/components/$1',
-    '^@pages/(.*)$': '<rootDir>/pages/$1',
-    '^@generatedTina/(.*)$': '<rootDir>/.tina/__generated__/$1'
+    '^.components/(.*)$': '<rootDir>/components/$1',
+    '^.data/(.*)$': '<rootDir>/data/$1',
+    '^.pages/(.*)$': '<rootDir>/pages/$1',
+    '^.generatedTina/(.*)$': '<rootDir>/.tina/__generated__/$1'
   },
   modulePathIgnorePatterns: ['node_modules', 'jest-test-results.json'],
   setupFilesAfterEnv: ['<rootDir>/jest/jest.setup.ts'],

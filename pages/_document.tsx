@@ -6,6 +6,8 @@ import Document, {
   DocumentContext
 } from 'next/document';
 
+import { publicLinks } from '.data/publicLinks';
+
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
     const initialProps = await Document.getInitialProps(ctx);
@@ -22,19 +24,19 @@ class MyDocument extends Document {
           />
           <link
             rel="alternate"
-            href="/api/feeddata/atom"
+            href={publicLinks.feedAtom}
             title="Irsan's Atom Feed"
             type="application/atom+xml"
           />
           <link
             rel="alternate"
-            href="/api/feeddata/json"
+            href={publicLinks.feedJson}
             title="Irsan's JSON Feed"
             type="application/feed+json"
           />
           <link
             rel="alternate"
-            href="/api/feeddata/rss"
+            href={publicLinks.feedRss}
             title="Irsan's RSS Feed"
             type="application/rss+xml"
           />

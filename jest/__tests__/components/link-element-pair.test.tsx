@@ -1,5 +1,6 @@
-import { LinkElementPair } from '@components/link-element-pair';
 import { render } from '@testing-library/react';
+
+import { LinkElementPair } from '.components/link-element-pair';
 
 describe('LinkElementPair component', () => {
   const testCases = [

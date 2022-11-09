@@ -1,7 +1,8 @@
 import { expect } from '@storybook/jest';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { within } from '@storybook/testing-library';
-import { Chips } from '@components/chips';
+
+import { Chips } from '.components/chips';
 
 export default {
   title: 'Custom/Chips',

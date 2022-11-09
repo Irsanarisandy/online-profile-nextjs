@@ -7,11 +7,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { NextSeo } from 'next-seo';
 import { useTina } from 'tinacms/dist/react';
-import { Cards } from '@components/cards';
-import { OpacityPageTransitionMotion } from '@components/custom-motion';
-import { TinaConnectionProps } from '@entities/tina-props.interface';
-import { client } from '@generatedTina/client';
-import { PostConnectionQuery, PostFilter } from '@generatedTina/types';
+import { Cards } from '.components/cards';
+import { OpacityPageTransitionMotion } from '.components/custom-motion';
+import { TinaConnectionProps } from '.entities/tina-props.interface';
+import { client } from '.generatedTina/client';
+import { PostConnectionQuery, PostFilter } from '.generatedTina/types';
 
 interface PostsData {
   location: string;

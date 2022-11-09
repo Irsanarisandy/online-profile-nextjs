@@ -1,6 +1,7 @@
-import { AboutQuery } from '@generatedTina/types';
-import About from '@pages/about';
 import { render } from '@testing-library/react';
+
+import { AboutQuery } from '.generatedTina/types';
+import About from '.pages/about';
 
 describe('About page', () => {
   const data = {

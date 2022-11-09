@@ -4,13 +4,15 @@ import { NextSeo } from 'next-seo';
 import { useTina } from 'tinacms/dist/react';
 import { Components, TinaMarkdown } from 'tinacms/dist/rich-text';
 import { DocumentArrowDownIcon } from '@heroicons/react/24/solid';
-import { Cards } from '@components/cards';
-import Codeblock from '@components/codeblock';
-import { OpacityPageTransitionMotion } from '@components/custom-motion';
-import { Progress, ProgressData } from '@components/progress';
-import { TinaProps } from '@entities/tina-props.interface';
-import { client } from '@generatedTina/client';
-import { AboutQuery } from '@generatedTina/types';
+
+import { Cards } from '.components/cards';
+import Codeblock from '.components/codeblock';
+import { OpacityPageTransitionMotion } from '.components/custom-motion';
+import { Progress, ProgressData } from '.components/progress';
+import { publicLinks } from '.data/publicLinks';
+import { TinaProps } from '.entities/tina-props.interface';
+import { client } from '.generatedTina/client';
+import { AboutQuery } from '.generatedTina/types';
 
 const About: NextPage<TinaProps<AboutQuery>> = (props) => {
   const { data } = useTina({
@@ -63,11 +65,7 @@ const About: NextPage<TinaProps<AboutQuery>> = (props) => {
             <TinaMarkdown content={body} components={components} />
           </div>
           <div className="inline-block border-2 rounded-full mt-8 px-4 py-2">
-            <Link
-              id="downloadCV"
-              href="https://filen.io/d/ff5b18ff-0c7d-4712-b2d0-a5125553ea02#!Ly7wBRqKfVGsgySn7w4wr5ORE5dPwqbW"
-              target="_blank"
-            >
+            <Link id="downloadCV" href={publicLinks.cv} target="_blank">
               <span className="flex">
                 <DocumentArrowDownIcon className="h-auto w-[28px]" />
                 &nbsp;Download CV

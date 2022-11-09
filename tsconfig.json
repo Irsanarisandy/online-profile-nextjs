@@ -16,12 +16,13 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@components/*": ["components/*"],
-      "@entities/*": ["entities/*"],
-      "@images/*": ["public/images/*"],
-      "@pages/*": ["pages/*"],
-      "@styles/*": ["styles/*"],
-      "@generatedTina/*": [".tina/__generated__/*"]
+      ".components/*": ["components/*"],
+      ".data/*": ["data/*"],
+      ".entities/*": ["entities/*"],
+      ".images/*": ["public/images/*"],
+      ".pages/*": ["pages/*"],
+      ".styles/*": ["styles/*"],
+      ".generatedTina/*": [".tina/__generated__/*"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"],

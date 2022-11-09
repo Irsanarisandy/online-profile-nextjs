@@ -1,7 +1,8 @@
 import { expect } from '@storybook/jest';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { within } from '@storybook/testing-library';
-import { LinkElementPair } from '@components/link-element-pair';
+
+import { LinkElementPair } from '.components/link-element-pair';
 
 export default {
   title: 'Custom/Link Element Pair',

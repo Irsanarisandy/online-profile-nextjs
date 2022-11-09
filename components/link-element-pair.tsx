@@ -1,4 +1,5 @@
 import { DocumentArrowDownIcon, RssIcon } from '@heroicons/react/24/solid';
+
 import { GitHubLogo, GitLabLogo, LinkedInLogo } from './svg-icons';
 
 interface IProp {

@@ -1,6 +1,15 @@
-import { HomeQuery } from '@generatedTina/types';
-import Home from '@pages/index';
 import { render } from '@testing-library/react';
+
+import { HomeQuery } from '.generatedTina/types';
+import Home from '.pages/index';
+
+jest.mock('next/router', () => ({
+  useRouter: () => ({
+    query: {},
+    pathname: '/',
+    asPath: '/'
+  })
+}));
 
 describe('Home page', () => {
   const data = {

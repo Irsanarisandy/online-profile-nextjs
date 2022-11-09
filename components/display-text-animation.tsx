@@ -1,4 +1,4 @@
-import styles from '../styles/DisplayTextAnimation.module.scss';
+import styles from '.styles/DisplayTextAnimation.module.scss';
 
 interface IProp {
   /**
@@ -40,7 +40,7 @@ export const DisplayTextAnimation = ({
   );
 
   return (
-    <div className={`${styles.animated_text_container}`}>
+    <div className={styles.animated_text_container}>
       {result.map((sentence, index) => (
         <div key={`sentence${index}`} className="flex">
           {sentence}
