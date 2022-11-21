@@ -19,10 +19,6 @@ class MyDocument extends Document {
       <Html lang="en" className="scroll-smooth">
         <Head>
           <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Merienda:wght@400;700&family=Quicksand:wght@300;400;500;600;700&display=swap"
-          />
-          <link
             rel="alternate"
             href={publicLinks.feedAtom}
             title="Irsan's Atom Feed"

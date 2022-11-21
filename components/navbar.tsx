@@ -196,8 +196,10 @@ class Navbar extends React.Component<NavbarProp, NavbarState> {
                   className="cursor-pointer"
                 />
               </Link>
-              <h1 className={styles.customfont_name}>Irsan</h1>
-              <span className={styles.customfont_role}>Web Developer</span>
+              <h1 className="nav-logo-desc font-bold">Irsan</h1>
+              <span className="nav-logo-desc font-normal text-xs">
+                Web Developer
+              </span>
             </NavOpacityMotionContainer>
           </div>
           <div className="flex-auto bg-gray-50 dark:bg-gray-900 transition-colors duration-500">
