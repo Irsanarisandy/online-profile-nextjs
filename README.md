@@ -8,7 +8,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - Local development workflow from the filesystem with a local GraqhQL server.
 - [Jest](https://jestjs.io/) to do unit testing.
 - [Storybook](https://storybook.js.org) to document custom components, do component testing, and read results of Jest unit testing. To initialise in project run `npx sb init --builder webpack5`, which will also make sure to use webpack 5 as the default builder.
-- [Cypress](https://www.cypress.io) to do integration and e2e testing. It has been integrated with [Cucumber](https://cucumber.io) to implement BDD automation testing.
+- [Cypress](https://www.cypress.io) to do integration and e2e testing, which has been integrated with [Cucumber](https://cucumber.io) to implement BDD automation testing. Also used for component testing.
 
 ## Getting Started
 
@@ -45,8 +45,10 @@ npm run build-storybook
 # run cypress tests
 npm run cypress
 
-# run cypress tests (without browser)
+# run cypress tests (without browser, for e2e & integration tests)
 npm run cypress:headless
+# run cypress tests (without browser, for component tests)
+npm run cypress:headless:comp
 ```
 
 Run `npm run dev` and open [http://localhost:3000](http://localhost:3000) with the browser to see the result.

@@ -1,6 +1,6 @@
 import { Given } from '@badeball/cypress-cucumber-preprocessor';
 // custom paths for outside Cypress folder doesn't work
-import { publicLinks } from '../../../data/publicLinks';
+import { publicLinks } from '../../data/publicLinks';
 
 const envMapping: { [key: string]: string } = {
   offline: 'http://localhost:3000/',

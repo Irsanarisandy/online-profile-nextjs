@@ -14,7 +14,8 @@
     "test-storybook": "test-storybook",
     "build-storybook": "build-storybook",
     "cypress": "cypress open",
-    "cypress:headless": "cypress run"
+    "cypress:headless": "cypress run",
+    "cypress:headless:comp": "cypress run --component"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.13",

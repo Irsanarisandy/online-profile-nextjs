@@ -22,5 +22,12 @@ export default defineConfig({
   e2e: {
     setupNodeEvents,
     specPattern: 'cypress/tests/**/*.{feature,features}'
+  },
+  component: {
+    devServer: {
+      framework: 'next',
+      bundler: 'webpack'
+    },
+    specPattern: 'cypress/component-tests/**/*.cy.{js,jsx,ts,tsx}'
   }
 });
