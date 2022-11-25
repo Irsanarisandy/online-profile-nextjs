@@ -6,6 +6,6 @@
   ],
   "rules": {
     "react/no-children-prop": "warn",
-    "react/no-unknown-property": "warn"
+    "react/no-unknown-property": ["warn", { "ignore": ["jsx", "global"] }]
   }
 }

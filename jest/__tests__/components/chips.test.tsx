@@ -14,7 +14,7 @@ describe('Chips component', () => {
       <Chips labels={labels} clickLocation={clickLocation} />
     );
 
-    labels.forEach(async (label, index) => {
+    labels.forEach((label, index) => {
       const content = view.getByTestId(`Chip ${index + 1}: ${label}`);
       expect(content).toBeInTheDocument();
       if (clickLocation) {

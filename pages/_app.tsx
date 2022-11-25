@@ -19,7 +19,7 @@ const quicksand = Quicksand({
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
-      <style global jsx>{`
+      <style jsx global>{`
         body {
           font-family: ${quicksand.style.fontFamily};
         }

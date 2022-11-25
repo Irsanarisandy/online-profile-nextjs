@@ -39,7 +39,7 @@ describe('About page', () => {
     }
   }`;
 
-  it('should render correctly without data', async () => {
+  it('should render correctly without data', () => {
     const view = render(
       <About
         data={{ about: {} } as AboutQuery}
@@ -54,35 +54,33 @@ describe('About page', () => {
     expect(view.queryByTestId('aboutOthers')).not.toBeInTheDocument();
   });
 
-  it('should render correctly with data', async () => {
+  it('should render correctly with data', () => {
     const view = render(
       <About data={data as AboutQuery} variables={variables} query={query} />
     );
-    expect((await view.findByTestId('aboutTitle')).innerHTML).toMatch(
-      /Hello world/
-    );
+    expect(view.getByTestId('aboutTitle').innerHTML).toMatch(/Hello world/);
 
-    const progressComp = view.queryByTestId('progress-comp');
+    const progressComp = view.getByTestId('progress-comp');
     expect(progressComp).toBeInTheDocument();
     expect(progressComp?.childElementCount).toBe(
       data.about.overallDevSkills.length
     );
 
-    const aboutFrontend = view.queryByTestId('aboutFrontend');
+    const aboutFrontend = view.getByTestId('aboutFrontend');
     expect(aboutFrontend).toBeInTheDocument();
     expect(aboutFrontend?.childElementCount).toBe(data.about.frontend.length);
 
-    const aboutBackend = view.queryByTestId('aboutBackend');
+    const aboutBackend = view.getByTestId('aboutBackend');
     expect(aboutBackend).toBeInTheDocument();
     expect(aboutBackend?.childElementCount).toBe(data.about.backend.length);
 
-    const aboutGeneralCoding = view.queryByTestId('aboutGeneralCoding');
+    const aboutGeneralCoding = view.getByTestId('aboutGeneralCoding');
     expect(aboutGeneralCoding).toBeInTheDocument();
     expect(aboutGeneralCoding?.childElementCount).toBe(
       data.about.generalCoding.length
     );
 
-    const aboutOthers = view.queryByTestId('aboutOthers');
+    const aboutOthers = view.getByTestId('aboutOthers');
     expect(aboutOthers).toBeInTheDocument();
     expect(aboutOthers?.childElementCount).toBe(data.about.others.length);
   });

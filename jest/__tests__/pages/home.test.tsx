@@ -26,15 +26,11 @@ describe('Home page', () => {
     }
   }`;
 
-  it('should render correctly', async () => {
+  it('should render correctly', () => {
     const view = render(
       <Home data={data as HomeQuery} variables={variables} query={query} />
     );
-    expect((await view.findByTestId('homeButtonAbout')).innerHTML).toMatch(
-      /About Me/
-    );
-    expect((await view.findByTestId('homeButtonBlog')).innerHTML).toMatch(
-      /My Blog/
-    );
+    expect(view.getByTestId('homeButtonAbout').innerHTML).toMatch(/About Me/);
+    expect(view.getByTestId('homeButtonBlog').innerHTML).toMatch(/My Blog/);
   });
 });
