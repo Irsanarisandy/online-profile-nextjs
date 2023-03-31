@@ -13,7 +13,7 @@ const customJestConfig = {
     '^.components/(.*)$': '<rootDir>/components/$1',
     '^.data/(.*)$': '<rootDir>/data/$1',
     '^.pages/(.*)$': '<rootDir>/pages/$1',
-    '^.generatedTina/(.*)$': '<rootDir>/.tina/__generated__/$1'
+    '^.generatedTina/(.*)$': '<rootDir>/tina/__generated__/$1'
   },
   modulePathIgnorePatterns: ['node_modules', 'jest-test-results.json'],
   setupFilesAfterEnv: ['<rootDir>/jest/jest.setup.ts'],

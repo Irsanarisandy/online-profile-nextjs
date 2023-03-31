@@ -31,8 +31,8 @@ const config = defineConfig({
             label: 'Title',
             name: 'title',
             ui: {
-              validate: (val) => {
-                if (val == null || val.trim().length === 0) {
+              validate: (value: string) => {
+                if (value == null || value.trim().length === 0) {
                   return 'Title must not be empty!';
                 }
               }
@@ -112,8 +112,8 @@ const config = defineConfig({
             label: 'Title',
             name: 'title',
             ui: {
-              validate: (val) => {
-                if (val == null || val.trim().length === 0) {
+              validate: (value: string) => {
+                if (value == null || value.trim().length === 0) {
                   return 'Title must not be empty!';
                 }
               }
@@ -125,8 +125,8 @@ const config = defineConfig({
             name: 'postDateTime',
             ui: {
               dateFormat: 'DD/MM/YYYY h:mm a',
-              validate: (val) => {
-                if (val == null || val.trim().length === 0) {
+              validate: (value: string) => {
+                if (value == null || value.trim().length === 0) {
                   return 'Datetime must not be empty!';
                 }
               }
@@ -144,8 +144,8 @@ const config = defineConfig({
             name: 'excerpt',
             ui: {
               component: 'textarea',
-              validate: (val) => {
-                if (val == null || val.trim().length === 0) {
+              validate: (value: string) => {
+                if (value == null || value.trim().length === 0) {
                   return 'Excerpt must not be empty!';
                 }
               }

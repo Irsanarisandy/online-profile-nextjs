@@ -22,7 +22,7 @@
       ".images/*": ["public/images/*"],
       ".pages/*": ["pages/*"],
       ".styles/*": ["styles/*"],
-      ".generatedTina/*": [".tina/__generated__/*"]
+      ".generatedTina/*": ["tina/__generated__/*"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"],
