@@ -1,26 +1,27 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { Progress } from '.components/progress';
 
-export default {
+const meta: Meta<typeof Progress> = {
   title: 'Custom/Progress',
-  component: Progress
-} as ComponentMeta<typeof Progress>;
-
-const Template: ComponentStory<typeof Progress> = (args) => (
-  <Progress {...args} />
-);
-
-export const Example = Template.bind({});
-Example.args = {
-  progressDataList: [
-    {
-      name: 'Test',
-      percentage: 80,
-      color: 'green'
-    }
-  ]
+  component: Progress,
+  tags: ['autodocs']
 };
-Example.parameters = {
-  jest: ['progress.test.tsx']
+
+export default meta;
+type Story = StoryObj<typeof Progress>;
+
+export const Example: Story = {
+  args: {
+    progressDataList: [
+      {
+        name: 'Test',
+        percentage: 80,
+        color: 'green'
+      }
+    ]
+  },
+  parameters: {
+    jest: ['progress.test.tsx']
+  }
 };

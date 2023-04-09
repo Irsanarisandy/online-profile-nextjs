@@ -1,30 +1,33 @@
 import { expect } from '@storybook/jest';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { within } from '@storybook/testing-library';
 
 import { Chips } from '.components/chips';
 
-export default {
+const meta: Meta<typeof Chips> = {
   title: 'Custom/Chips',
-  component: Chips
-} as ComponentMeta<typeof Chips>;
+  component: Chips,
+  tags: ['autodocs']
+};
 
-const Template: ComponentStory<typeof Chips> = (args) => <Chips {...args} />;
+export default meta;
+type Story = StoryObj<typeof Chips>;
 
 const labels = ['Storybook', 'Next.js'];
 
-export const Example = Template.bind({});
-Example.args = {
-  labels
-};
-Example.play = async ({ canvasElement }) => {
-  const canvas = within(canvasElement);
-  labels.forEach(async (label, index) => {
-    await expect(
-      canvas.getByTestId(`Chip ${index + 1}: ${label}`)
-    ).toBeInTheDocument();
-  });
-};
-Example.parameters = {
-  jest: ['chips.test.tsx']
+export const Example: Story = {
+  args: {
+    labels
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    labels.forEach(async (label, index) => {
+      expect(
+        canvas.getByTestId(`Chip ${index + 1}: ${label}`)
+      ).toBeInTheDocument();
+    });
+  },
+  parameters: {
+    jest: ['chips.test.tsx']
+  }
 };

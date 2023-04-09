@@ -1,17 +1,18 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { DisplayTextAnimation } from '.components/display-text-animation';
 
-export default {
+const meta: Meta<typeof DisplayTextAnimation> = {
   title: 'Custom/Display Text Animation',
-  component: DisplayTextAnimation
-} as ComponentMeta<typeof DisplayTextAnimation>;
+  component: DisplayTextAnimation,
+  tags: ['autodocs']
+};
 
-const Template: ComponentStory<typeof DisplayTextAnimation> = (args) => (
-  <DisplayTextAnimation {...args} />
-);
+export default meta;
+type Story = StoryObj<typeof DisplayTextAnimation>;
 
-export const Example = Template.bind({});
-Example.args = {
-  paragraph: ['Hello,', 'My name is Irsan']
+export const Example: Story = {
+  args: {
+    paragraph: ['Hello,', 'My name is Irsan']
+  }
 };
