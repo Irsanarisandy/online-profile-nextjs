@@ -16,10 +16,7 @@ describe('Chips component', () => {
         const content = cy.get(`[data-testid="Chip ${index + 1}: ${label}"]`);
         content.should('exist');
         if (clickLocation) {
-          content
-            .parent()
-            .should('have.attr', 'href')
-            .and('eq', `/test/${label}`);
+          content.should('have.attr', 'href').and('eq', `/test/${label}`);
         }
       });
     });

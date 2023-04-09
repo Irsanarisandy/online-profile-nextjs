@@ -18,7 +18,7 @@ describe('Chips component', () => {
       const content = view.getByTestId(`Chip ${index + 1}: ${label}`);
       expect(content).toBeInTheDocument();
       if (clickLocation) {
-        expect(content.parentElement).toHaveAttribute('href', `/test/${label}`);
+        expect(content).toHaveAttribute('href', `/test/${label}`);
       }
     });
   });
