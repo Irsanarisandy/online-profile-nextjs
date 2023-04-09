@@ -1,13 +1,6 @@
 {
-  "extends": [
-    "stylelint-config-standard",
-    "stylelint-config-standard-scss",
-    "stylelint-config-prettier",
-    "stylelint-config-prettier-scss"
-  ],
+  "extends": ["stylelint-config-standard", "stylelint-config-standard-scss"],
   "rules": {
-    "color-hex-case": "upper",
-    "selector-class-pattern": null,
-    "string-quotes": "single"
+    "selector-class-pattern": null
   }
 }

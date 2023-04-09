@@ -34,6 +34,7 @@ $screen-width-xl: 1280px;
 
   &::before {
     $h-side: '';
+
     @if $horizontal == 'left' {
       $h-side: 'right';
     } @else {
@@ -46,6 +47,7 @@ $screen-width-xl: 1280px;
 
   &::after {
     $v-side: '';
+
     @if $vertical == 'top' {
       $v-side: 'bottom';
     } @else {
