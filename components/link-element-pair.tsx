@@ -17,11 +17,11 @@ interface IProp {
   otherIconSize?: number;
 }
 
-export const LinkElementPair = ({
+export function LinkElementPair({
   linkName,
   classes,
   otherIconSize
-}: IProp) => {
+}: IProp): JSX.Element {
   switch (linkName) {
     case 'linkedin':
       return (
@@ -64,4 +64,4 @@ export const LinkElementPair = ({
         </span>
       );
   }
-};
+}

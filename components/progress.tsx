@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 
 export interface ProgressData {
   name: string;
@@ -29,94 +29,81 @@ interface ProgressProp {
   height?: number;
 }
 
-interface ProgressState {
-  displayPercentage: boolean;
-}
+export function Progress({
+  progressDataList,
+  hideName = false,
+  hideInfo = false,
+  bgColor = '#A3A3A3',
+  height = 24
+}: ProgressProp): JSX.Element {
+  const [displayPercentage, setDisplayPercentage] = useState(false);
 
-export class Progress extends React.Component<ProgressProp, ProgressState> {
-  constructor(props: ProgressProp) {
-    super(props);
-    this.state = { displayPercentage: window.innerWidth >= 640 };
-  }
+  useLayoutEffect(() => {
+    const updateWindowDimensions = () => {
+      setDisplayPercentage(window.innerWidth >= 800);
+    };
 
-  static defaultProps = {
-    hideName: false,
-    hideInfo: false,
-    bgColor: '#A3A3A3',
-    height: 24
-  };
+    updateWindowDimensions();
 
-  componentDidMount() {
-    window.addEventListener('resize', this.updateWindowDimensions);
-  }
+    window.addEventListener('resize', updateWindowDimensions);
 
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.updateWindowDimensions);
-  }
+    return () => {
+      window.removeEventListener('resize', updateWindowDimensions);
+    };
+  }, []);
 
-  updateWindowDimensions = () =>
-    this.setState({
-      displayPercentage: window.innerWidth >= 640
-    });
-
-  render() {
-    const { progressDataList, hideName, hideInfo, bgColor, height } =
-      this.props;
-    const { displayPercentage } = this.state;
-
-    return (
-      <div
-        data-testid="progress-comp"
-        className="flex rounded-lg animate-pulse"
-        style={{ backgroundColor: bgColor, height }}
-      >
-        {progressDataList.length === 1 && (
+  return (
+    <div
+      data-testid="progress-comp"
+      className="flex rounded-lg animate-pulse"
+      style={{ backgroundColor: bgColor, height }}
+    >
+      {progressDataList.length === 1 && (
+        <div
+          data-testid="progress-info-1"
+          className="flex justify-center rounded-lg"
+          style={{
+            backgroundColor: progressDataList[0].color,
+            height,
+            width: `${progressDataList[0].percentage}%`
+          }}
+        >
+          {!hideInfo
+            ? `${!hideName ? progressDataList[0].name : ''} ${
+                hideName || displayPercentage
+                  ? `(${progressDataList[0].percentage}%)`
+                  : ''
+              }`
+            : ''}
+        </div>
+      )}
+      {progressDataList.length > 1 &&
+        progressDataList.map((progressData, index) => (
           <div
-            data-testid="progress-info-1"
-            className="flex justify-center rounded-lg"
+            key={`Progress data ${index + 1}`}
+            data-testid={`progress-info-${index + 1}`}
+            className={`flex justify-center ${
+              index === 0
+                ? 'rounded-l-lg'
+                : index === progressDataList.length - 1
+                ? 'rounded-r-lg'
+                : ''
+            }`}
             style={{
-              backgroundColor: progressDataList[0].color,
+              backgroundColor: progressData.color,
               height,
-              width: `${progressDataList[0].percentage}%`
+              width: `${progressData.percentage}%`
             }}
           >
             {!hideInfo
-              ? `${!hideName ? progressDataList[0].name : ''} ${
+              ? `${!hideName ? progressData.name : ''} ${
                   hideName || displayPercentage
-                    ? `(${progressDataList[0].percentage}%)`
+                    ? `(${progressData.percentage}%)`
                     : ''
                 }`
               : ''}
           </div>
-        )}
-        {progressDataList.length > 1 &&
-          progressDataList.map((progressData, index) => (
-            <div
-              key={`Progress data ${index + 1}`}
-              data-testid={`progress-info-${index + 1}`}
-              className={`flex justify-center ${
-                index === 0
-                  ? 'rounded-l-lg'
-                  : index === progressDataList.length - 1
-                  ? 'rounded-r-lg'
-                  : ''
-              }`}
-              style={{
-                backgroundColor: progressData.color,
-                height,
-                width: `${progressData.percentage}%`
-              }}
-            >
-              {!hideInfo
-                ? `${!hideName ? progressData.name : ''} ${
-                    hideName || displayPercentage
-                      ? `(${progressData.percentage}%)`
-                      : ''
-                  }`
-                : ''}
-            </div>
-          ))}
-      </div>
-    );
-  }
+        ))}
+    </div>
+  );
 }

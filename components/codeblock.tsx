@@ -6,10 +6,13 @@ interface IProp {
   language?: string;
 }
 
-const Codeblock = ({ children, language }: PropsWithChildren<IProp>) => (
-  <Prism language={language || 'markdown'} style={darcula}>
-    {children?.toString() || ''}
-  </Prism>
-);
-
-export default Codeblock;
+export function Codeblock({
+  children,
+  language
+}: PropsWithChildren<IProp>): JSX.Element {
+  return (
+    <Prism language={language || 'markdown'} style={darcula}>
+      {children?.toString() || ''}
+    </Prism>
+  );
+}

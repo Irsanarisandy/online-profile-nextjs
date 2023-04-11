@@ -1,4 +1,4 @@
-import { GetStaticPropsResult, NextPage } from 'next';
+import { GetStaticPropsResult } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { NextSeo } from 'next-seo';
@@ -19,9 +19,9 @@ interface PostsData {
   heroImage: string;
 }
 
-const Posts: NextPage<TinaConnectionProps<PostConnectionQuery, PostFilter>> = (
-  props
-) => {
+export default function Posts(
+  props: TinaConnectionProps<PostConnectionQuery, PostFilter>
+): JSX.Element {
   const { data } = useTina({
     data: props.data,
     variables: props.variables,
@@ -101,7 +101,7 @@ const Posts: NextPage<TinaConnectionProps<PostConnectionQuery, PostFilter>> = (
       )}
     </>
   );
-};
+}
 
 export async function getStaticProps(): Promise<
   GetStaticPropsResult<TinaConnectionProps<PostConnectionQuery, PostFilter>>
@@ -119,5 +119,3 @@ export async function getStaticProps(): Promise<
     }
   };
 }
-
-export default Posts;

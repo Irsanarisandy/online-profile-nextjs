@@ -1,4 +1,4 @@
-import type { GetStaticPropsResult, NextPage } from 'next';
+import type { GetStaticPropsResult } from 'next';
 import Link from 'next/link';
 import { NextSeo } from 'next-seo';
 import { useTina } from 'tinacms/dist/react';
@@ -6,7 +6,7 @@ import { Components, TinaMarkdown } from 'tinacms/dist/rich-text';
 import { DocumentArrowDownIcon } from '@heroicons/react/24/solid';
 
 import { Cards } from '.components/cards';
-import Codeblock from '.components/codeblock';
+import { Codeblock } from '.components/codeblock';
 import { OpacityPageTransitionMotion } from '.components/custom-motion';
 import { Progress, ProgressData } from '.components/progress';
 import { publicLinks } from '.data/publicLinks';
@@ -14,7 +14,7 @@ import { TinaProps } from '.entities/tina-props.interface';
 import { client } from '.generatedTina/client';
 import { AboutQuery } from '.generatedTina/types';
 
-const About: NextPage<TinaProps<AboutQuery>> = (props) => {
+export default function About(props: TinaProps<AboutQuery>): JSX.Element {
   const { data } = useTina({
     data: props.data,
     variables: props.variables,
@@ -128,7 +128,7 @@ const About: NextPage<TinaProps<AboutQuery>> = (props) => {
       </OpacityPageTransitionMotion>
     </>
   );
-};
+}
 
 export async function getStaticProps(): Promise<
   GetStaticPropsResult<TinaProps<AboutQuery>>
@@ -143,5 +143,3 @@ export async function getStaticProps(): Promise<
     }
   };
 }
-
-export default About;

@@ -1,8 +1,4 @@
-import type {
-  GetStaticPathsResult,
-  GetStaticPropsResult,
-  NextPage
-} from 'next';
+import type { GetStaticPathsResult, GetStaticPropsResult } from 'next';
 import Image from 'next/image';
 import { NextSeo } from 'next-seo';
 import { useTina } from 'tinacms/dist/react';
@@ -10,13 +6,13 @@ import { Components, TinaMarkdown } from 'tinacms/dist/rich-text';
 
 import { Cards } from '.components/cards';
 import { Chips } from '.components/chips';
-import Codeblock from '.components/codeblock';
+import { Codeblock } from '.components/codeblock';
 import { OpacityPageTransitionMotion } from '.components/custom-motion';
 import { TinaProps } from '.entities/tina-props.interface';
 import { client } from '.generatedTina/client';
 import { PostQuery } from '.generatedTina/types';
 
-const Post: NextPage<TinaProps<PostQuery>> = (props) => {
+export default function Post(props: TinaProps<PostQuery>): JSX.Element {
   const { data } = useTina({
     data: props.data,
     variables: props.variables,
@@ -90,7 +86,7 @@ const Post: NextPage<TinaProps<PostQuery>> = (props) => {
       </OpacityPageTransitionMotion>
     </>
   );
-};
+}
 
 export async function getStaticProps({
   params
@@ -117,5 +113,3 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
     fallback: 'blocking'
   };
 }
-
-export default Post;

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 type ToggleThemeState = 'dark' | 'light';
 
-function useToggleTheme() {
+export default function useToggleTheme() {
   const preferDarkQuery = '(prefers-color-scheme: dark)';
   const [theme, setTheme] = useState<ToggleThemeState>(() => {
     const localStorageValue = window.localStorage.getItem('theme');
@@ -50,5 +50,3 @@ function useToggleTheme() {
 
   return [theme, setTheme] as const;
 }
-
-export default useToggleTheme;

@@ -3,13 +3,16 @@ import Document, {
   Head,
   Main,
   NextScript,
-  DocumentContext
+  DocumentContext,
+  DocumentInitialProps
 } from 'next/document';
 
 import { publicLinks } from '.data/publicLinks';
 
 class MyDocument extends Document {
-  static async getInitialProps(ctx: DocumentContext) {
+  static async getInitialProps(
+    ctx: DocumentContext
+  ): Promise<DocumentInitialProps> {
     const initialProps = await Document.getInitialProps(ctx);
     return { ...initialProps };
   }

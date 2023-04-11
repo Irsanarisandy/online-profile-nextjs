@@ -10,7 +10,9 @@ import Footer from './footer';
 import useToggleTheme from './toggle-theme';
 import styles from '.styles/Layout.module.scss';
 
-function Layout({ children }: PropsWithChildren<object>): JSX.Element {
+export default function Layout({
+  children
+}: PropsWithChildren<object>): JSX.Element {
   const fetcher = (url: string) => axios.get(url).then((res) => res.data);
   const { data, error } = useSWR('/api/links', fetcher);
 
@@ -48,5 +50,3 @@ function Layout({ children }: PropsWithChildren<object>): JSX.Element {
     </div>
   );
 }
-
-export default Layout;

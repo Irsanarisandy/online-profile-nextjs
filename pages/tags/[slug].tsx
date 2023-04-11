@@ -1,8 +1,4 @@
-import type {
-  GetStaticPathsResult,
-  GetStaticPropsResult,
-  NextPage
-} from 'next';
+import type { GetStaticPathsResult, GetStaticPropsResult } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { NextSeo } from 'next-seo';
@@ -21,9 +17,9 @@ interface PostsData {
   heroImage: string;
 }
 
-const Tags: NextPage<TinaConnectionProps<PostConnectionQuery, PostFilter>> = (
-  props
-) => {
+export default function Tags(
+  props: TinaConnectionProps<PostConnectionQuery, PostFilter>
+): JSX.Element {
   const { data } = useTina({
     data: props.data,
     variables: props.variables,
@@ -80,7 +76,7 @@ const Tags: NextPage<TinaConnectionProps<PostConnectionQuery, PostFilter>> = (
       </OpacityPageTransitionMotion>
     </>
   );
-};
+}
 
 export async function getStaticProps({
   params
@@ -119,5 +115,3 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
     fallback: false
   };
 }
-
-export default Tags;

@@ -1,9 +1,8 @@
-import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 
 import { OpacityPageTransitionMotion } from '.components/custom-motion';
 
-const ComingSoon: NextPage = () => {
+export default function ComingSoon(): JSX.Element {
   return (
     <>
       <NextSeo title="Coming Soon" description="Coming Soon" />
@@ -12,6 +11,4 @@ const ComingSoon: NextPage = () => {
       </OpacityPageTransitionMotion>
     </>
   );
-};
-
-export default ComingSoon;
+}

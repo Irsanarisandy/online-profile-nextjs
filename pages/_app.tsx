@@ -16,7 +16,7 @@ const quicksand = Quicksand({
   subsets: ['latin']
 });
 
-function MyApp({ Component, pageProps }: AppProps) {
+export default function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <>
       <style jsx global>{`
@@ -34,5 +34,3 @@ function MyApp({ Component, pageProps }: AppProps) {
     </>
   );
 }
-
-export default MyApp;

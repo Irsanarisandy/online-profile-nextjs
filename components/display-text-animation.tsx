@@ -15,11 +15,11 @@ interface IProp {
   classes?: string;
 }
 
-export const DisplayTextAnimation = ({
+export function DisplayTextAnimation({
   paragraph,
   speed = (n: number) => n / 10 + 1,
   classes
-}: IProp) => {
+}: IProp): JSX.Element {
   let curIndex = 0;
   const result = paragraph.map((line, lineIndex) =>
     line.split('').map((char, charIndex) => {
@@ -48,4 +48,4 @@ export const DisplayTextAnimation = ({
       ))}
     </div>
   );
-};
+}

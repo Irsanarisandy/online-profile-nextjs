@@ -9,7 +9,7 @@ interface IProp {
   links: Links;
 }
 
-function Footer({ links }: IProp): JSX.Element {
+export default function Footer({ links }: IProp): JSX.Element {
   let linkElements: JSX.Element[] = [];
   let linkDropdownMenus: JSX.Element[] = [];
   const [feedExpanded, setFeedExpanded] = useState(false);
@@ -93,5 +93,3 @@ function Footer({ links }: IProp): JSX.Element {
     </footer>
   );
 }
-
-export default Footer;

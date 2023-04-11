@@ -1,4 +1,4 @@
-import type { GetStaticPropsResult, NextPage } from 'next';
+import type { GetStaticPropsResult } from 'next';
 import { useRouter } from 'next/router';
 import { useTina } from 'tinacms/dist/react';
 import {
@@ -13,7 +13,7 @@ import { TinaProps } from '.entities/tina-props.interface';
 import { client } from '.generatedTina/client';
 import { HomeQuery } from '.generatedTina/types';
 
-const Home: NextPage<TinaProps<HomeQuery>> = (props) => {
+export default function Home(props: TinaProps<HomeQuery>): JSX.Element {
   const router = useRouter();
   const { data } = useTina({
     data: props.data,
@@ -79,7 +79,7 @@ const Home: NextPage<TinaProps<HomeQuery>> = (props) => {
       </div>
     </OpacityPageTransitionMotion>
   );
-};
+}
 
 export async function getStaticProps(): Promise<
   GetStaticPropsResult<TinaProps<HomeQuery>>
@@ -94,5 +94,3 @@ export async function getStaticProps(): Promise<
     }
   };
 }
-
-export default Home;
