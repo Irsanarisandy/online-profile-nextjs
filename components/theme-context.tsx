@@ -1,13 +1,20 @@
-import { useEffect, useState } from 'react';
+import { createContext, PropsWithChildren, useEffect, useState } from 'react';
 
-type ToggleThemeState = 'dark' | 'light';
+type ThemeState = 'dark' | 'light';
 
-export default function useToggleTheme() {
-  const preferDarkQuery = '(prefers-color-scheme: dark)';
-  const [theme, setTheme] = useState<ToggleThemeState>(() => {
+const initialState = {
+  theme: 'light',
+  changeTheme: () => {}
+};
+export const ThemeContext = createContext(initialState);
+
+const preferDarkQuery = '(prefers-color-scheme: dark)';
+
+export default function ThemeProvider({ children }: PropsWithChildren) {
+  const [theme, setTheme] = useState<ThemeState>(() => {
     const localStorageValue = window.localStorage.getItem('theme');
-    if (localStorageValue) {
-      return localStorageValue === 'dark' ? 'dark' : 'light';
+    if (localStorageValue != null && localStorageValue !== '') {
+      return localStorageValue as ThemeState;
     }
     return window.matchMedia(preferDarkQuery).matches ? 'dark' : 'light';
   });
@@ -48,5 +55,13 @@ export default function useToggleTheme() {
     window.localStorage.setItem('theme', theme);
   }, [theme]);
 
-  return [theme, setTheme] as const;
+  const changeTheme = () => {
+    setTheme((prevState) => (prevState === 'light' ? 'dark' : 'light'));
+  };
+
+  return (
+    <ThemeContext.Provider value={{ theme, changeTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
 }

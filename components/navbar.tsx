@@ -18,13 +18,13 @@ interface NavlinkProp {
   href: string;
   name: string;
   isOpen: boolean;
-  colorTheme?: string;
+  theme?: string;
   handleClick?: () => void;
 }
 
 interface NavbarProp {
   links: Links;
-  colorTheme?: string;
+  theme?: string;
 }
 
 function NavOpacityMotionContainer({
@@ -57,13 +57,13 @@ function Navlink({
   href,
   name,
   isOpen,
-  colorTheme,
+  theme,
   handleClick
 }: NavlinkProp): JSX.Element {
   return (
     <div
       className={`text-center ${
-        colorTheme !== 'dark' ? styles.navlink : styles.navlink_dark
+        theme !== 'dark' ? styles.navlink : styles.navlink_dark
       }`}
       onClick={handleClick}
     >
@@ -92,7 +92,7 @@ function Navlink({
   );
 }
 
-export default function Navbar({ links, colorTheme }: NavbarProp): JSX.Element {
+export default function Navbar({ links, theme }: NavbarProp): JSX.Element {
   const [isMobile, setIsMobile] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -157,7 +157,7 @@ export default function Navbar({ links, colorTheme }: NavbarProp): JSX.Element {
           style={{
             backgroundColor:
               isMobile && isOpen
-                ? colorTheme !== 'dark'
+                ? theme !== 'dark'
                   ? 'white'
                   : 'black'
                 : 'transparent'
@@ -200,21 +200,21 @@ export default function Navbar({ links, colorTheme }: NavbarProp): JSX.Element {
                 href="/about"
                 name="About"
                 isOpen={isOpen}
-                colorTheme={colorTheme}
+                theme={theme}
                 handleClick={handleClick}
               />
               <Navlink
                 href="/posts"
                 name="Blog"
                 isOpen={isOpen}
-                colorTheme={colorTheme}
+                theme={theme}
                 handleClick={handleClick}
               />
               <Navlink
                 href="/coming-soon"
                 name="Games"
                 isOpen={isOpen}
-                colorTheme={colorTheme}
+                theme={theme}
                 handleClick={handleClick}
               />
             </div>

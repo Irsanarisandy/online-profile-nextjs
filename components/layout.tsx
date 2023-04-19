@@ -1,27 +1,25 @@
 import axios from 'axios';
 import { AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/router';
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, useContext } from 'react';
 import useSWR from 'swr';
 import { MoonIcon, SunIcon } from '@heroicons/react/24/solid';
 
-import Navbar from './navbar';
 import Footer from './footer';
-import useToggleTheme from './toggle-theme';
+import Navbar from './navbar';
+import { ThemeContext } from './theme-context';
 import styles from '.styles/Layout.module.scss';
 
-export default function Layout({
-  children
-}: PropsWithChildren<object>): JSX.Element {
+export default function Layout({ children }: PropsWithChildren): JSX.Element {
   const fetcher = (url: string) => axios.get(url).then((res) => res.data);
   const { data, error } = useSWR('/api/links', fetcher);
 
-  const [colorTheme, setTheme] = useToggleTheme();
+  const { theme, changeTheme } = useContext(ThemeContext);
   const router = useRouter();
 
   return (
     <div className="h-screen flex flex-row">
-      <Navbar links={data} colorTheme={colorTheme} />
+      <Navbar links={data} theme={theme} />
       <div className="flex flex-col flex-auto overflow-y-auto">
         <AnimatePresence
           mode="wait"
@@ -37,10 +35,10 @@ export default function Layout({
         id="themeToggleButton"
         aria-label="theme toggle button"
         className={`fixed bottom-4 right-4 text-black bg-gray-200 ${styles.toggle_button}`}
-        onClick={() => setTheme(colorTheme === 'light' ? 'dark' : 'light')}
+        onClick={changeTheme}
       >
         <span className="flex justify-center">
-          {colorTheme === 'light' ? (
+          {theme === 'light' ? (
             <SunIcon className={styles.toggle_icon} />
           ) : (
             <MoonIcon className={styles.toggle_icon} />

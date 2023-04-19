@@ -4,9 +4,12 @@ import { Merienda, Quicksand } from 'next/font/google';
 import { DefaultSeo } from 'next-seo';
 
 import { NEXT_SEO_DEFAULT } from 'next-seo.config';
+import Layout from '.components/layout';
 import '.styles/globals.scss';
 
-const Layout = dynamic(() => import('.components/layout'), { ssr: false });
+const ThemeProvider = dynamic(() => import('.components/theme-context'), {
+  ssr: false
+});
 
 const merienda = Merienda({
   subsets: ['latin']
@@ -28,9 +31,11 @@ export default function MyApp({ Component, pageProps }: AppProps): JSX.Element {
         }
       `}</style>
       <DefaultSeo {...NEXT_SEO_DEFAULT} />
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <ThemeProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ThemeProvider>
     </>
   );
 }
