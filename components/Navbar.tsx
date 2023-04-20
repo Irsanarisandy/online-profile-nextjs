@@ -10,7 +10,8 @@ import {
 
 import { LinkElementPair } from './LinkElementPair';
 import type Links from '.entities/links.interface';
-import logo from '.images/logo.png';
+import logoBlack from '.images/initials-black.png';
+import logoWhite from '.images/initials-white.png';
 import styles from '.styles/Navbar.module.scss';
 
 interface CustomMotionProp
@@ -177,10 +178,10 @@ export default function Navbar({ links, theme }: NavbarProp): JSX.Element {
               }}
             >
               <Image
-                src={logo}
+                src={theme === 'dark' ? logoWhite : logoBlack}
                 alt="logo"
                 height={100}
-                width={55}
+                width={100}
                 className="cursor-pointer"
               />
             </Link>

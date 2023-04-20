@@ -8,7 +8,7 @@ export const NEXT_SEO_DEFAULT: NextSeoProps = {
   additionalLinkTags: [
     {
       rel: 'apple-touch-icon',
-      href: '/images/apple-touch-icon.png',
+      href: '/images/initials-black.png',
       sizes: '180x180'
     },
     {
