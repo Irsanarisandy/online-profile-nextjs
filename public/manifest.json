@@ -1,6 +1,10 @@
 {
   "name": "Irsan's Online Profile",
   "short_name": "Online Profile",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
   "icons": [
     {
       "src": "/images/android-chrome-192x192.png",
@@ -18,9 +22,5 @@
       "type": "image/png",
       "purpose": "maskable"
     }
-  ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
-  "display": "standalone",
-  "start_url": "/"
+  ]
 }
