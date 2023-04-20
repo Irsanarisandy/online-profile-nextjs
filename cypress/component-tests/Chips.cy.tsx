@@ -1,5 +1,4 @@
-// custom paths for outside Cypress folder doesn't work
-import { Chips } from '../../components/chips';
+import { Chips } from '.components/Chips';
 
 describe('Chips component', () => {
   const testCases = [

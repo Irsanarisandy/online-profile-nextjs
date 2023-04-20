@@ -1,8 +1,10 @@
+import type { DetailedHTMLProps, HTMLAttributes } from 'react';
 import { DocumentArrowDownIcon, RssIcon } from '@heroicons/react/24/solid';
 
-import { GitHubLogo, GitLabLogo, LinkedInLogo } from './svg-icons';
+import { GitHubLogo, GitLabLogo, LinkedInLogo } from './SvgIcons';
 
-interface IProp {
+interface IProp
+  extends DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement> {
   /**
    * Name of link corresponding to icon
    */
@@ -10,7 +12,7 @@ interface IProp {
   /**
    * Class names from custom SCSS files and [Tailwind CSS](https://tailwindcss.com/)
    */
-  classes?: string;
+  className?: string;
   /**
    * Size of default other icon
    */
@@ -19,44 +21,44 @@ interface IProp {
 
 export function LinkElementPair({
   linkName,
-  classes,
+  className,
   otherIconSize
 }: IProp): JSX.Element {
   switch (linkName) {
     case 'linkedin':
       return (
-        <span className={classes} data-testid="linkedin">
+        <span className={className} data-testid="linkedin">
           <LinkedInLogo fill="#0A66C2" />
         </span>
       );
     case 'github':
       return (
-        <span className={classes} data-testid="github">
+        <span className={className} data-testid="github">
           <GitHubLogo fill="currentcolor" />
         </span>
       );
     case 'gitlab':
       return (
-        <span className={classes} data-testid="gitlab">
+        <span className={className} data-testid="gitlab">
           <GitLabLogo fill="#FCA121" />
         </span>
       );
     case 'cv':
       return (
-        <span className={classes} data-testid="cv">
+        <span className={className} data-testid="cv">
           <DocumentArrowDownIcon />
         </span>
       );
     case 'feed':
       return (
-        <span className={classes} data-testid="feed">
+        <span className={className} data-testid="feed">
           <RssIcon />
         </span>
       );
     default:
       return (
         <span
-          className={classes}
+          className={className}
           style={{ fontSize: otherIconSize }}
           data-testid="other"
         >

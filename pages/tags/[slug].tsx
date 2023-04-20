@@ -3,59 +3,81 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { NextSeo } from 'next-seo';
 import { useTina } from 'tinacms/dist/react';
-import { Cards } from '.components/cards';
-import { OpacityPageTransitionMotion } from '.components/custom-motion';
-import { TinaConnectionProps } from '.entities/tina-props.interface';
+import { Cards } from '.components/Cards';
+import { OpacityPageTransitionMotion } from '.components/CustomMotion';
 import { client } from '.generatedTina/client';
-import { PostConnectionQuery, PostFilter } from '.generatedTina/types';
+import type {
+  Post,
+  PostConnectionQuery,
+  PostConnectionQueryVariables
+} from '.generatedTina/types';
 
-interface PostsData {
-  location: string;
-  title: string;
-  tags: string[];
-  excerpt: string;
-  heroImage: string;
-}
-
-export default function Tags(
-  props: TinaConnectionProps<PostConnectionQuery, PostFilter>
-): JSX.Element {
+export default function Tags(props: {
+  data: PostConnectionQuery;
+  variables: PostConnectionQueryVariables;
+  query: string;
+  slug: string;
+}): JSX.Element {
   const { data } = useTina({
     data: props.data,
     variables: props.variables,
     query: props.query
   });
 
-  if (data == null || data.postConnection?.edges == null) {
+  if (data?.postConnection?.edges == null) {
     return <div>Tags data does not exist!</div>;
   }
 
-  const postList: PostsData[] = data.postConnection.edges
-    .map((edge: any) => ({
-      location: edge.node._sys.filename,
-      ...edge.node
-    }))
-    .filter((curData: PostsData) => {
+  const postList: ({ location: string } & Post)[] = data.postConnection.edges
+    .flatMap((edge) =>
+      edge?.node != null
+        ? {
+            location: edge.node._sys.filename,
+            ...(edge.node as Post)
+          }
+        : []
+    )
+    .filter((curData) => {
       const tags = curData.tags;
-      return tags && tags.includes(props.slug as string);
+      return tags != null && tags.includes(props.slug);
     });
+
+  const displayedDateTime = (postDateTime: string) =>
+    new Intl.DateTimeFormat(
+      typeof navigator !== 'undefined' ? navigator.language : 'en-NZ',
+      {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        timeZoneName: 'short'
+      }
+    ).format(new Date(postDateTime));
+
   return (
     <>
       <NextSeo title="Posts Tags" description={`Tag: ${props.slug}`} />
-      <OpacityPageTransitionMotion classes="flex flex-col min-h-full px-4 pt-4 sm:px-8 sm:pt-8">
-        <Cards classes="p-4 sm:p-8 mb-4 md:mb-8">
+      <OpacityPageTransitionMotion className="flex flex-col min-h-full px-4 pt-4 sm:px-8 sm:pt-8">
+        <Cards className="p-4 sm:p-8 mb-4 md:mb-8">
           <h1>Tag: {props.slug}</h1>
         </Cards>
-        <section className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 md:auto-rows-[440px]">
+        <section className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 md:auto-rows-[450px]">
           {postList.map((curPost, index) => (
-            <Cards classes="p-4 sm:p-8 flex flex-col" key={`post${index + 1}`}>
-              <div className="mb-4 flex">
+            <Cards
+              className="p-4 sm:p-8 flex flex-col"
+              key={`post${index + 1}`}
+            >
+              <div className="mb-4 flex flex-col">
                 <Link
                   href={`/posts/${curPost.location}`}
                   className="hover:text-[#FDB601]"
                 >
                   <h1>{curPost.title}</h1>
                 </Link>
+                <span className="mt-2">
+                  {displayedDateTime(curPost.postDateTime as string)}
+                </span>
               </div>
               {curPost.heroImage && (
                 <div className="block w-full">
@@ -80,15 +102,22 @@ export default function Tags(
 
 export async function getStaticProps({
   params
-}: any): Promise<
-  GetStaticPropsResult<TinaConnectionProps<PostConnectionQuery, PostFilter>>
+}: {
+  params: { slug: string };
+}): Promise<
+  GetStaticPropsResult<{
+    data: PostConnectionQuery;
+    variables: PostConnectionQueryVariables;
+    query: string;
+    slug: string;
+  }>
 > {
   // Temporary: needs to be changed when Tina finally supports filtering on list
   const { slug } = params;
-  const tinaProps = (await client.queries.postConnection({
+  const tinaProps = await client.queries.postConnection({
     sort: 'postDateTime',
     last: 10
-  })) as TinaConnectionProps<PostConnectionQuery, PostFilter>;
+  });
 
   return {
     props: {
@@ -102,10 +131,15 @@ export async function getStaticProps({
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
   // Temporary: needs to be changed when Tina finally supports filtering on list
-  const postListResponse: any = await client.queries.postConnection();
-  let tags: string[] = postListResponse.data.postConnection.edges
-    .map((edge: any) => edge.node.tags)
-    .flat();
+  const postListResponse = await client.queries.postConnection();
+  if (postListResponse.data.postConnection.edges == null)
+    throw new Error('Cannot connect to GraphQL server!');
+
+  let tags = postListResponse.data.postConnection.edges.flatMap((edge) =>
+    edge?.node?.tags != null
+      ? edge.node.tags.flatMap((tag) => (tag != null ? tag : []))
+      : []
+  );
   tags = Array.from(new Set(tags));
 
   return {

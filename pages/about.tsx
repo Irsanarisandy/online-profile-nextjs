@@ -5,23 +5,26 @@ import { useTina } from 'tinacms/dist/react';
 import { Components, TinaMarkdown } from 'tinacms/dist/rich-text';
 import { DocumentArrowDownIcon } from '@heroicons/react/24/solid';
 
-import { Cards } from '.components/cards';
-import { Codeblock } from '.components/codeblock';
-import { OpacityPageTransitionMotion } from '.components/custom-motion';
-import { Progress, ProgressData } from '.components/progress';
+import { Cards } from '.components/Cards';
+import { Codeblock } from '.components/Codeblock';
+import { OpacityPageTransitionMotion } from '.components/CustomMotion';
+import { Progress, ProgressData } from '.components/Progress';
 import { publicLinks } from '.data/publicLinks';
-import { TinaProps } from '.entities/tina-props.interface';
 import { client } from '.generatedTina/client';
-import { AboutQuery } from '.generatedTina/types';
+import type { AboutQuery, AboutQueryVariables } from '.generatedTina/types';
 
-export default function About(props: TinaProps<AboutQuery>): JSX.Element {
+export default function About(props: {
+  data: AboutQuery;
+  variables: AboutQueryVariables;
+  query: string;
+}): JSX.Element {
   const { data } = useTina({
     data: props.data,
     variables: props.variables,
     query: props.query
   });
 
-  if (data == null || data.about == null) {
+  if (data?.about == null) {
     return <div>About data does not exist!</div>;
   }
 
@@ -45,7 +48,7 @@ export default function About(props: TinaProps<AboutQuery>): JSX.Element {
   const components: Components<{}> = {
     code_block: (codeBlockProps) => (
       <Codeblock language={codeBlockProps?.lang}>
-        {codeBlockProps?.value}
+        {codeBlockProps?.value as string}
       </Codeblock>
     )
   };
@@ -57,7 +60,7 @@ export default function About(props: TinaProps<AboutQuery>): JSX.Element {
         description="An about page containing some information about Irsan Arisandy, as a website developer."
       />
       <OpacityPageTransitionMotion>
-        <Cards classes="m-4 sm:m-8 p-4 sm:p-8">
+        <Cards className="m-4 sm:m-8 p-4 sm:p-8">
           <h1 data-testid="aboutTitle" className="mb-8">
             {title}
           </h1>
@@ -65,7 +68,12 @@ export default function About(props: TinaProps<AboutQuery>): JSX.Element {
             <TinaMarkdown content={body} components={components} />
           </div>
           <div className="inline-block border-2 rounded-full mt-8 px-4 py-2">
-            <Link id="downloadCV" href={publicLinks.cv} target="_blank">
+            <Link
+              id="downloadCV"
+              href={publicLinks.cv}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <span className="flex">
                 <DocumentArrowDownIcon className="h-auto w-[28px]" />
                 &nbsp;Download CV
@@ -74,7 +82,7 @@ export default function About(props: TinaProps<AboutQuery>): JSX.Element {
           </div>
         </Cards>
         {overallDevSkillsExist && (
-          <Cards classes="m-4 sm:m-8 p-4 sm:p-8">
+          <Cards className="m-4 sm:m-8 p-4 sm:p-8">
             <Progress progressDataList={overallDevSkills as ProgressData[]} />
           </Cards>
         )}
@@ -84,7 +92,7 @@ export default function About(props: TinaProps<AboutQuery>): JSX.Element {
           othersExist) && (
           <div className="grid gap-8 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 m-4 sm:m-8">
             {frontendExist && (
-              <Cards classes="p-4 sm:p-8">
+              <Cards className="p-4 sm:p-8">
                 <h2 className="mb-2">Frontend Skills</h2>
                 <ul data-testid="aboutFrontend">
                   {(frontend as string[]).map((skill: string) => (
@@ -94,7 +102,7 @@ export default function About(props: TinaProps<AboutQuery>): JSX.Element {
               </Cards>
             )}
             {backendExist && (
-              <Cards classes="p-4 sm:p-8">
+              <Cards className="p-4 sm:p-8">
                 <h2 className="mb-2">Backend Skills</h2>
                 <ul data-testid="aboutBackend">
                   {(backend as string[]).map((skill: string) => (
@@ -104,7 +112,7 @@ export default function About(props: TinaProps<AboutQuery>): JSX.Element {
               </Cards>
             )}
             {generalCodingExist && (
-              <Cards classes="p-4 sm:p-8">
+              <Cards className="p-4 sm:p-8">
                 <h2 className="mb-2">General Coding Skills</h2>
                 <ul data-testid="aboutGeneralCoding">
                   {(generalCoding as string[]).map((skill: string) => (
@@ -114,7 +122,7 @@ export default function About(props: TinaProps<AboutQuery>): JSX.Element {
               </Cards>
             )}
             {othersExist && (
-              <Cards classes="p-4 sm:p-8">
+              <Cards className="p-4 sm:p-8">
                 <h2 className="mb-2">Other Skills</h2>
                 <ul data-testid="aboutOthers">
                   {(others as string[]).map((skill: string) => (
@@ -131,7 +139,11 @@ export default function About(props: TinaProps<AboutQuery>): JSX.Element {
 }
 
 export async function getStaticProps(): Promise<
-  GetStaticPropsResult<TinaProps<AboutQuery>>
+  GetStaticPropsResult<{
+    data: AboutQuery;
+    variables: AboutQueryVariables;
+    query: string;
+  }>
 > {
   const tinaProps = await client.queries.about({ relativePath: 'About.md' });
 

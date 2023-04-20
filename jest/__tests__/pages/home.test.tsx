@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 
-import { HomeQuery } from '.generatedTina/types';
+import type { HomeQuery } from '.generatedTina/types';
 import Home from '.pages/index';
 
 jest.mock('next/router', () => ({

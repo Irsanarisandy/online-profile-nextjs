@@ -1,5 +1,4 @@
-// custom paths for outside Cypress folder doesn't work
-import { LinkElementPair } from '../../components/link-element-pair';
+import { LinkElementPair } from '.components/LinkElementPair';
 
 describe('LinkElementPair component', () => {
   const testCases = [

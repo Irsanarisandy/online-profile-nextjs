@@ -20,8 +20,7 @@ import './commands';
 // require('./commands')
 
 import { mount } from 'cypress/react18';
-// custom paths for outside Cypress folder doesn't work
-import '../../styles/globals.scss';
+import '.styles/globals.scss';
 
 // Augment the Cypress namespace to include type definitions for
 // your custom command.

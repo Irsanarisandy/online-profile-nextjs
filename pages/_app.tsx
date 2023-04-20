@@ -4,10 +4,10 @@ import { Merienda, Quicksand } from 'next/font/google';
 import { DefaultSeo } from 'next-seo';
 
 import { NEXT_SEO_DEFAULT } from 'next-seo.config';
-import Layout from '.components/layout';
+import Layout from '.components/Layout';
 import '.styles/globals.scss';
 
-const ThemeProvider = dynamic(() => import('.components/theme-context'), {
+const ThemeProvider = dynamic(() => import('.components/ThemeContext'), {
   ssr: false
 });
 

@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 
-import { AboutQuery } from '.generatedTina/types';
+import type { AboutQuery } from '.generatedTina/types';
 import About from '.pages/about';
 
 describe('About page', () => {

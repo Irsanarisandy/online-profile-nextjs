@@ -2,7 +2,7 @@ import { expect } from '@storybook/jest';
 import type { Meta, StoryObj } from '@storybook/react';
 import { within } from '@storybook/testing-library';
 
-import { LinkElementPair } from '.components/link-element-pair';
+import { LinkElementPair } from '.components/LinkElementPair';
 
 const meta: Meta<typeof LinkElementPair> = {
   title: 'Custom/Link Element Pair',
@@ -21,13 +21,12 @@ type Story = StoryObj<typeof LinkElementPair>;
 
 export const Example: Story = {
   args: {
-    classes: 'block w-14',
+    className: 'block w-14',
     otherIconSize: 38
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const stringArgs =
-      new URLSearchParams(window.location.search).get('args') || '';
+    const stringArgs = new URLSearchParams(location.search).get('args') || '';
     const args: { [key: string]: string } = {};
     if (stringArgs !== '') {
       stringArgs.split(';').forEach((stringArg) => {
@@ -57,6 +56,6 @@ export const Example: Story = {
     }
   },
   parameters: {
-    jest: ['link-element-pair.test.tsx']
+    jest: ['LinkElementPair.test.tsx']
   }
 };

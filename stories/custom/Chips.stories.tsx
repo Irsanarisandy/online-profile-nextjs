@@ -2,7 +2,7 @@ import { expect } from '@storybook/jest';
 import type { Meta, StoryObj } from '@storybook/react';
 import { within } from '@storybook/testing-library';
 
-import { Chips } from '.components/chips';
+import { Chips } from '.components/Chips';
 
 const meta: Meta<typeof Chips> = {
   title: 'Custom/Chips',
@@ -28,6 +28,6 @@ export const Example: Story = {
     });
   },
   parameters: {
-    jest: ['chips.test.tsx']
+    jest: ['Chips.test.tsx']
   }
 };

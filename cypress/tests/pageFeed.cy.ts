@@ -25,7 +25,7 @@ Then('user can see {word} feed in menu', (feedType: string) => {
 
 When('user generate {word} feed', (feedType: string) => {
   cy.downloadFile(
-    `${window.location.origin}/${feedLinkMapping[feedType]}`,
+    `${location.origin}/${feedLinkMapping[feedType]}`,
     'cypress/downloads',
     feedFileMapping[feedType]
   );

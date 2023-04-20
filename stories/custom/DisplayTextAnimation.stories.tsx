@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { DisplayTextAnimation } from '.components/display-text-animation';
+import { DisplayTextAnimation } from '.components/DisplayTextAnimation';
 
 const meta: Meta<typeof DisplayTextAnimation> = {
   title: 'Custom/Display Text Animation',

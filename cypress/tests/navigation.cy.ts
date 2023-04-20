@@ -1,5 +1,5 @@
 import { Given } from '@badeball/cypress-cucumber-preprocessor';
-// custom paths for outside Cypress folder doesn't work
+// custom paths doesn't work
 import { publicLinks } from '../../data/publicLinks';
 
 const envMapping: { [key: string]: string } = {
@@ -22,7 +22,7 @@ Given('user goes to {word} page', (page: string) => {
 });
 
 Given('links API is valid', () => {
-  cy.request(`${window.location.origin}/api/links`).then((response) => {
+  cy.request(`${location.origin}/api/links`).then((response) => {
     expect(response).property('status').to.be.oneOf([200, 304]);
     Object.entries(publicLinks).forEach((link) => {
       expect(response.body).property(link[0]).to.be.equal(link[1]);

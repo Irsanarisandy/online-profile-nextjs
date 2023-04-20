@@ -24,12 +24,13 @@ backend:
   - Django (Python)
   - Rest APIs
   - GraphQL APIs
-  - 'SQL Databases (e.g. MySQL, SQL Server)'
+  - SQL Databases (e.g. MySQL, SQL Server)
 generalCoding:
   - Python
   - TypeScript / JavaScript
   - C#
   - C / C++
+  - SQL / SQLite
 others:
   - Git
   - Unit testing
@@ -42,12 +43,8 @@ I am a Fullstack Website Developer, currently working for an Australian company.
 
 &nbsp;
 
-I like to discover new web technologies, while also keep up with the latest trend in my career. This website, for example, was created using [Next.js](https://nextjs.org/), [TailwindCSS](https://tailwindcss.com/) and [TinaCMS](https://tina.io/). I am also interested in blockchain and cryptocurrency.
+I like to discover new technologies related to my career. This website, for example, was created using [Next.js](https://nextjs.org/), [TailwindCSS](https://tailwindcss.com/) and [TinaCMS](https://tina.io/). I am also interested in keeping up with the latest trend in other technologies, such as web3 technologies which includes the use of (but not limited to) blockchains, cryptocurrencies and nfts.
 
 &nbsp;
 
-Outside my career, I love to read manga, go for hiking/travelling, and play shooting/strategy games. Some games I currently play include:
-
-- Rainbow Six Siege
-- League of Legends (mostly on mobile)
-- Chess
+Outside of work, I do some mentoring for those who needs help in coding. This includes (but not limited to) the skills mentioned in the sections below. Feel free to reach out to me by [email](mailto:irsanarisandy@protonmail.com) if you have any queries.
