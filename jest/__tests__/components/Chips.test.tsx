@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 
-import { Chips } from '.components/chips';
+import { Chips } from '.components/Chips';
 
 describe('Chips component', () => {
   const testCases = [

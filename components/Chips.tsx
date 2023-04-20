@@ -1,6 +1,8 @@
 import Link from 'next/link';
+import type { DetailedHTMLProps, HTMLAttributes } from 'react';
 
-interface IProp {
+interface IProp
+  extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   /**
    * List of chip names
    */
@@ -12,12 +14,16 @@ interface IProp {
   /**
    * Class names from custom SCSS files and [Tailwind CSS](https://tailwindcss.com/)
    */
-  classes?: string;
+  className?: string;
 }
 
-export function Chips({ labels, clickLocation, classes }: IProp): JSX.Element {
+export function Chips({
+  labels,
+  clickLocation,
+  className
+}: IProp): JSX.Element {
   return (
-    <div className={`flex flex-wrap ${classes}`}>
+    <div className={`flex flex-wrap ${className}`}>
       {clickLocation == null &&
         labels.map((label, index) => (
           <span

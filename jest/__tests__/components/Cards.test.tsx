@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 
-import { Cards } from '.components/cards';
+import { Cards } from '.components/Cards';
 
 describe('Cards component', () => {
   it('should render correctly', () => {

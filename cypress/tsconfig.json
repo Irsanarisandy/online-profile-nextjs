@@ -1,7 +1,11 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "types": ["cypress"]
+    "types": ["cypress"],
+    "paths": {
+      ".components/*": ["components/*"],
+      ".styles/*": ["styles/*"]
+    }
   },
   "exclude": ["node_modules"]
 }

@@ -1,17 +1,22 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { PropsWithChildren, useLayoutEffect, useState } from 'react';
+import {
+  type DetailedHTMLProps,
+  type HTMLAttributes,
+  useLayoutEffect,
+  useState
+} from 'react';
 
-import { LinkElementPair } from './link-element-pair';
-import Links from '.entities/links.interface';
+import { LinkElementPair } from './LinkElementPair';
+import type Links from '.entities/links.interface';
 import logo from '.images/logo.png';
 import styles from '.styles/Navbar.module.scss';
 
-interface CustomMotionProp {
+interface CustomMotionProp
+  extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   isMobile: boolean;
   isOpen: boolean;
-  classes?: string;
 }
 
 interface NavlinkProp {
@@ -31,10 +36,10 @@ function NavOpacityMotionContainer({
   children,
   isMobile,
   isOpen,
-  classes
-}: PropsWithChildren<CustomMotionProp>): JSX.Element {
+  className
+}: CustomMotionProp): JSX.Element {
   return isMobile ? (
-    <div className={classes} style={{ opacity: Number(isOpen) }}>
+    <div className={className} style={{ opacity: Number(isOpen) }}>
       {children}
     </div>
   ) : (
@@ -46,7 +51,7 @@ function NavOpacityMotionContainer({
       }}
       initial="hidden"
       animate={isOpen ? 'display' : 'hidden'}
-      className={classes}
+      className={className}
     >
       {children}
     </motion.div>
@@ -99,23 +104,19 @@ export default function Navbar({ links, theme }: NavbarProp): JSX.Element {
   useLayoutEffect(() => {
     const updateWindowDimensions = () => {
       setIsMobile(
-        window.innerHeight <= 570 ||
-          window.innerWidth <= 640 ||
-          window.innerHeight >= window.innerWidth
+        innerHeight <= 570 || innerWidth <= 640 || innerHeight >= innerWidth
       );
       setIsOpen(
-        window.innerHeight > 570 &&
-          window.innerWidth > 640 &&
-          window.innerHeight < window.innerWidth
+        innerHeight > 570 && innerWidth > 640 && innerHeight < innerWidth
       );
     };
 
     updateWindowDimensions();
 
-    window.addEventListener('resize', updateWindowDimensions);
+    addEventListener('resize', updateWindowDimensions);
 
     return () => {
-      window.removeEventListener('resize', updateWindowDimensions);
+      removeEventListener('resize', updateWindowDimensions);
     };
   }, []);
 
@@ -137,7 +138,7 @@ export default function Navbar({ links, theme }: NavbarProp): JSX.Element {
               pointerEvents: isOpen ? 'auto' : 'none'
             }}
           >
-            <LinkElementPair linkName={name} classes={styles.icon} />
+            <LinkElementPair linkName={name} className={styles.icon} />
           </Link>
         );
       }
@@ -166,7 +167,7 @@ export default function Navbar({ links, theme }: NavbarProp): JSX.Element {
           <NavOpacityMotionContainer
             isMobile={isMobile}
             isOpen={isOpen}
-            classes="flex flex-col items-center p-4"
+            className="flex flex-col items-center p-4"
           >
             <Link
               href="/"
@@ -193,7 +194,7 @@ export default function Navbar({ links, theme }: NavbarProp): JSX.Element {
           <NavOpacityMotionContainer
             isMobile={isMobile}
             isOpen={isOpen}
-            classes="flex flex-col items-center"
+            className="flex flex-col items-center"
           >
             <div className="w-full my-12">
               <Navlink

@@ -5,9 +5,9 @@ import { PropsWithChildren, useContext } from 'react';
 import useSWR from 'swr';
 import { MoonIcon, SunIcon } from '@heroicons/react/24/solid';
 
-import Footer from './footer';
-import Navbar from './navbar';
-import { ThemeContext } from './theme-context';
+import Footer from './Footer';
+import Navbar from './Navbar';
+import { ThemeContext } from './ThemeContext';
 import styles from '.styles/Layout.module.scss';
 
 export default function Layout({ children }: PropsWithChildren): JSX.Element {
@@ -21,10 +21,7 @@ export default function Layout({ children }: PropsWithChildren): JSX.Element {
     <div className="h-screen flex flex-row">
       <Navbar links={data} theme={theme} />
       <div className="flex flex-col flex-auto overflow-y-auto">
-        <AnimatePresence
-          mode="wait"
-          onExitComplete={() => window.scrollTo(0, 0)}
-        >
+        <AnimatePresence mode="wait" onExitComplete={() => scrollTo(0, 0)}>
           <main key={router.asPath} className="grow">
             {children}
           </main>

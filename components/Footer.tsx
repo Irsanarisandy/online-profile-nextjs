@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { useState } from 'react';
 
-import { LinkElementPair } from './link-element-pair';
-import Links from '.entities/links.interface';
+import { LinkElementPair } from './LinkElementPair';
+import type Links from '.entities/links.interface';
 import styles from '.styles/Footer.module.scss';
 
 interface IProp {
@@ -26,7 +26,7 @@ export default function Footer({ links }: IProp): JSX.Element {
           >
             <LinkElementPair
               linkName={link[0]}
-              classes={styles.icon}
+              className={styles.icon}
               otherIconSize={20}
             />
           </Link>
@@ -62,7 +62,7 @@ export default function Footer({ links }: IProp): JSX.Element {
           onClick={() => setFeedExpanded(!feedExpanded)}
           title="Feed Dropdown"
         >
-          <LinkElementPair linkName="feed" classes={styles.icon} />
+          <LinkElementPair linkName="feed" className={styles.icon} />
         </button>
         {feedExpanded && (
           <div

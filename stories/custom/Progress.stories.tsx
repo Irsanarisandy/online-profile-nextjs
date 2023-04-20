@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Progress } from '.components/progress';
+import { Progress } from '.components/Progress';
 
 const meta: Meta<typeof Progress> = {
   title: 'Custom/Progress',
@@ -22,6 +22,6 @@ export const Example: Story = {
     ]
   },
   parameters: {
-    jest: ['progress.test.tsx']
+    jest: ['Progress.test.tsx']
   }
 };

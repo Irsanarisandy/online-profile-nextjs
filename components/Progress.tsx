@@ -40,15 +40,15 @@ export function Progress({
 
   useLayoutEffect(() => {
     const updateWindowDimensions = () => {
-      setDisplayPercentage(window.innerWidth >= 800);
+      setDisplayPercentage(innerWidth >= 800);
     };
 
     updateWindowDimensions();
 
-    window.addEventListener('resize', updateWindowDimensions);
+    addEventListener('resize', updateWindowDimensions);
 
     return () => {
-      window.removeEventListener('resize', updateWindowDimensions);
+      removeEventListener('resize', updateWindowDimensions);
     };
   }, []);
 

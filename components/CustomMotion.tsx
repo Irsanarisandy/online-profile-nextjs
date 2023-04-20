@@ -1,14 +1,13 @@
 import { motion } from 'framer-motion';
-import { PropsWithChildren } from 'react';
-
-interface IProp {
-  classes?: string;
-}
+import type { DetailedHTMLProps, HTMLAttributes } from 'react';
 
 export function OpacityPageTransitionMotion({
-  children,
-  classes
-}: PropsWithChildren<IProp>): JSX.Element {
+  className,
+  children
+}: DetailedHTMLProps<
+  HTMLAttributes<HTMLDivElement>,
+  HTMLDivElement
+>): JSX.Element {
   return (
     <motion.div
       variants={{
@@ -21,7 +20,7 @@ export function OpacityPageTransitionMotion({
       // as it removes css modules styling after going to another page in prod
       exit="hidden"
       transition={{ duration: 1 }}
-      className={classes}
+      className={className}
     >
       {children}
     </motion.div>

@@ -35,7 +35,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     author
   });
 
-  const aboutFile = path.join(process.cwd(), '/content/about/About.md');
+  const aboutFile = path.join(process.cwd(), '/content/page/About.md');
   const { content } = matter(fs.readFileSync(aboutFile));
   const aboutUrl = `${siteURL}/about`;
   feed.addItem({

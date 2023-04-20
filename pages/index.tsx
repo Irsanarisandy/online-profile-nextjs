@@ -7,13 +7,16 @@ import {
   PlayIcon
 } from '@heroicons/react/24/outline';
 
-import { OpacityPageTransitionMotion } from '.components/custom-motion';
-import { DisplayTextAnimation } from '.components/display-text-animation';
-import { TinaProps } from '.entities/tina-props.interface';
+import { OpacityPageTransitionMotion } from '.components/CustomMotion';
+import { DisplayTextAnimation } from '.components/DisplayTextAnimation';
 import { client } from '.generatedTina/client';
-import { HomeQuery } from '.generatedTina/types';
+import type { HomeQuery, HomeQueryVariables } from '.generatedTina/types';
 
-export default function Home(props: TinaProps<HomeQuery>): JSX.Element {
+export default function Home(props: {
+  data: HomeQuery;
+  variables: HomeQueryVariables;
+  query: string;
+}): JSX.Element {
   const router = useRouter();
   const { data } = useTina({
     data: props.data,
@@ -21,7 +24,7 @@ export default function Home(props: TinaProps<HomeQuery>): JSX.Element {
     query: props.query
   });
 
-  if (data == null || data.home == null) {
+  if (data?.home == null) {
     return <div>Home data does not exist!</div>;
   }
 
@@ -39,7 +42,7 @@ export default function Home(props: TinaProps<HomeQuery>): JSX.Element {
           <DisplayTextAnimation
             paragraph={intro as string[]}
             speed={speed}
-            classes="text-[1.5rem] font-bold sm:text-[3rem] sm:font-extrabold md:text-[4rem]"
+            className="text-[1.5rem] font-bold sm:text-[3rem] sm:font-extrabold md:text-[4rem]"
           />
         )}
         <div className="mt-4 flex">
@@ -82,7 +85,11 @@ export default function Home(props: TinaProps<HomeQuery>): JSX.Element {
 }
 
 export async function getStaticProps(): Promise<
-  GetStaticPropsResult<TinaProps<HomeQuery>>
+  GetStaticPropsResult<{
+    data: HomeQuery;
+    variables: HomeQueryVariables;
+    query: string;
+  }>
 > {
   const tinaProps = await client.queries.home({ relativePath: 'Home.md' });
 

@@ -1,6 +1,9 @@
+import type { DetailedHTMLProps, HTMLAttributes } from 'react';
+
 import styles from '.styles/DisplayTextAnimation.module.scss';
 
-interface IProp {
+interface IProp
+  extends DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement> {
   /**
    * List of sentences
    */
@@ -12,13 +15,13 @@ interface IProp {
   /**
    * Class names from custom SCSS files and [Tailwind CSS](https://tailwindcss.com/)
    */
-  classes?: string;
+  className?: string;
 }
 
 export function DisplayTextAnimation({
   paragraph,
   speed = (n: number) => n / 10 + 1,
-  classes
+  className
 }: IProp): JSX.Element {
   let curIndex = 0;
   const result = paragraph.map((line, lineIndex) =>
@@ -28,7 +31,7 @@ export function DisplayTextAnimation({
         <span
           aria-hidden="true"
           key={`line${lineIndex}char${charIndex}`}
-          className={classes}
+          className={className}
           style={{
             animationDelay: `${speed(curIndex)}s`
           }}

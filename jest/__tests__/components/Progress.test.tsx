@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 
-import { Progress } from '.components/progress';
+import { Progress } from '.components/Progress';
 
 describe('Progress component', () => {
   const progressDataList = [

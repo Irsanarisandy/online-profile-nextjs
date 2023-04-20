@@ -1,13 +1,12 @@
 import type { Preview } from '@storybook/react';
 import { withTests } from '@storybook/addon-jest';
-import results from '../jest-test-results.json';
 
 import 'tailwindcss/tailwind.css';
 import '../styles/globals.scss';
 
 export const decorators = [
   withTests({
-    results,
+    results: require('../jest-test-results.json'),
     filesExt: '(\\.test)?(\\.tsx?)?$'
   })
 ];

@@ -6,7 +6,10 @@ const config = defineConfig({
       {
         label: 'Home',
         name: 'home',
-        path: 'content/home',
+        path: 'content/page',
+        match: {
+          include: 'Home'
+        },
         fields: [
           {
             type: 'string',
@@ -16,6 +19,10 @@ const config = defineConfig({
           }
         ],
         ui: {
+          allowedActions: {
+            create: false,
+            delete: false
+          },
           router: () => {
             return '/';
           }
@@ -24,7 +31,10 @@ const config = defineConfig({
       {
         label: 'About',
         name: 'about',
-        path: 'content/about',
+        path: 'content/page',
+        match: {
+          include: 'About'
+        },
         fields: [
           {
             type: 'string',
@@ -96,6 +106,10 @@ const config = defineConfig({
           }
         ],
         ui: {
+          allowedActions: {
+            create: false,
+            delete: false
+          },
           router: () => {
             return '/about';
           }
@@ -178,7 +192,7 @@ const config = defineConfig({
   media: {
     loadCustomStore: async () => {
       const pack = await import('next-tinacms-cloudinary');
-      return pack.TinaCloudCloudinaryMediaStore as any;
+      return pack.TinaCloudCloudinaryMediaStore;
     }
   },
   build: {

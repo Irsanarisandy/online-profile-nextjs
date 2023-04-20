@@ -1,6 +1,6 @@
+import { defineConfig } from 'cypress';
 import { addCucumberPreprocessorPlugin } from '@badeball/cypress-cucumber-preprocessor';
 import browserify from '@badeball/cypress-cucumber-preprocessor/browserify';
-import { defineConfig } from 'cypress';
 
 const { downloadFile } = require('cypress-downloadfile/lib/addPlugin');
 

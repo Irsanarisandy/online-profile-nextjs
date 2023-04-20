@@ -12,15 +12,15 @@ const preferDarkQuery = '(prefers-color-scheme: dark)';
 
 export default function ThemeProvider({ children }: PropsWithChildren) {
   const [theme, setTheme] = useState<ThemeState>(() => {
-    const localStorageValue = window.localStorage.getItem('theme');
+    const localStorageValue = localStorage.getItem('theme');
     if (localStorageValue != null && localStorageValue !== '') {
       return localStorageValue as ThemeState;
     }
-    return window.matchMedia(preferDarkQuery).matches ? 'dark' : 'light';
+    return matchMedia(preferDarkQuery).matches ? 'dark' : 'light';
   });
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia(preferDarkQuery);
+    const mediaQuery = matchMedia(preferDarkQuery);
     const pageContent = document.getElementById('__next') as HTMLElement;
     const handleChange = () => {
       setTheme(() => {
@@ -52,7 +52,7 @@ export default function ThemeProvider({ children }: PropsWithChildren) {
       document.body.classList.remove('bg-black', 'text-white');
       pageContent.className = 'light-gradient';
     }
-    window.localStorage.setItem('theme', theme);
+    localStorage.setItem('theme', theme);
   }, [theme]);
 
   const changeTheme = () => {
