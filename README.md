@@ -53,8 +53,6 @@ npm run cypress:headless:comp
 
 Run `npm run dev` and open [http://localhost:3000](http://localhost:3000) with the browser to see the result.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
 ## Local URLs
 
 - [http://localhost:3000](http://localhost:3000) : browse the website

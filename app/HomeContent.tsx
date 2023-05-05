@@ -1,5 +1,6 @@
-import type { GetStaticPropsResult } from 'next';
-import { useRouter } from 'next/router';
+'use client';
+
+import { useRouter } from 'next/navigation';
 import { useTina } from 'tinacms/dist/react';
 import {
   FaceSmileIcon,
@@ -9,19 +10,22 @@ import {
 
 import { OpacityPageTransitionMotion } from '.components/CustomMotion';
 import { DisplayTextAnimation } from '.components/DisplayTextAnimation';
-import { client } from '.generatedTina/client';
 import type { HomeQuery, HomeQueryVariables } from '.generatedTina/types';
 
-export default function Home(props: {
-  data: HomeQuery;
-  variables: HomeQueryVariables;
-  query: string;
-}): JSX.Element {
+export default function HomeContent({
+  tinaProps
+}: {
+  tinaProps: {
+    data: HomeQuery;
+    variables: HomeQueryVariables;
+    query: string;
+  };
+}) {
   const router = useRouter();
   const { data } = useTina({
-    data: props.data,
-    variables: props.variables,
-    query: props.query
+    data: tinaProps.data,
+    variables: tinaProps.variables,
+    query: tinaProps.query
   });
 
   if (data?.home == null) {
@@ -33,7 +37,7 @@ export default function Home(props: {
   const speed = (n: number) => (n / 10) * 2 + 1;
 
   return (
-    <OpacityPageTransitionMotion>
+    <OpacityPageTransitionMotion keyName="home">
       <div
         className="p-4 sm:p-8 flex flex-col justify-center"
         style={{ height: 'calc(100vh - 103px)' }}
@@ -82,22 +86,4 @@ export default function Home(props: {
       </div>
     </OpacityPageTransitionMotion>
   );
-}
-
-export async function getStaticProps(): Promise<
-  GetStaticPropsResult<{
-    data: HomeQuery;
-    variables: HomeQueryVariables;
-    query: string;
-  }>
-> {
-  const tinaProps = await client.queries.home({ relativePath: 'Home.md' });
-
-  return {
-    props: {
-      data: tinaProps.data,
-      variables: tinaProps.variables,
-      query: tinaProps.query
-    }
-  };
 }

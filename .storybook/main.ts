@@ -36,6 +36,7 @@ const config: StorybookConfig = {
 
     config.resolve.alias = {
       ...config.resolve.alias,
+      '.app': path.resolve(__dirname, '../app'),
       '.components': path.resolve(__dirname, '../components'),
       '.images': path.resolve(__dirname, '../public/images'),
       '.pages': path.resolve(__dirname, '../pages'),
