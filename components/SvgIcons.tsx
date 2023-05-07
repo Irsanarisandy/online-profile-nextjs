@@ -1,9 +1,11 @@
+import React from 'react';
+
 interface IProp {
   bgColor?: string;
   fill?: string;
 }
 
-export function GitHubLogo({ bgColor, fill }: IProp): JSX.Element {
+export function GitHubLogo({ bgColor, fill }: IProp) {
   return (
     <svg
       role="img"
@@ -19,7 +21,7 @@ export function GitHubLogo({ bgColor, fill }: IProp): JSX.Element {
   );
 }
 
-export function GitLabLogo({ bgColor, fill }: IProp): JSX.Element {
+export function GitLabLogo({ bgColor, fill }: IProp) {
   return (
     <svg
       role="img"
@@ -35,7 +37,7 @@ export function GitLabLogo({ bgColor, fill }: IProp): JSX.Element {
   );
 }
 
-export function LinkedInLogo({ bgColor, fill }: IProp): JSX.Element {
+export function LinkedInLogo({ bgColor, fill }: IProp) {
   return (
     <svg
       role="img"

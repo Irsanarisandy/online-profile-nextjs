@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Merienda } from 'next/font/google';
 import Image, { type ImageLoaderProps } from 'next/image';
 import Link from 'next/link';
-import {
+import React, {
   type DetailedHTMLProps,
   type HTMLAttributes,
   useLayoutEffect,
@@ -45,7 +45,7 @@ function NavOpacityMotionContainer({
   isMobile,
   isOpen,
   className
-}: CustomMotionProp): JSX.Element {
+}: CustomMotionProp) {
   return isMobile ? (
     <div className={className} style={{ opacity: Number(isOpen) }}>
       {children}
@@ -66,13 +66,7 @@ function NavOpacityMotionContainer({
   );
 }
 
-function Navlink({
-  href,
-  name,
-  isOpen,
-  theme,
-  handleClick
-}: NavlinkProp): JSX.Element {
+function Navlink({ href, name, isOpen, theme, handleClick }: NavlinkProp) {
   return (
     <div
       className={`text-center ${
@@ -105,7 +99,7 @@ function Navlink({
   );
 }
 
-export default function Navbar({ links, theme }: NavbarProp): JSX.Element {
+export default function Navbar({ links, theme }: NavbarProp) {
   const [isMobile, setIsMobile] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -131,7 +125,7 @@ export default function Navbar({ links, theme }: NavbarProp): JSX.Element {
   const handleClick = () =>
     setIsOpen((prevState) => (isMobile ? !prevState : true));
 
-  let linkElements: JSX.Element[] = [];
+  let linkElements: React.JSX.Element[] = [];
   if (links != null) {
     const certainLinks = ['linkedin', 'github', 'gitlab'] as const;
     certainLinks.forEach((name) => {

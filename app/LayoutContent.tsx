@@ -1,7 +1,7 @@
 'use client';
 
 import { AnimatePresence } from 'framer-motion';
-import { PropsWithChildren, useContext } from 'react';
+import React, { type PropsWithChildren, useContext } from 'react';
 import { MoonIcon, SunIcon } from '@heroicons/react/24/solid';
 
 import Footer from '.components/Footer';

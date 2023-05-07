@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import { Quicksand } from 'next/font/google';
-import { PropsWithChildren } from 'react';
+import React, { type PropsWithChildren } from 'react';
 
 import LayoutContent from './LayoutContent';
 import { publicLinks } from '.data/publicLinks';
@@ -11,9 +11,7 @@ const quicksand = Quicksand({
   subsets: ['latin']
 });
 
-export default function RootLayout({
-  children
-}: PropsWithChildren): JSX.Element {
+export default function RootLayout({ children }: PropsWithChildren) {
   const data = publicLinks;
   const ThemeProvider = dynamic(() => import('.components/ThemeContext'), {
     ssr: false

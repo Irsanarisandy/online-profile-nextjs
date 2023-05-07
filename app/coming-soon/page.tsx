@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
+import React from 'react';
 
 import { OpacityPageTransitionMotion } from '.components/CustomMotion';
 
-export default function Page(): JSX.Element {
+export default function Page() {
   return (
     <OpacityPageTransitionMotion
       keyName="coming-soon"

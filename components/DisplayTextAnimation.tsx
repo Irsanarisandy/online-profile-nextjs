@@ -1,4 +1,4 @@
-import type { DetailedHTMLProps, HTMLAttributes } from 'react';
+import React, { type DetailedHTMLProps, type HTMLAttributes } from 'react';
 
 import styles from '.styles/DisplayTextAnimation.module.scss';
 
@@ -22,7 +22,7 @@ export function DisplayTextAnimation({
   paragraph,
   speed = (n: number) => n / 10 + 1,
   className
-}: IProp): JSX.Element {
+}: IProp) {
   let curIndex = 0;
   const result = paragraph.map((line, lineIndex) =>
     line.split('').map((char, charIndex) => {

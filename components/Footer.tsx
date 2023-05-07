@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import { LinkElementPair } from './LinkElementPair';
 import type Links from '.entities/links.interface';
@@ -9,9 +9,9 @@ interface IProp {
   links: Links;
 }
 
-export default function Footer({ links }: IProp): JSX.Element {
-  let linkElements: JSX.Element[] = [];
-  let linkDropdownMenus: JSX.Element[] = [];
+export default function Footer({ links }: IProp) {
+  let linkElements: React.JSX.Element[] = [];
+  let linkDropdownMenus: React.JSX.Element[] = [];
   const [feedExpanded, setFeedExpanded] = useState(false);
 
   if (links != null) {

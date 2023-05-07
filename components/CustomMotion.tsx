@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import type { DetailedHTMLProps, HTMLAttributes } from 'react';
+import React, { type DetailedHTMLProps, type HTMLAttributes } from 'react';
 
 export function OpacityPageTransitionMotion({
   className,
@@ -9,7 +9,7 @@ export function OpacityPageTransitionMotion({
   keyName
 }: DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> & {
   keyName: string;
-}): JSX.Element {
+}) {
   return (
     <motion.div
       key={keyName}

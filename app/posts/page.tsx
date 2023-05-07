@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
+import React from 'react';
 
 import PostsContent from './PostsContent';
 import { client } from '.generatedTina/client';
 
-export default async function Page(): Promise<JSX.Element> {
+export default async function Page() {
   const tinaProps = await client.queries.postConnection({
     sort: 'postDateTime',
     last: 10

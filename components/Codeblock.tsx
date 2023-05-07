@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import { Prism, type SyntaxHighlighterProps } from 'react-syntax-highlighter';
 import { darcula } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 

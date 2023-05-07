@@ -1,4 +1,4 @@
-import type { DetailedHTMLProps, HTMLAttributes } from 'react';
+import React, { type DetailedHTMLProps, type HTMLAttributes } from 'react';
 import { DocumentArrowDownIcon, RssIcon } from '@heroicons/react/24/solid';
 
 import { GitHubLogo, GitLabLogo, LinkedInLogo } from './SvgIcons';
@@ -19,11 +19,7 @@ interface IProp
   otherIconSize?: number;
 }
 
-export function LinkElementPair({
-  linkName,
-  className,
-  otherIconSize
-}: IProp): JSX.Element {
+export function LinkElementPair({ linkName, className, otherIconSize }: IProp) {
   switch (linkName) {
     case 'linkedin':
       return (

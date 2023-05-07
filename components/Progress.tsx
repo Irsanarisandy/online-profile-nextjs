@@ -35,7 +35,7 @@ export function Progress({
   hideInfo = false,
   bgColor = '#A3A3A3',
   height = 24
-}: ProgressProp): JSX.Element {
+}: ProgressProp) {
   const [displayPercentage, setDisplayPercentage] = useState(false);
 
   useLayoutEffect(() => {

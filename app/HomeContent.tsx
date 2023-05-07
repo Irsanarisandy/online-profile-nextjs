@@ -1,6 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import React from 'react';
 import { useTina } from 'tinacms/dist/react';
 import {
   FaceSmileIcon,

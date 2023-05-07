@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import React from 'react';
 import { useTina } from 'tinacms/dist/react';
 
 import { Cards } from '.components/Cards';

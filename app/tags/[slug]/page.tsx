@@ -1,13 +1,10 @@
 import type { Metadata } from 'next';
+import React from 'react';
 
 import TagsContent from './TagsContent';
 import { client } from '.generatedTina/client';
 
-export default async function Page({
-  params
-}: {
-  params: { slug: string };
-}): Promise<JSX.Element> {
+export default async function Page({ params }: { params: { slug: string } }) {
   // Temporary: needs to be changed when Tina finally supports filtering on list
   const { slug } = params;
   const tinaProps = await client.queries.postConnection({

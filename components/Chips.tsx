@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import type { DetailedHTMLProps, HTMLAttributes } from 'react';
+import React, { type DetailedHTMLProps, type HTMLAttributes } from 'react';
 
 interface IProp
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
@@ -17,11 +17,7 @@ interface IProp
   className?: string;
 }
 
-export function Chips({
-  labels,
-  clickLocation,
-  className
-}: IProp): JSX.Element {
+export function Chips({ labels, clickLocation, className }: IProp) {
   return (
     <div className={`flex flex-wrap ${className}`}>
       {clickLocation == null &&
