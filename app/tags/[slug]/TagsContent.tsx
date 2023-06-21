@@ -64,14 +64,14 @@ export default function TagsContent({
   return (
     <OpacityPageTransitionMotion
       keyName={`tag-${slug}`}
-      className="flex flex-col min-h-full px-4 pt-4 sm:px-8 sm:pt-8"
+      className="flex min-h-full flex-col px-4 pt-4 sm:px-8 sm:pt-8"
     >
-      <Cards className="p-4 sm:p-8 mb-4 md:mb-8">
+      <Cards className="mb-4 p-4 sm:p-8 md:mb-8">
         <h1>Tag: {slug}</h1>
       </Cards>
-      <section className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 md:auto-rows-[450px]">
+      <section className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:auto-rows-[450px] lg:grid-cols-3 2xl:grid-cols-4">
         {postList.map((curPost, index) => (
-          <Cards className="p-4 sm:p-8 flex flex-col" key={`post${index + 1}`}>
+          <Cards className="flex flex-col p-4 sm:p-8" key={`post${index + 1}`}>
             <div className="mb-4 flex flex-col">
               <Link
                 href={`/posts/${curPost.location}`}
@@ -85,7 +85,7 @@ export default function TagsContent({
             </div>
             {curPost.heroImage && (
               <div className="block w-full">
-                <div className="max-w-[300px] mx-auto">
+                <div className="mx-auto max-w-[300px]">
                   <Image
                     src={curPost.heroImage}
                     alt="hero image"

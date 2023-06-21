@@ -26,7 +26,7 @@ export function Chips({ labels, clickLocation, className }: IProp) {
             key={`Chip ${index + 1}: ${label}`}
             data-testid={`Chip ${index + 1}: ${label}`}
             aria-label={`Chip ${index + 1}: ${label}`}
-            className="mr-4 mb-4 px-4 py-2 rounded-full bg-gray-900 dark:bg-gray-50 text-white dark:text-black font-semibold text-sm flex align-center transition-colors"
+            className="align-center mb-4 mr-4 flex rounded-full bg-gray-900 px-4 py-2 text-sm font-semibold text-white transition-colors dark:bg-gray-50 dark:text-black"
           >
             {label}
           </span>
@@ -39,7 +39,7 @@ export function Chips({ labels, clickLocation, className }: IProp) {
             key={`Chip link ${index + 1}: ${label}`}
             href={`/${clickLocation}/${label}`}
           >
-            <span className="mr-4 mb-4 px-4 py-2 rounded-full bg-gray-900 dark:bg-gray-50 text-white dark:text-black font-semibold text-sm flex align-center transition-colors">
+            <span className="align-center mb-4 mr-4 flex rounded-full bg-gray-900 px-4 py-2 text-sm font-semibold text-white transition-colors dark:bg-gray-50 dark:text-black">
               {label}
             </span>
           </Link>

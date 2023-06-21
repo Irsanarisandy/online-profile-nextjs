@@ -191,18 +191,18 @@ export default function Navbar({ links, theme }: NavbarProp) {
               />
             </Link>
             <h1 className={`font-bold ${merienda.className}`}>Irsan</h1>
-            <span className={`font-normal text-xs ${merienda.className}`}>
+            <span className={`text-xs font-normal ${merienda.className}`}>
               Web Developer
             </span>
           </NavOpacityMotionContainer>
         </div>
-        <div className="flex-auto bg-gray-50 dark:bg-gray-900 transition-colors duration-500">
+        <div className="flex-auto bg-gray-50 transition-colors duration-500 dark:bg-gray-900">
           <NavOpacityMotionContainer
             isMobile={isMobile}
             isOpen={isOpen}
             className="flex flex-col items-center"
           >
-            <div className="w-full my-12">
+            <div className="my-12 w-full">
               <Navlink
                 href="/about"
                 name="About"
@@ -239,7 +239,7 @@ export default function Navbar({ links, theme }: NavbarProp) {
       </nav>
       <button
         aria-label="nav menu toggle button"
-        className={`z-10 text-black bg-gray-200 flex flex-col justify-center items-center ${styles.toggle_nav_button}`}
+        className={`z-10 flex flex-col items-center justify-center bg-gray-200 text-black ${styles.toggle_nav_button}`}
         onClick={() => setIsOpen((prevState) => !prevState)}
       >
         {isMobile && (

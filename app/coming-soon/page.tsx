@@ -7,7 +7,7 @@ export default function Page() {
   return (
     <OpacityPageTransitionMotion
       keyName="coming-soon"
-      className="h-full flex items-center justify-center"
+      className="flex h-full items-center justify-center"
     >
       <h1>Coming Soon</h1>
     </OpacityPageTransitionMotion>

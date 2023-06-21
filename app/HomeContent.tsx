@@ -40,7 +40,7 @@ export default function HomeContent({
   return (
     <OpacityPageTransitionMotion keyName="home">
       <div
-        className="p-4 sm:p-8 flex flex-col justify-center"
+        className="flex flex-col justify-center p-4 sm:p-8"
         style={{ height: 'calc(100vh - 103px)' }}
       >
         {introExist && (
@@ -55,7 +55,7 @@ export default function HomeContent({
             id="homeButtonAbout"
             data-testid="homeButtonAbout"
             aria-label="navigate to about page button"
-            className="mr-8 w-[120px] hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors duration-500 font-bold py-2 px-4 border border-transparent rounded shadow-lg shadow-gray-50 dark:shadow-gray-900"
+            className="mr-8 w-[120px] rounded border border-transparent px-4 py-2 font-bold shadow-lg shadow-gray-50 transition-colors duration-500 hover:bg-gray-50 dark:shadow-gray-900 dark:hover:bg-gray-900"
             onClick={() => router.push('/about')}
           >
             <span>
@@ -66,7 +66,7 @@ export default function HomeContent({
             id="homeButtonBlog"
             data-testid="homeButtonBlog"
             aria-label="navigate to blog page button"
-            className="mr-8 w-[120px] hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors duration-500 font-bold py-2 px-4 border border-transparent rounded shadow-lg shadow-gray-50 dark:shadow-gray-900"
+            className="mr-8 w-[120px] rounded border border-transparent px-4 py-2 font-bold shadow-lg shadow-gray-50 transition-colors duration-500 hover:bg-gray-50 dark:shadow-gray-900 dark:hover:bg-gray-900"
             onClick={() => router.push('/posts')}
           >
             <span>
@@ -76,7 +76,7 @@ export default function HomeContent({
           <button
             id="homeButtonGames"
             aria-label="navigate to games page button"
-            className="w-[120px] hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors duration-500 font-bold py-2 px-4 border border-transparent rounded shadow-lg shadow-gray-50 dark:shadow-gray-900"
+            className="w-[120px] rounded border border-transparent px-4 py-2 font-bold shadow-lg shadow-gray-50 transition-colors duration-500 hover:bg-gray-50 dark:shadow-gray-900 dark:hover:bg-gray-900"
             onClick={() => router.push('/coming-soon')}
           >
             <span>

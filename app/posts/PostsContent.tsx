@@ -66,24 +66,24 @@ export default function PostsContent({
   return (
     <OpacityPageTransitionMotion keyName="posts">
       {postsData.length === 0 && (
-        <div className="h-full flex items-center justify-center">
+        <div className="flex h-full items-center justify-center">
           <h1>No posts available!</h1>
         </div>
       )}
       {postsData.length > 0 && (
-        <div className="flex flex-col md:flex-row min-h-full px-4 pt-4 sm:px-8 sm:pt-8">
+        <div className="flex min-h-full flex-col px-4 pt-4 sm:px-8 sm:pt-8 md:flex-row">
           <section className="mb-8 md:mb-0 md:ml-8">
-            <Cards className="p-4 sm:p-8 flex flex-col md:w-[320px]">
+            <Cards className="flex flex-col p-4 sm:p-8 md:w-[320px]">
               <h1 className="mb-4">Tags</h1>
               {postsTags.length > 0 && (
                 <Chips labels={postsTags} clickLocation="tags" />
               )}
             </Cards>
           </section>
-          <section className="md:grow md:order-first grid gap-8 grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 md:auto-rows-[450px]">
+          <section className="grid grid-cols-1 gap-8 md:order-first md:grow md:auto-rows-[450px] lg:grid-cols-2 2xl:grid-cols-3">
             {postsData.map((data, index) => (
               <Cards
-                className="p-4 sm:p-8 flex flex-col"
+                className="flex flex-col p-4 sm:p-8"
                 key={`post${index + 1}`}
               >
                 <div className="mb-4 flex flex-col">
@@ -99,7 +99,7 @@ export default function PostsContent({
                 </div>
                 {data.heroImage && (
                   <div className="block w-full">
-                    <div className="max-w-[300px] mx-auto">
+                    <div className="mx-auto max-w-[300px]">
                       <Image
                         src={data.heroImage}
                         alt="hero image"

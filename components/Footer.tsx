@@ -43,7 +43,7 @@ export default function Footer({ links }: IProp) {
             key={name}
             role="menuitem"
             id={`feed${feedType}`}
-            className="text-sm py-2 px-4 block w-full bg-transparent text-gray-700 hover:bg-gray-100"
+            className="block w-full bg-transparent px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
             href={link[1]}
             target="_blank"
             rel="noopener noreferrer"
@@ -83,7 +83,7 @@ export default function Footer({ links }: IProp) {
   return (
     <footer className="flex flex-col items-center py-4">
       <div
-        className="mb-2 transition-opacity duration-1500 grid gap-5"
+        className="mb-2 grid gap-5 transition-opacity duration-1500"
         style={{
           opacity: linkElements.length === 0 ? 0 : 1,
           gridTemplateColumns: `repeat(${linkElements.length}, minmax(0, 1fr))`

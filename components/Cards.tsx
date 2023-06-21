@@ -16,7 +16,7 @@ interface IProp
 export function Cards({ className, children }: IProp) {
   return (
     <div
-      className={`hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors duration-500 border border-transparent rounded-lg shadow-lg shadow-gray-50 dark:shadow-gray-900 ${className}`}
+      className={`rounded-lg border border-transparent shadow-lg shadow-gray-50 transition-colors duration-500 hover:bg-gray-50 dark:shadow-gray-900 dark:hover:bg-gray-900 ${className}`}
     >
       {children}
     </div>

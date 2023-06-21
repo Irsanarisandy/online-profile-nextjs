@@ -59,9 +59,9 @@ export default function PostContent({
 
   return (
     <OpacityPageTransitionMotion keyName={`post-${slug}`}>
-      <Cards className="m-4 sm:m-8 p-4 sm:p-8">
+      <Cards className="m-4 p-4 sm:m-8 sm:p-8">
         <h1>{title}</h1>
-        <span className="block my-4">
+        <span className="my-4 block">
           <time>{displayedDateTime}</time>
         </span>
         {tagsExist && (
@@ -73,7 +73,7 @@ export default function PostContent({
         )}
         {heroImage && (
           <div className="w-full">
-            <div className="max-w-md mx-auto">
+            <div className="mx-auto max-w-md">
               <Image
                 src={heroImage}
                 alt="hero image"
@@ -83,7 +83,7 @@ export default function PostContent({
             </div>
           </div>
         )}
-        <article className="mt-4 markdown">
+        <article className="markdown mt-4">
           <TinaMarkdown content={body} components={components} />
         </article>
       </Cards>

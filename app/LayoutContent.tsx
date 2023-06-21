@@ -15,9 +15,9 @@ export default function LayoutContent({ children }: PropsWithChildren) {
   const { theme, changeTheme } = useContext(ThemeContext);
 
   return (
-    <div className="h-screen flex flex-row">
+    <div className="flex h-screen flex-row">
       <Navbar links={data} theme={theme} />
-      <div className="flex flex-col flex-auto overflow-y-auto">
+      <div className="flex flex-auto flex-col overflow-y-auto">
         <main className="grow">
           <AnimatePresence mode="wait" onExitComplete={() => scrollTo(0, 0)}>
             {children}
@@ -28,7 +28,7 @@ export default function LayoutContent({ children }: PropsWithChildren) {
       <button
         id="themeToggleButton"
         aria-label="theme toggle button"
-        className={`fixed bottom-4 right-4 text-black bg-gray-200 ${styles.toggle_button}`}
+        className={`fixed bottom-4 right-4 bg-gray-200 text-black ${styles.toggle_button}`}
         onClick={changeTheme}
       >
         <span className="flex justify-center">

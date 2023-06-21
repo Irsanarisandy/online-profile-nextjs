@@ -55,7 +55,7 @@ export function Progress({
   return (
     <div
       data-testid="progress-comp"
-      className="flex rounded-lg animate-pulse"
+      className="flex animate-pulse rounded-lg"
       style={{ backgroundColor: bgColor, height }}
     >
       {progressDataList.length === 1 && (

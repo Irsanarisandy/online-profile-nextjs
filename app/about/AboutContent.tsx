@@ -59,14 +59,14 @@ export default function AboutContent({
 
   return (
     <OpacityPageTransitionMotion keyName="about">
-      <Cards className="m-4 sm:m-8 p-4 sm:p-8">
+      <Cards className="m-4 p-4 sm:m-8 sm:p-8">
         <h1 data-testid="aboutTitle" className="mb-8">
           {title}
         </h1>
         <div className="markdown">
           <TinaMarkdown content={body} components={components} />
         </div>
-        <div className="inline-block border-2 rounded-full mt-8 px-4 py-2">
+        <div className="mt-8 inline-block rounded-full border-2 px-4 py-2">
           <Link
             id="downloadCV"
             href={publicLinks.cv}
@@ -81,12 +81,12 @@ export default function AboutContent({
         </div>
       </Cards>
       {overallDevSkillsExist && (
-        <Cards className="m-4 sm:m-8 p-4 sm:p-8">
+        <Cards className="m-4 p-4 sm:m-8 sm:p-8">
           <Progress progressDataList={overallDevSkills as ProgressData[]} />
         </Cards>
       )}
       {(frontendExist || backendExist || generalCodingExist || othersExist) && (
-        <div className="grid gap-8 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 m-4 sm:m-8">
+        <div className="m-4 grid grid-cols-1 gap-8 sm:m-8 md:grid-cols-2 xl:grid-cols-3">
           {frontendExist && (
             <Cards className="p-4 sm:p-8">
               <h2 className="mb-2">Frontend Skills</h2>
