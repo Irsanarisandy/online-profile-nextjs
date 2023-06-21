@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import React from 'react';
-import { useTina } from 'tinacms/dist/react';
+import { tinaField, useTina } from 'tinacms/dist/react';
 import {
   FaceSmileIcon,
   NewspaperIcon,
@@ -48,6 +48,7 @@ export default function HomeContent({
             paragraph={intro as string[]}
             speed={speed}
             className="text-[1.5rem] font-bold sm:text-[3rem] sm:font-extrabold md:text-[4rem]"
+            passedTinaFieldFunc={(i) => tinaField(data.home, 'intro', i)}
           />
         )}
         <div className="mt-4 flex">

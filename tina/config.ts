@@ -185,10 +185,16 @@ const config = defineConfig({
       }
     ]
   },
+  // https://tina.io/docs/reference/search/overview/
+  search: {
+    tina: {
+      indexerToken: process.env.TINA_SEARCH_TOKEN as string
+    }
+  },
   // https://vercel.com/docs/concepts/projects/environment-variables#system-environment-variables
   branch: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF || 'main',
   clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID as string,
-  token: process.env.TINA_TOKEN as string,
+  token: process.env.TINA_CONTENT_TOKEN as string,
   media: {
     loadCustomStore: async () => {
       const pack = await import('next-tinacms-cloudinary');

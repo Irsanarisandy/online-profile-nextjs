@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import React from 'react';
-import { useTina } from 'tinacms/dist/react';
+import { tinaField, useTina } from 'tinacms/dist/react';
 import { Components, TinaMarkdown } from 'tinacms/dist/rich-text';
 
 import { Cards } from '.components/Cards';
@@ -60,8 +60,11 @@ export default function PostContent({
   return (
     <OpacityPageTransitionMotion keyName={`post-${slug}`}>
       <Cards className="m-4 p-4 sm:m-8 sm:p-8">
-        <h1>{title}</h1>
-        <span className="my-4 block">
+        <h1 data-tina-field={tinaField(data.post, 'title')}>{title}</h1>
+        <span
+          className="my-4 block"
+          data-tina-field={tinaField(data.post, 'postDateTime')}
+        >
           <time>{displayedDateTime}</time>
         </span>
         {tagsExist && (
@@ -69,11 +72,15 @@ export default function PostContent({
             labels={tags as string[]}
             clickLocation="tags"
             className="mb-4"
+            passedTinaFieldFunc={(i) => tinaField(data.post, 'tags', i)}
           />
         )}
         {heroImage && (
           <div className="w-full">
-            <div className="mx-auto max-w-md">
+            <div
+              className="mx-auto max-w-md"
+              data-tina-field={tinaField(data.post, 'heroImage')}
+            >
               <Image
                 src={heroImage}
                 alt="hero image"
@@ -83,7 +90,10 @@ export default function PostContent({
             </div>
           </div>
         )}
-        <article className="markdown mt-4">
+        <article
+          className="markdown mt-4"
+          data-tina-field={tinaField(data.post, 'body')}
+        >
           <TinaMarkdown content={body} components={components} />
         </article>
       </Cards>

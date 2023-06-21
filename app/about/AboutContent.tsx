@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import React from 'react';
-import { useTina } from 'tinacms/dist/react';
+import { tinaField, useTina } from 'tinacms/dist/react';
 import { Components, TinaMarkdown } from 'tinacms/dist/rich-text';
 import { DocumentArrowDownIcon } from '@heroicons/react/24/solid';
 
@@ -60,10 +60,17 @@ export default function AboutContent({
   return (
     <OpacityPageTransitionMotion keyName="about">
       <Cards className="m-4 p-4 sm:m-8 sm:p-8">
-        <h1 data-testid="aboutTitle" className="mb-8">
+        <h1
+          data-testid="aboutTitle"
+          className="mb-8"
+          data-tina-field={tinaField(data.about, 'title')}
+        >
           {title}
         </h1>
-        <div className="markdown">
+        <div
+          className="markdown"
+          data-tina-field={tinaField(data.about, 'body')}
+        >
           <TinaMarkdown content={body} components={components} />
         </div>
         <div className="mt-8 inline-block rounded-full border-2 px-4 py-2">
@@ -82,7 +89,12 @@ export default function AboutContent({
       </Cards>
       {overallDevSkillsExist && (
         <Cards className="m-4 p-4 sm:m-8 sm:p-8">
-          <Progress progressDataList={overallDevSkills as ProgressData[]} />
+          <Progress
+            progressDataList={overallDevSkills as ProgressData[]}
+            passedTinaFieldFunc={(i) =>
+              tinaField(data.about, 'overallDevSkills', i)
+            }
+          />
         </Cards>
       )}
       {(frontendExist || backendExist || generalCodingExist || othersExist) && (
@@ -91,8 +103,13 @@ export default function AboutContent({
             <Cards className="p-4 sm:p-8">
               <h2 className="mb-2">Frontend Skills</h2>
               <ul data-testid="aboutFrontend">
-                {(frontend as string[]).map((skill: string) => (
-                  <li key={`Frontend: ${skill}`}>{skill}</li>
+                {(frontend as string[]).map((skill, i) => (
+                  <li
+                    key={`Frontend: ${skill}`}
+                    data-tina-field={tinaField(data.about, 'frontend', i)}
+                  >
+                    {skill}
+                  </li>
                 ))}
               </ul>
             </Cards>
@@ -101,8 +118,13 @@ export default function AboutContent({
             <Cards className="p-4 sm:p-8">
               <h2 className="mb-2">Backend Skills</h2>
               <ul data-testid="aboutBackend">
-                {(backend as string[]).map((skill: string) => (
-                  <li key={`Backend: ${skill}`}>{skill}</li>
+                {(backend as string[]).map((skill, i) => (
+                  <li
+                    key={`Backend: ${skill}`}
+                    data-tina-field={tinaField(data.about, 'backend', i)}
+                  >
+                    {skill}
+                  </li>
                 ))}
               </ul>
             </Cards>
@@ -111,8 +133,13 @@ export default function AboutContent({
             <Cards className="p-4 sm:p-8">
               <h2 className="mb-2">General Coding Skills</h2>
               <ul data-testid="aboutGeneralCoding">
-                {(generalCoding as string[]).map((skill: string) => (
-                  <li key={`General: ${skill}`}>{skill}</li>
+                {(generalCoding as string[]).map((skill, i) => (
+                  <li
+                    key={`General: ${skill}`}
+                    data-tina-field={tinaField(data.about, 'generalCoding', i)}
+                  >
+                    {skill}
+                  </li>
                 ))}
               </ul>
             </Cards>
@@ -121,8 +148,13 @@ export default function AboutContent({
             <Cards className="p-4 sm:p-8">
               <h2 className="mb-2">Other Skills</h2>
               <ul data-testid="aboutOthers">
-                {(others as string[]).map((skill: string) => (
-                  <li key={`Other: ${skill}`}>{skill}</li>
+                {(others as string[]).map((skill, i) => (
+                  <li
+                    key={`Other: ${skill}`}
+                    data-tina-field={tinaField(data.about, 'others', i)}
+                  >
+                    {skill}
+                  </li>
                 ))}
               </ul>
             </Cards>
