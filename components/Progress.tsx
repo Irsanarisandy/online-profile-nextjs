@@ -27,6 +27,10 @@ interface ProgressProp {
    * Progress height
    */
   height?: number;
+  /**
+   * Tina's click to edit functionality (only available in Tina's edit mode)
+   */
+  passedTinaFieldFunc?: (i: number) => string;
 }
 
 export function Progress({
@@ -34,7 +38,8 @@ export function Progress({
   hideName = false,
   hideInfo = false,
   bgColor = '#A3A3A3',
-  height = 24
+  height = 24,
+  passedTinaFieldFunc
 }: ProgressProp) {
   const [displayPercentage, setDisplayPercentage] = useState(false);
 
@@ -52,6 +57,10 @@ export function Progress({
     };
   }, []);
 
+  const soleTinaProgressField = passedTinaFieldFunc
+    ? passedTinaFieldFunc(0)
+    : undefined;
+
   return (
     <div
       data-testid="progress-comp"
@@ -61,6 +70,7 @@ export function Progress({
       {progressDataList.length === 1 && (
         <div
           data-testid="progress-info-1"
+          data-tina-field={soleTinaProgressField}
           className="flex justify-center rounded-lg"
           style={{
             backgroundColor: progressDataList[0].color,
@@ -78,32 +88,39 @@ export function Progress({
         </div>
       )}
       {progressDataList.length > 1 &&
-        progressDataList.map((progressData, index) => (
-          <div
-            key={`Progress data ${index + 1}`}
-            data-testid={`progress-info-${index + 1}`}
-            className={`flex justify-center ${
-              index === 0
-                ? 'rounded-l-lg'
-                : index === progressDataList.length - 1
-                ? 'rounded-r-lg'
-                : ''
-            }`}
-            style={{
-              backgroundColor: progressData.color,
-              height,
-              width: `${progressData.percentage}%`
-            }}
-          >
-            {!hideInfo
-              ? `${!hideName ? progressData.name : ''} ${
-                  hideName || displayPercentage
-                    ? `(${progressData.percentage}%)`
-                    : ''
-                }`
-              : ''}
-          </div>
-        ))}
+        progressDataList.map((progressData, i) => {
+          const passedTinaField = passedTinaFieldFunc
+            ? passedTinaFieldFunc(i)
+            : undefined;
+
+          return (
+            <div
+              key={`Progress data ${i + 1}`}
+              data-testid={`progress-info-${i + 1}`}
+              data-tina-field={passedTinaField}
+              className={`flex justify-center ${
+                i === 0
+                  ? 'rounded-l-lg'
+                  : i === progressDataList.length - 1
+                  ? 'rounded-r-lg'
+                  : ''
+              }`}
+              style={{
+                backgroundColor: progressData.color,
+                height,
+                width: `${progressData.percentage}%`
+              }}
+            >
+              {!hideInfo
+                ? `${!hideName ? progressData.name : ''} ${
+                    hideName || displayPercentage
+                      ? `(${progressData.percentage}%)`
+                      : ''
+                  }`
+                : ''}
+            </div>
+          );
+        })}
     </div>
   );
 }

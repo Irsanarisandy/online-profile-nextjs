@@ -19,6 +19,9 @@ npm run dev
 # build project
 npm run build
 
+# analyze size of output files after project have been built
+npm run analyze
+
 # lint scripts (JS/JSX/TS/TSX)
 npm run lint
 # lint and fix scripts (JS/JSX/TS/TSX)

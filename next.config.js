@@ -23,8 +23,14 @@ const nextConfig = {
   }
 };
 
-const withPWA = require('next-pwa')({
+const BundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true'
+});
+
+const PWA = require('next-pwa')({
   dest: 'public'
 });
 
-module.exports = withPWA(nextConfig);
+const withPlugins = require('next-compose-plugins');
+
+module.exports = withPlugins([BundleAnalyzer, PWA], nextConfig);

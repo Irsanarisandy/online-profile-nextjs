@@ -16,12 +16,17 @@ interface IProp
    * Class names from custom SCSS files and [Tailwind CSS](https://tailwindcss.com/)
    */
   className?: string;
+  /**
+   * Tina's click to edit functionality (only available in Tina's edit mode)
+   */
+  passedTinaFieldFunc?: (i: number) => string;
 }
 
 export function DisplayTextAnimation({
   paragraph,
   speed = (n: number) => n / 10 + 1,
-  className
+  className,
+  passedTinaFieldFunc
 }: IProp) {
   let curIndex = 0;
   const result = paragraph.map((line, lineIndex) =>
@@ -44,11 +49,21 @@ export function DisplayTextAnimation({
 
   return (
     <div className={styles.animated_text_container}>
-      {result.map((sentence, index) => (
-        <div key={`sentence${index}`} className="flex">
-          {sentence}
-        </div>
-      ))}
+      {result.map((sentence, i) => {
+        const passedTinaField = passedTinaFieldFunc
+          ? passedTinaFieldFunc(i)
+          : undefined;
+
+        return (
+          <div
+            key={`sentence${i}`}
+            data-tina-field={passedTinaField}
+            className="flex"
+          >
+            {sentence}
+          </div>
+        );
+      })}
     </div>
   );
 }
