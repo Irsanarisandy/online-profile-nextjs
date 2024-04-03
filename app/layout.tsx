@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import dynamic from 'next/dynamic';
 import { Quicksand } from 'next/font/google';
 import React, { type PropsWithChildren } from 'react';
@@ -107,7 +107,6 @@ export const metadata: Metadata = {
     title: "Irsan's Online Profile PWA",
     statusBarStyle: 'default'
   },
-  themeColor: '#ffffff',
   // twitter: {
   //   cardType: 'summary',
   //   handle: 'jhooks',
@@ -136,4 +135,8 @@ export const metadata: Metadata = {
       }
     ]
   }
+};
+
+export const viewport: Viewport = {
+  themeColor: '#ffffff'
 };

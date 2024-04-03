@@ -1,4 +1,5 @@
-import { ImageResponse, type NextRequest } from 'next/server';
+import { ImageResponse } from 'next/og';
+import { type NextRequest } from 'next/server';
 
 const quicksandFont = fetch(
   'https://github.com/andrew-paglinawan/QuicksandFamily/blob/master/fonts/statics/Quicksand-Regular.ttf?raw=true'
