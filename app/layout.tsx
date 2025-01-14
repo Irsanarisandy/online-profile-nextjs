@@ -80,7 +80,6 @@ export const metadata: Metadata = {
     'irsan arisandy online portfolio',
     'irsan arisandy online profile',
     'blog',
-    'cv',
     'developer',
     'portfolio',
     'profile',

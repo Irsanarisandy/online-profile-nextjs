@@ -4,7 +4,6 @@ import { LinkElementPair } from '.components/LinkElementPair';
 
 describe('LinkElementPair component', () => {
   const testCases = [
-    ['cv', 'cv'],
     ['feed', 'feed'],
     ['github', 'github'],
     ['gitlab', 'gitlab'],

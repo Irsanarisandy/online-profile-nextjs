@@ -4,7 +4,6 @@ import Link from 'next/link';
 import React from 'react';
 import { tinaField, useTina } from 'tinacms/dist/react';
 import { Components, TinaMarkdown } from 'tinacms/dist/rich-text';
-import { DocumentArrowDownIcon } from '@heroicons/react/24/solid';
 
 import { Cards } from '.components/Cards';
 import { Codeblock } from '.components/Codeblock';
@@ -72,19 +71,6 @@ export default function AboutContent({
           data-tina-field={tinaField(data.about, 'body')}
         >
           <TinaMarkdown content={body} components={components} />
-        </div>
-        <div className="mt-8 inline-block rounded-full border-2 px-4 py-2">
-          <Link
-            id="downloadCV"
-            href={publicLinks.cv}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span className="flex">
-              <DocumentArrowDownIcon className="h-auto w-[28px]" />
-              &nbsp;Download CV
-            </span>
-          </Link>
         </div>
       </Cards>
       {overallDevSkillsExist && (

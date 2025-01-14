@@ -11,7 +11,7 @@ const meta: Meta<typeof LinkElementPair> = {
   argTypes: {
     linkName: {
       control: 'select',
-      options: ['cv', 'feed', 'github', 'gitlab', 'linkedin', 'other']
+      options: ['feed', 'github', 'gitlab', 'linkedin', 'other']
     }
   }
 };
@@ -35,9 +35,6 @@ export const Example: Story = {
       });
     }
     switch (args.linkName) {
-      case 'cv':
-        expect(canvas.getByTestId('cv')).toBeInTheDocument();
-        break;
       case 'feed':
         expect(canvas.getByTestId('feed')).toBeInTheDocument();
         break;

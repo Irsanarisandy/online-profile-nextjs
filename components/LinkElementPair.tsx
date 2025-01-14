@@ -1,5 +1,5 @@
 import React, { type DetailedHTMLProps, type HTMLAttributes } from 'react';
-import { DocumentArrowDownIcon, RssIcon } from '@heroicons/react/24/solid';
+import { RssIcon } from '@heroicons/react/24/solid';
 
 import { GitHubLogo, GitLabLogo, LinkedInLogo } from './SvgIcons';
 
@@ -37,12 +37,6 @@ export function LinkElementPair({ linkName, className, otherIconSize }: IProp) {
       return (
         <span className={className} data-testid="gitlab">
           <GitLabLogo fill="#FCA121" />
-        </span>
-      );
-    case 'cv':
-      return (
-        <span className={className} data-testid="cv">
-          <DocumentArrowDownIcon />
         </span>
       );
     case 'feed':
