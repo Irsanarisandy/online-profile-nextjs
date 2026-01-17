@@ -5,7 +5,8 @@ const quicksandFont = fetch(
   'https://github.com/andrew-paglinawan/QuicksandFamily/blob/master/fonts/statics/Quicksand-Regular.ttf?raw=true'
 ).then((res) => res.arrayBuffer());
 
-export const runtime = 'edge';
+// TODO: replace this API with a fixed image, or fix code
+// export const runtime = 'edge';
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);

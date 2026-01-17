@@ -7,6 +7,11 @@ const nextConfig = {
         source: '/tags',
         destination: '/posts',
         permanent: true
+      },
+      {
+        source: '/api/initialsImage',
+        destination: '/404',
+        permanent: true
       }
     ];
   },
